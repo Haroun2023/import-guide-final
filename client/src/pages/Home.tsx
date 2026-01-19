@@ -53,13 +53,13 @@ export default function Home() {
 
         {/* Tabs Section */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-12">
-          <TabsList className="grid w-full grid-cols-6 mb-8">
-            <TabsTrigger value="overview">نظرة عامة</TabsTrigger>
-            <TabsTrigger value="plumbing">مواد السباكة</TabsTrigger>
-            <TabsTrigger value="electrical">مواد الكهرباء</TabsTrigger>
-            <TabsTrigger value="process">العملية</TabsTrigger>
-            <TabsTrigger value="search">البحث</TabsTrigger>
-            <TabsTrigger value="calculator">الحاسبة</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 mb-8 h-auto">
+            <TabsTrigger value="overview" className="cursor-pointer py-3">نظرة عامة</TabsTrigger>
+            <TabsTrigger value="plumbing" className="cursor-pointer py-3">مواد السباكة</TabsTrigger>
+            <TabsTrigger value="electrical" className="cursor-pointer py-3">مواد الكهرباء</TabsTrigger>
+            <TabsTrigger value="process" className="cursor-pointer py-3">العملية</TabsTrigger>
+            <TabsTrigger value="search" className="cursor-pointer py-3">البحث</TabsTrigger>
+            <TabsTrigger value="calculator" className="cursor-pointer py-3">الحاسبة</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
