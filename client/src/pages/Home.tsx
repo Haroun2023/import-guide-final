@@ -302,18 +302,24 @@ export default function Home() {
             احصل على الدليل الشامل والموارد المتعددة التي تتضمن جميع المعلومات والأمثلة والنماذج والقوالب المطلوبة لاستيراد مواد السباكة والكهرباء بنجاح.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button className="bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold">
-              <Download className="w-4 h-4 ml-2" />
-              الدليل الشامل (PDF)
-            </Button>
-            <Button className="bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold">
-              <Download className="w-4 h-4 ml-2" />
-              قائمة المصادر
-            </Button>
-            <Button className="bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold">
-              <Download className="w-4 h-4 ml-2" />
-              النماذج والقوالب
-            </Button>
+            <a href="/import-guide.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
+              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
+                <Download className="w-4 h-4 ml-2" />
+                الدليل الشامل (PDF)
+              </Button>
+            </a>
+            <a href="/sources-list.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
+              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
+                <Download className="w-4 h-4 ml-2" />
+                قائمة المصادر
+              </Button>
+            </a>
+            <a href="/checklists-templates.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
+              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
+                <Download className="w-4 h-4 ml-2" />
+                النماذج والقوالب
+              </Button>
+            </a>
           </div>
         </Card>
       </main>
@@ -349,7 +355,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
             <p>© 2026 الدليل الشامل للاستيراد من الصين لملتقى الأوفياء. جميع الحقوق محفوظة.</p>
-            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.1</p>
+            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.2</p>
           </div>
         </div>
       </footer>
