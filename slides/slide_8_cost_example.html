@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple de Calcul - Vêtements en Coton</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+        }
+        
+        .title-section {
+            background: #0A2540;
+            padding-top: 30px;
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-bottom: 30px;
+            border-bottom: 4px solid #C5A059;
+        }
+        
+        .title-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        
+        .content-section {
+            display: flex;
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+        
+        .table-section {
+            width: 55%;
+            padding-right: 40px;
+        }
+        
+        .chart-section {
+            width: 45%;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .cost-table thead {
+            background: #F0F4F8;
+            border-bottom: 2px solid #0A2540;
+        }
+        
+        .cost-table th {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0A2540;
+            text-align: left;
+            padding: 12px 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cost-table td {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #0A2540;
+            padding: 12px 15px;
+            border-bottom: 1px solid #E5E9F0;
+        }
+        
+        .cost-table tr:hover {
+            background: #F8FAFC;
+        }
+        
+        .item-label {
+            font-weight: 500;
+        }
+        
+        .amount {
+            text-align: right;
+            font-weight: 500;
+        }
+        
+        .subtotal-row {
+            background: #F0F4F8;
+            font-weight: 600;
+            border-top: 2px solid #0A2540;
+        }
+        
+        .total-row {
+            background: #0A2540;
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .total-row td {
+            color: #FFFFFF;
+            border-bottom: none;
+        }
+        
+        .total-row .amount {
+            color: #C5A059;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            height: 320px;
+        }
+        
+        .chart-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #0A2540;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="title-section">
+            <h2>Exemple de Calcul - Vêtements en Coton</h2>
+        </div>
+        
+        <div class="content-section">
+            <div class="table-section">
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Élément</th>
+                            <th class="amount">Montant (SAR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-label">Valeur de la facture</td>
+                            <td class="amount">37 500</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Coût du fret maritime</td>
+                            <td class="amount">1 875</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Assurance</td>
+                            <td class="amount">375</td>
+                        </tr>
+                        <tr class="subtotal-row">
+                            <td class="item-label">Valeur CIF totale</td>
+                            <td class="amount">39 750</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Droits de douane (12%)</td>
+                            <td class="amount">4 770</td>
+                        </tr>
+                        <tr class="subtotal-row">
+                            <td class="item-label">Sous-total</td>
+                            <td class="amount">44 520</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">TVA (15%)</td>
+                            <td class="amount">6 678</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Frais portuaires</td>
+                            <td class="amount">200</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Frais de dédouanement</td>
+                            <td class="amount">300</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td class="item-label">TOTAL À PAYER</td>
+                            <td class="amount">51 698</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="chart-section">
+                <div class="chart-wrapper">
+                    <canvas id="costChart"></canvas>
+                </div>
+                <div class="chart-label">Composition du coût total</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const ctx = document.getElementById('costChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Valeur CIF', 'Droits', 'TVA', 'Autres frais'],
+                datasets: [{
+                    data: [39750, 4770, 6678, 500],
+                    backgroundColor: [
+                        '#0A2540',
+                        '#C5A059',
+                        '#4A7BA7',
+                        '#E5E9F0'
+                    ],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 12
+                            },
+                            color: '#0A2540',
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

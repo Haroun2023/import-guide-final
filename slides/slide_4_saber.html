@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système SABER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #0A2540;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding-top: 60px;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #C5A059;
+            margin-bottom: 15px;
+        }
+        
+        .intro-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #E5E9F0;
+            line-height: 1.5;
+            max-width: 900px;
+            margin-bottom: 25px;
+        }
+        
+        .content-grid {
+            display: flex;
+            flex: 1;
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-top: 20px;
+        }
+        
+        .left-column {
+            width: 35%;
+            padding-right: 30px;
+            border-right: 2px solid rgba(197, 160, 89, 0.4);
+        }
+        
+        .right-columns {
+            width: 65%;
+            display: flex;
+            padding-left: 30px;
+        }
+        
+        .certificate-column {
+            flex: 1;
+            padding-right: 20px;
+        }
+        
+        .certificate-column:last-child {
+            padding-right: 0;
+            border-left: 2px solid rgba(197, 160, 89, 0.4);
+            padding-left: 20px;
+        }
+        
+        .key-points {
+            list-style: none;
+        }
+        
+        .key-points li {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .key-points li:before {
+            content: '▸';
+            color: #C5A059;
+            font-size: 16px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .cert-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #C5A059;
+            margin-bottom: 15px;
+        }
+        
+        .cert-acronym {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #C5A059;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .cert-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #E5E9F0;
+            margin-bottom: 12px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            line-height: 1.4;
+        }
+        
+        .cert-item:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+        
+        .cert-label {
+            font-weight: 600;
+            color: #FFFFFF;
+            display: block;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>Qu'est-ce que SABER ?</h2>
+            <p class="intro-text">SABER est la plateforme électronique obligatoire pour enregistrer et certifier tous les produits importés. Depuis le 1er janvier 2025, tous les produits réglementés doivent être certifiés via SABER.</p>
+        </div>
+        
+        <div class="content-grid">
+            <div class="left-column">
+                <ul class="key-points">
+                    <li>Plateforme numérique gérée par la SASO</li>
+                    <li>Obligatoire depuis le 1er janvier 2025</li>
+                    <li>Couvre 37 nouvelles catégories en 2025</li>
+                    <li>Système SABER 2.0 renforcé</li>
+                    <li>Vérification blockchain pour l'authenticité</li>
+                    <li>Audits post-dédouanement (30 jours)</li>
+                </ul>
+            </div>
+            
+            <div class="right-columns">
+                <div class="certificate-column">
+                    <div class="cert-acronym">PCoC</div>
+                    <div class="cert-title">Certificat de Conformité du Produit</div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Validité</span>
+                        1 an à partir de la date d'émission
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Portée</span>
+                        Couvre un modèle de produit spécifique
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Paramètres</span>
+                        Description, code HS, fabricant, pays d'origine
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Timing</span>
+                        Avant la première importation
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Délai</span>
+                        5-10 jours ouvrables
+                    </div>
+                </div>
+                
+                <div class="certificate-column">
+                    <div class="cert-acronym">SCoC</div>
+                    <div class="cert-title">Certificat de Conformité de l'Expédition</div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Validité</span>
+                        Spécifique à chaque expédition
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Processus</span>
+                        Émis après inspection de l'expédition
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Timing</span>
+                        Avant l'arrivée en Arabie Saoudite
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Coût</span>
+                        Généralement inclus dans les frais PCoC
+                    </div>
+                    
+                    <div class="cert-item">
+                        <span class="cert-label">Délai</span>
+                        2-3 jours après soumission
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+{
+  "project_info": {
+    "title": "Guide Expert : Importation Chine - Arabie Saoudite",
+    "created": 1768858980.657782,
+    "last_updated": 1768859437.4488518,
+    "total_slides": 20
+  },
+  "slides": [
+    {
+      "id": "slide_1_cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "slide_2_context",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "slide_3_authorities",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "slide_4_saber",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "slide_5_hs_code",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "slide_6_vat",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "slide_7_duties",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "slide_8_cost_example",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "slide_9_transport",
+      "state": "edit_pending",
+      "pageNum": 9
+    },
+    {
+      "id": "slide_10_ports",
+      "state": "edit_pending",
+      "pageNum": 10
+    },
+    {
+      "id": "slide_11_documents",
+      "state": "edit_pending",
+      "pageNum": 11
+    },
+    {
+      "id": "slide_12_clearance_steps",
+      "state": "edit_pending",
+      "pageNum": 12
+    },
+    {
+      "id": "slide_13_fasah",
+      "state": "edit_pending",
+      "pageNum": 13
+    },
+    {
+      "id": "slide_14_inspection",
+      "state": "edit_pending",
+      "pageNum": 14
+    },
+    {
+      "id": "slide_15_payment",
+      "state": "edit_pending",
+      "pageNum": 15
+    },
+    {
+      "id": "slide_16_errors",
+      "state": "edit_pending",
+      "pageNum": 16
+    },
+    {
+      "id": "slide_17_penalties",
+      "state": "edit_pending",
+      "pageNum": 17
+    },
+    {
+      "id": "slide_18_resources",
+      "state": "edit_pending",
+      "pageNum": 18
+    },
+    {
+      "id": "slide_19_best_practices",
+      "state": "edit_pending",
+      "pageNum": 19
+    },
+    {
+      "id": "slide_20_conclusion",
+      "state": "edit_pending",
+      "pageNum": 20
+    }
+  ],
+  "outline": [
+    {
+      "id": "slide_1_cover",
+      "title": "Guide Expert : Importation Chine - Arabie Saoudite",
+      "summary": "Couverture présentant le titre principal, le sous-titre, l'auteur et la date de la documentation complète sur l'importation.",
+      "image_plan": "/home/ubuntu/import-china-saudi-guide/client/public/images/hero-shipping.png - Image 1 perfectly illustrates the theme of importation between China and Saudi Arabia, featuring flags, a cargo ship, and a customs building. It is ideal for the cover slide.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_2_context",
+      "title": "Pourquoi importer de Chine ?",
+      "summary": "Contexte du commerce bilatéral Chine-Arabie Saoudite avec 87,3 milliards de dollars en 2021 et les secteurs clés d'importation.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_3_authorities",
+      "title": "Qui régule l'importation ?",
+      "summary": "Présentation des quatre autorités principales : ZATCA, SASO, MOCI et SFDA avec leurs responsabilités respectives.",
+      "image_plan": "/home/ubuntu/import-china-saudi-guide/client/public/images/regulations-overview.png - Image 3 is a diagram illustrating the regulatory framework and key authorities (SASO, MOCI, SFDA, Certificate), which directly matches the slide content about regulatory authorities.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_4_saber",
+      "title": "Qu'est-ce que SABER ?",
+      "summary": "Explication du système SABER obligatoire depuis 2025, incluant les types de certificats (PCoC et SCoC).",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_5_hs_code",
+      "title": "Comprendre le Code HS",
+      "summary": "Définition et importance du Code HS étendu à 8-12 chiffres en Arabie Saoudite avec exemple pratique.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_6_vat",
+      "title": "Taxe sur la Valeur Ajoutée (TVA)",
+      "summary": "Explication de la TVA de 15% appliquée à tous les biens importés avec formule de calcul et exemptions.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_7_duties",
+      "title": "Droits de Douane par Catégorie",
+      "summary": "Tableau des taux de droits de douane par catégorie de produits et surcharge de luxe depuis 2025.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_8_cost_example",
+      "title": "Exemple de Calcul - Vêtements en Coton",
+      "summary": "Calcul détaillé du coût total d'importation incluant CIF, droits, TVA et frais supplémentaires.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_9_transport",
+      "title": "Choisir le Mode de Transport",
+      "summary": "Comparaison entre transport maritime et aérien avec coûts, délais et cas d'usage appropriés.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_10_ports",
+      "title": "Où débarquer votre marchandise ?",
+      "summary": "Présentation des ports d'entrée principaux (Dammam, Jeddah) et aéroports avec avantages respectifs.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_11_documents",
+      "title": "Préparation des Documents",
+      "summary": "Checklist complète des documents requis pour l'importation avec délais de préparation.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_12_clearance_steps",
+      "title": "5 Étapes du Dédouanement",
+      "summary": "Processus étape par étape du dédouanement avec délais totaux pour chaque phase.",
+      "image_plan": "/home/ubuntu/import-china-saudi-guide/client/public/images/customs-process.png - Image 2 is a process flow diagram titled \"Customs Clearance Process in Saudi Arabia\" which perfectly matches the slide content detailing the 5 steps of customs clearance.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_13_fasah",
+      "title": "Soumettre via FASAH",
+      "summary": "Explication de la plateforme FASAH, processus de soumission et validation automatique par IA.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_14_inspection",
+      "title": "Types d'Inspection",
+      "summary": "Distinction entre inspection par IA (82%) et inspection physique (18%) avec délais et coûts.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_15_payment",
+      "title": "Comment Payer ?",
+      "summary": "Méthodes de paiement via SADAD, délais de paiement et pénalités en cas de retard.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_16_errors",
+      "title": "Pièges Courants",
+      "summary": "Énumération des 5 erreurs courantes à éviter et solutions pour chacune.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_17_penalties",
+      "title": "Conséquences de Non-Conformité",
+      "summary": "Tableau des pénalités et amendes pour différentes violations réglementaires.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_18_resources",
+      "title": "Où Trouver de l'Aide ?",
+      "summary": "Ressources essentielles incluant plateformes numériques et organismes accrédités.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_19_best_practices",
+      "title": "Bonnes Pratiques",
+      "summary": "Conseils pratiques et checklist pour réussir son importation depuis la Chine.",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_20_conclusion",
+      "title": "Résumé et Prochaines Étapes",
+      "summary": "Récapitulatif des points clés et étapes concrètes pour commencer l'importation.",
+      "image_plan": "",
+      "slide_template_key": ""
+    }
+  ]
+}

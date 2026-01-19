@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الهيئات التنظيمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #0A2540;
+            display: flex;
+            align-items: center;
+        }
+        
+        .left-content {
+            width: 45%;
+            padding-top: 60px;
+            padding-right: 80px;
+            padding-left: 40px;
+            padding-bottom: 40px;
+        }
+        
+        .right-content {
+            width: 55%;
+            padding-top: 60px;
+            padding-left: 80px;
+            padding-right: 40px;
+            padding-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #C5A059;
+            margin-bottom: 20px;
+        }
+        
+        .authority-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        }
+        
+        .authority-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .authority-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #C5A059;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .authority-acronym {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+        
+        .authority-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #E5E9F0;
+            line-height: 1.5;
+        }
+        
+        .image-wrapper {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="left-content">
+            <h2>من يُنظّم الاستيراد؟</h2>
+            
+            <div class="authority-item">
+                <div class="authority-name">الهيئة الرئيسية</div>
+                <div class="authority-acronym">ZATCA</div>
+                <div class="authority-desc">هيئة الزكاة والضريبة والجمارك - تدير الجمارك والضرائب والقيمة المضافة والتخليص</div>
+            </div>
+            
+            <div class="authority-item">
+                <div class="authority-name">المعايير والجودة</div>
+                <div class="authority-acronym">SASO</div>
+                <div class="authority-desc">الهيئة السعودية للمواصفات والمقاييس والجودة - تحدد معايير المنتجات والشهادات</div>
+            </div>
+            
+            <div class="authority-item">
+                <div class="authority-name">التجارة والاستثمار</div>
+                <div class="authority-acronym">MOCI</div>
+                <div class="authority-desc">وزارة التجارة والاستثمار - تصدر تراخيص الاستيراد والتسجيل التجاري</div>
+            </div>
+            
+            <div class="authority-item">
+                <div class="authority-name">الغذاء والدواء</div>
+                <div class="authority-acronym">SFDA</div>
+                <div class="authority-desc">الهيئة العامة للغذاء والدواء - توافق على المنتجات الغذائية والدوائية</div>
+            </div>
+        </div>
+        
+        <div class="right-content">
+            <div class="image-wrapper">
+                <img src="/images/regulations-overview.png" alt="الإطار التنظيمي">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

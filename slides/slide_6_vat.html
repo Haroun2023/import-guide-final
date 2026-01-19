@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxe sur la Valeur Ajoutée (TVA)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .header-section {
+            background: #0A2540;
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #C5A059;
+            margin-bottom: 20px;
+        }
+        
+        .vat-rate {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+        
+        .vat-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #E5E9F0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .content-section {
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+        
+        .formula-box {
+            background: #F0F4F8;
+            border-left: 4px solid #C5A059;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .formula-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0A2540;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .formula-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #0A2540;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+        
+        .formula-text .variable {
+            color: #C5A059;
+            font-weight: 600;
+        }
+        
+        .exemptions-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0A2540;
+            margin-bottom: 20px;
+        }
+        
+        .exemptions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .exemption-item {
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .exemption-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #C5A059;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .exemption-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #0A2540;
+            margin-bottom: 4px;
+        }
+        
+        .exemption-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #552B2B;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-section">
+            <h2>Taxe sur la Valeur Ajoutée</h2>
+            <div class="vat-rate">15%</div>
+            <p class="vat-description">La TVA de 15% s'applique à tous les biens importés en Arabie Saoudite, calculée sur la valeur CIF (Coût, Assurance, Fret) plus les droits de douane.</p>
+        </div>
+        
+        <div class="content-section">
+            <div class="formula-box">
+                <div class="formula-title">Formule de Calcul</div>
+                <div class="formula-text">
+                    TVA = (<span class="variable">Valeur CIF</span> + <span class="variable">Droits de douane</span>) × <span class="variable">15%</span>
+                </div>
+            </div>
+            
+            <h3 class="exemptions-title">Exemptions de TVA</h3>
+            <div class="exemptions-grid">
+                <div class="exemption-item">
+                    <div class="exemption-name">Fournitures médicales</div>
+                    <div class="exemption-desc">Exemption complète pour les équipements et fournitures médicales</div>
+                </div>
+                <div class="exemption-item">
+                    <div class="exemption-name">Matériel éducatif</div>
+                    <div class="exemption-desc">Exemption complète pour les livres et matériel pédagogique</div>
+                </div>
+                <div class="exemption-item">
+                    <div class="exemption-name">Métaux d'investissement</div>
+                    <div class="exemption-desc">Exemption complète pour l'or et autres métaux précieux</div>
+                </div>
+                <div class="exemption-item">
+                    <div class="exemption-name">Articles personnels</div>
+                    <div class="exemption-desc">Exemption si valeur inférieure à 3 000 SAR</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

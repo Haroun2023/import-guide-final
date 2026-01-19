@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code HS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: #0A2540;
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-bottom: 20px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #C5A059;
+        }
+        
+        .content {
+            display: flex;
+            flex: 1;
+        }
+        
+        .left-column {
+            width: 50%;
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 40px;
+            padding-bottom: 40px;
+        }
+        
+        .right-column {
+            width: 50%;
+            padding-top: 40px;
+            padding-right: 80px;
+            padding-left: 40px;
+            padding-bottom: 40px;
+            background: #F0F4F8;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0A2540;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #C5A059;
+        }
+        
+        .definition {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #0A2540;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .importance-list {
+            list-style: none;
+        }
+        
+        .importance-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #0A2540;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .importance-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #C5A059;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: #FFFFFF;
+            border-left: 4px solid #C5A059;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .example-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #C5A059;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .hs-code-display {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0A2540;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .code-breakdown {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #0A2540;
+            line-height: 1.8;
+        }
+        
+        .code-part {
+            margin-bottom: 8px;
+            padding-left: 12px;
+            border-left: 2px solid #E5E9F0;
+        }
+        
+        .code-digits {
+            font-weight: 600;
+            color: #C5A059;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>Comprendre le Code HS</h2>
+        </div>
+        
+        <div class="content">
+            <div class="left-column">
+                <div class="section-title">Qu'est-ce que le Code HS ?</div>
+                <p class="definition">Le Code HS (Harmonized System) est un code numérique international qui classe les produits commerciaux. En Arabie Saoudite, le code est étendu à 8-12 chiffres pour plus de précision, contrairement aux 6 chiffres utilisés internationalement.</p>
+                
+                <div class="section-title">Pourquoi c'est important ?</div>
+                <ul class="importance-list">
+                    <li>Détermine les droits de douane applicables</li>
+                    <li>Identifie les réglementations SASO applicables</li>
+                    <li>Affecte la TVA et autres taxes</li>
+                    <li>Utilisé pour les statistiques commerciales</li>
+                </ul>
+            </div>
+            
+            <div class="right-column">
+                <div class="section-title">Exemple Pratique</div>
+                
+                <div class="example-box">
+                    <div class="example-title">Vêtements en Coton pour Femmes</div>
+                    <div class="hs-code-display">6204.62.00.10</div>
+                    <div class="code-breakdown">
+                        <div class="code-part"><span class="code-digits">6204</span> - Vêtements pour femmes</div>
+                        <div class="code-part"><span class="code-digits">62</span> - Coton</div>
+                        <div class="code-part"><span class="code-digits">00</span> - Catégorie standard</div>
+                        <div class="code-part"><span class="code-digits">10</span> - Classification saoudienne spécifique</div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Implications</div>
+                    <div class="code-breakdown">
+                        <div class="code-part"><strong>Droit de douane :</strong> 12%</div>
+                        <div class="code-part"><strong>TVA :</strong> 15%</div>
+                        <div class="code-part"><strong>Réglementations :</strong> Étiquetage SASO requis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

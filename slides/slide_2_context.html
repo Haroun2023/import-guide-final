@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السياق التجاري</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+        }
+        
+        .left-section {
+            width: 50%;
+            padding-top: 60px;
+            padding-right: 80px;
+            padding-left: 40px;
+            padding-bottom: 60px;
+            background: #0A2540;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .right-section {
+            width: 50%;
+            padding-top: 60px;
+            padding-left: 80px;
+            padding-right: 40px;
+            padding-bottom: 60px;
+            background: #FFFFFF;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #C5A059;
+            margin-bottom: 30px;
+        }
+        
+        .intro-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #E5E9F0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .sectors-list {
+            list-style: none;
+        }
+        
+        .sectors-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #FFFFFF;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            display: flex;
+            align-items: center;
+        }
+        
+        .sectors-list li:before {
+            content: '▸';
+            color: #C5A059;
+            font-size: 18px;
+            margin-left: 12px;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 380px;
+            width: 100%;
+        }
+        
+        .stat-box {
+            background: #F0F4F8;
+            padding: 20px;
+            border-right: 4px solid #C5A059;
+            margin-top: 30px;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #0A2540;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #0A2540;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="left-section">
+            <h2>لماذا الاستيراد من الصين؟</h2>
+            <p class="intro-text">تعتبر الصين الشريك التجاري الأول للمملكة العربية السعودية، حيث بلغ حجم التبادل التجاري الثنائي 87.3 مليار دولار في عام 2021.</p>
+            
+            <ul class="sectors-list">
+                <li>الآلات والمعدات الصناعية</li>
+                <li>المنتجات الإلكترونية</li>
+                <li>المنسوجات والملابس</li>
+                <li>مواد البناء والإنشاء</li>
+                <li>المنتجات الكيميائية</li>
+            </ul>
+        </div>
+        
+        <div class="right-section">
+            <div class="chart-wrapper">
+                <canvas id="tradeChart"></canvas>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">87.3 مليار $</div>
+                <div class="stat-label">حجم التبادل التجاري الثنائي (2021)</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const ctx = document.getElementById('tradeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2017', '2018', '2019', '2020', '2021'],
+                datasets: [{
+                    label: 'التبادل التجاري (مليار دولار)',
+                    data: [52, 60, 68, 75, 87.3],
+                    backgroundColor: '#C5A059',
+                    borderRadius: 4,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 12
+                            },
+                            color: '#0A2540'
+                        },
+                        grid: {
+                            color: 'rgba(10, 37, 64, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 12
+                            },
+                            color: '#0A2540'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

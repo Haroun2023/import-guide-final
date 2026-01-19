@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Droits de Douane par Catégorie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header-section {
+            background: #0A2540;
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-bottom: 30px;
+        }
+        
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background: #C5A059;
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+        
+        .intro-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #E5E9F0;
+            line-height: 1.5;
+        }
+        
+        .content-section {
+            flex: 1;
+            padding-top: 40px;
+            padding-left: 80px;
+            padding-right: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        .table-wrapper {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        thead {
+            background: #F0F4F8;
+            border-top: 2px solid #C5A059;
+            border-bottom: 2px solid #C5A059;
+        }
+        
+        th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0A2540;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            padding: 14px 12px;
+            font-size: 14px;
+            color: #0A2540;
+            border-bottom: 1px solid #E5E9F0;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #FFFFFF;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #F9FAFB;
+        }
+        
+        .category-name {
+            font-weight: 500;
+            color: #0A2540;
+        }
+        
+        .duty-rate {
+            font-weight: 600;
+            color: #C5A059;
+        }
+        
+        .note-section {
+            background: #F0F4F8;
+            padding: 20px;
+            border-left: 4px solid #C5A059;
+            margin-top: 20px;
+        }
+        
+        .note-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        
+        .note-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #0A2540;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-section">
+            <div class="accent-line"></div>
+            <h2>Droits de Douane par Catégorie</h2>
+            <p class="intro-text">Les droits de douane en Arabie Saoudite sont basés sur le Système Tarifaire Unifié du CCG. Le taux standard est de 5%, mais il varie selon le type de produit.</p>
+        </div>
+        
+        <div class="content-section">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Catégorie de Produit</th>
+                            <th>Code HS</th>
+                            <th>Taux de Droit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category-name">Électronique</td>
+                            <td>85</td>
+                            <td class="duty-rate">5-20%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Machines et équipement</td>
+                            <td>84</td>
+                            <td class="duty-rate">5-15%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Textiles et vêtements</td>
+                            <td>61-63</td>
+                            <td class="duty-rate">12%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Jouets</td>
+                            <td>95</td>
+                            <td class="duty-rate">10-20%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Meubles</td>
+                            <td>94</td>
+                            <td class="duty-rate">15%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Produits alimentaires</td>
+                            <td>02-21</td>
+                            <td class="duty-rate">5-20%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Matériaux de construction</td>
+                            <td>68-71</td>
+                            <td class="duty-rate">5-10%</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Produits chimiques</td>
+                            <td>28-38</td>
+                            <td class="duty-rate">5-10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="note-section">
+                <div class="note-title">⚠ Surcharge de Luxe (depuis 2025)</div>
+                <div class="note-text">Une surcharge de luxe s'applique à certains articles : Vêtements et accessoires de marque (+20%), Montres et bijoux (+15%), Véhicules de luxe (+20%)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
