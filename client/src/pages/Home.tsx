@@ -72,10 +72,12 @@ export default function Home() {
               <p className="text-gray-700 mb-6">
                 يوفر هذا الدليل شرحاً مفصلاً وعملياً لجميع جوانب الاستيراد، مع التركيز على المتطلبات التنظيمية والرسوم الجمركية والعملية اللوجستية.
               </p>
-              <Button className="bg-[#0A2540] hover:bg-[#0D3050] text-white">
-                اقرأ الدليل الكامل
-                <ArrowRight className="w-4 h-4 mr-2" />
-              </Button>
+              <a href="/import-guide.pdf" target="_blank" rel="noopener noreferrer">
+                <Button className="bg-[#0A2540] hover:bg-[#0D3050] text-white cursor-pointer">
+                  اقرأ الدليل الكامل
+                  <Download className="w-4 h-4 mr-2" />
+                </Button>
+              </a>
             </Card>
 
             <Card className="p-8">
