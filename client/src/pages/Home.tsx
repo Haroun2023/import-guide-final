@@ -5,6 +5,7 @@ import { ArrowRight, Download, FileText, Lightbulb, Wrench, Shield, TrendingUp }
 import { useState } from "react";
 import SearchEngine from "@/components/SearchEngine";
 import CostCalculator from "@/components/CostCalculator";
+import SuppliersList from "@/components/SuppliersList";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -53,13 +54,14 @@ export default function Home() {
 
         {/* Tabs Section */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-12">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 mb-8 h-auto">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-7 mb-8 h-auto">
             <TabsTrigger value="overview" className="cursor-pointer py-3">نظرة عامة</TabsTrigger>
             <TabsTrigger value="plumbing" className="cursor-pointer py-3">مواد السباكة</TabsTrigger>
             <TabsTrigger value="electrical" className="cursor-pointer py-3">مواد الكهرباء</TabsTrigger>
             <TabsTrigger value="process" className="cursor-pointer py-3">العملية</TabsTrigger>
             <TabsTrigger value="search" className="cursor-pointer py-3">البحث</TabsTrigger>
             <TabsTrigger value="calculator" className="cursor-pointer py-3">الحاسبة</TabsTrigger>
+            <TabsTrigger value="suppliers" className="cursor-pointer py-3">الموردين</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
@@ -293,6 +295,11 @@ export default function Home() {
           <TabsContent value="calculator" className="space-y-6">
             <CostCalculator />
           </TabsContent>
+
+          {/* Suppliers Tab */}
+          <TabsContent value="suppliers" className="space-y-6">
+            <SuppliersList />
+          </TabsContent>
         </Tabs>
 
         {/* Download Section */}
@@ -301,7 +308,7 @@ export default function Home() {
           <p className="text-gray-300 mb-6">
             احصل على الدليل الشامل والموارد المتعددة التي تتضمن جميع المعلومات والأمثلة والنماذج والقوالب المطلوبة لاستيراد مواد السباكة والكهرباء بنجاح.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <a href="/import-guide.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
               <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
                 <Download className="w-4 h-4 ml-2" />
@@ -318,6 +325,12 @@ export default function Home() {
               <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
                 <Download className="w-4 h-4 ml-2" />
                 النماذج والقوالب
+              </Button>
+            </a>
+            <a href="/advanced-features.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
+              <Button className="w-full bg-[#0A2540] hover:bg-[#0D3050] text-white border border-[#C5A059] font-semibold cursor-pointer">
+                <Lightbulb className="w-4 h-4 ml-2" />
+                مقترحات تطويرية
               </Button>
             </a>
           </div>
@@ -355,7 +368,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
             <p>© 2026 الدليل الشامل للاستيراد من الصين لملتقى الأوفياء. جميع الحقوق محفوظة.</p>
-            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.2</p>
+            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.3</p>
           </div>
         </div>
       </footer>
