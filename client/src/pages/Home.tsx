@@ -81,10 +81,10 @@ export default function Home() {
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 text-center">
                 <h3 className="text-xl font-bold text-[#0A2540] mb-2">تحميل الدليل الكامل والموارد</h3>
                 <p className="text-gray-600 mb-6">احصل على الدليل الشامل والموارد المتعددة التي تتضمن جميع المعلومات والأمثلة والنماذج والقوالب المطلوبة لاستيراد مواد السباكة والكهرباء بنجاح.</p>
-                <a href="/unified-import-guide.pdf" target="_blank" rel="noopener noreferrer" className="inline-block w-full md:w-auto">
-                  <Button className="bg-[#0A2540] hover:bg-[#0D3050] text-white cursor-pointer w-full md:w-auto px-4 md:px-8 py-4 md:py-6 text-base md:text-lg h-auto flex flex-col md:flex-row items-center justify-center gap-2">
-                    <Download className="w-6 h-6 md:ml-3 mb-2 md:mb-0" />
-                    <span className="text-center">تحميل الدليل الشامل الموحد (PDF)</span>
+                <a href="/unified-import-guide.pdf" target="_blank" rel="noopener noreferrer" className="block w-full md:inline-block md:w-auto">
+                  <Button className="bg-[#0A2540] hover:bg-[#0D3050] text-white cursor-pointer w-full md:w-auto px-4 py-4 md:px-8 md:py-6 h-auto flex flex-col md:flex-row items-center justify-center gap-3 whitespace-normal">
+                    <Download className="w-6 h-6 md:ml-3 shrink-0" />
+                    <span className="text-center text-sm md:text-lg leading-tight">تحميل الدليل الشامل الموحد (PDF)</span>
                   </Button>
                 </a>
                 <p className="text-xs text-gray-500 mt-3">يشمل: الدليل التفصيلي، قائمة المصادر، النماذج والقوالب، قائمة الموردين، والمقترحات التطويرية</p>

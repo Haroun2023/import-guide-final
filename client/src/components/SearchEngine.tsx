@@ -187,7 +187,7 @@ export default function SearchEngine() {
           <h2 className="text-2xl font-bold text-[#0A2540]">محرك البحث المتقدم</h2>
         </div>
         <p className="text-gray-700 mb-6">
-          ابحث عن أكواس HS والمتطلبات والشهادات المطلوبة لكل منتج
+          ابحث عن أكواد HS والمتطلبات والشهادات المطلوبة لكل منتج
         </p>
 
         {/* Search Input */}
