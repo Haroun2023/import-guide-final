@@ -85,19 +85,19 @@ export default function Home() {
             <Card className="p-8">
               <h3 className="text-xl font-bold text-[#0A2540] mb-4">الهيئات التنظيمية الرئيسية</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border-r-4 border-[#C5A059] pr-4">
+                <div className="border-r-4 border-[#C5A059] pr-4 text-right">
                   <h4 className="font-semibold text-[#0A2540] mb-2">ZATCA</h4>
                   <p className="text-sm text-gray-600">هيئة الزكاة والضريبة والجمارك - تدير الجمارك والضرائب والتخليص</p>
                 </div>
-                <div className="border-r-4 border-[#C5A059] pr-4">
+                <div className="border-r-4 border-[#C5A059] pr-4 text-right">
                   <h4 className="font-semibold text-[#0A2540] mb-2">SASO</h4>
                   <p className="text-sm text-gray-600">الهيئة السعودية للمواصفات والمقاييس والجودة - تحدد المعايير والشهادات</p>
                 </div>
-                <div className="border-r-4 border-[#C5A059] pr-4">
+                <div className="border-r-4 border-[#C5A059] pr-4 text-right">
                   <h4 className="font-semibold text-[#0A2540] mb-2">MOCI</h4>
                   <p className="text-sm text-gray-600">وزارة التجارة والاستثمار - تصدر التراخيص والتسجيل التجاري</p>
                 </div>
-                <div className="border-r-4 border-[#C5A059] pr-4">
+                <div className="border-r-4 border-[#C5A059] pr-4 text-right">
                   <h4 className="font-semibold text-[#0A2540] mb-2">SFDA</h4>
                   <p className="text-sm text-gray-600">الهيئة العامة للغذاء والدواء - توافق على المنتجات الكيميائية</p>
                 </div>
@@ -134,7 +134,7 @@ export default function Home() {
               </div>
 
               <h3 className="text-lg font-semibold text-[#0A2540] mb-4">متطلبات SABER</h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 text-right">
                 <li className="flex items-start gap-3">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>شهادة مطابقة المنتج (PCoC) - إلزامية</span>
@@ -153,7 +153,7 @@ export default function Home() {
                 </li>
               </ul>
 
-              <div className="mt-6 p-4 bg-blue-50 border-r-4 border-blue-400 rounded">
+              <div className="mt-6 p-4 bg-blue-50 border-r-4 border-blue-400 rounded text-right">
                 <p className="text-sm text-gray-700">
                   <strong>التكاليف:</strong> رسوم PCoC 800-1,500 ريال + اختبارات 1,000-2,000 ريال = 1,800-3,500 ريال لكل منتج
                 </p>
@@ -190,7 +190,7 @@ export default function Home() {
               </div>
 
               <h3 className="text-lg font-semibold text-[#0A2540] mb-4">متطلبات SABER</h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 text-right">
                 <li className="flex items-start gap-3">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>شهادة مطابقة المنتج (PCoC) - إلزامية</span>
@@ -209,7 +209,7 @@ export default function Home() {
                 </li>
               </ul>
 
-              <div className="mt-6 p-4 bg-blue-50 border-r-4 border-blue-400 rounded">
+              <div className="mt-6 p-4 bg-blue-50 border-r-4 border-blue-400 rounded text-right">
                 <p className="text-sm text-gray-700">
                   <strong>التكاليف:</strong> رسوم PCoC 1,000-2,000 ريال + اختبارات 2,000-4,000 ريال = 3,000-6,000 ريال لكل منتج
                 </p>
