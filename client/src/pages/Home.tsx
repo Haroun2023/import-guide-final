@@ -115,19 +115,19 @@ export default function Home() {
 
               <h3 className="text-lg font-semibold text-[#0A2540] mb-4">أكواس HS الرئيسية</h3>
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">أنابيب الحديد والصلب</span>
                   <span className="font-mono text-[#C5A059] font-semibold">7306.30.00.00</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">أنابيب النحاس</span>
                   <span className="font-mono text-[#C5A059] font-semibold">7408.11.00.00</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">أنابيب البلاستيك (PVC)</span>
                   <span className="font-mono text-[#C5A059] font-semibold">3916.90.00.00</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">الصمامات والتجهيزات</span>
                   <span className="font-mono text-[#C5A059] font-semibold">8481.80.00.00</span>
                 </div>
@@ -135,19 +135,19 @@ export default function Home() {
 
               <h3 className="text-lg font-semibold text-[#0A2540] mb-4">متطلبات SABER</h3>
               <ul className="space-y-2 text-gray-700 text-right">
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>شهادة مطابقة المنتج (PCoC) - إلزامية</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>اختبارات الضغط والتسرب</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>اختبارات المواد والسمية</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>وسم عربي واضح على كل منتج</span>
                 </li>
@@ -171,19 +171,19 @@ export default function Home() {
 
               <h3 className="text-lg font-semibold text-[#0A2540] mb-4">أكواس HS الرئيسية</h3>
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">الأسلاك والكابلات النحاسية</span>
                   <span className="font-mono text-[#C5A059] font-semibold">8544.30.00.00</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">القواطع الكهربائية</span>
                   <span className="font-mono text-[#C5A059] font-semibold">8536.50.00.00</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">المفاتيح الكهربائية</span>
                   <span className="font-mono text-[#C5A059] font-semibold">8537.10.00.00</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">مصابيح LED والإضاءة</span>
                   <span className="font-mono text-[#C5A059] font-semibold">8539.29.00.00</span>
                 </div>
@@ -191,19 +191,19 @@ export default function Home() {
 
               <h3 className="text-lg font-semibold text-[#0A2540] mb-4">متطلبات SABER</h3>
               <ul className="space-y-2 text-gray-700 text-right">
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>شهادة مطابقة المنتج (PCoC) - إلزامية</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>اختبارات السلامة الكهربائية (IEC 60950)</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>اختبارات التوافقية الكهرومغناطيسية (EMC)</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 flex-row-reverse">
                   <span className="text-[#C5A059] font-bold">✓</span>
                   <span>اختبارات الحرارة والرطوبة</span>
                 </li>
@@ -258,27 +258,27 @@ export default function Home() {
             <Card className="p-8">
               <h2 className="text-2xl font-bold text-[#0A2540] mb-4">الرسوم الجمركية والضرائب</h2>
               <div className="space-y-3">
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">أنابيب معدنية</span>
                   <span className="font-semibold text-[#C5A059]">5%</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">أنابيب بلاستيكية</span>
                   <span className="font-semibold text-[#C5A059]">10%</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">أسلاك وكابلات</span>
                   <span className="font-semibold text-[#C5A059]">5%</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">قواطع ومفاتيح</span>
                   <span className="font-semibold text-[#C5A059]">10%</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">مصابيح LED</span>
                   <span className="font-semibold text-[#C5A059]">15%</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
                   <span className="text-gray-700">ضريبة القيمة المضافة</span>
                   <span className="font-semibold text-[#C5A059]">15%</span>
                 </div>

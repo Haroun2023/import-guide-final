@@ -120,6 +120,26 @@
   }
   body {
     @apply bg-background text-foreground;
+    direction: rtl;
+    text-align: right;
+  }
+  /* Force RTL for all flex containers and grid items */
+  .flex, .grid, .flex-row, .flex-col {
+    direction: rtl;
+  }
+  /* Ensure list items and table cells align right */
+  ul, ol, li, th, td, p, h1, h2, h3, h4, h5, h6 {
+    text-align: right;
+    direction: rtl;
+  }
+  /* Fix icon spacing for RTL */
+  .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+  .ml-2 {
+    margin-left: 0;
+    margin-right: 0.5rem;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
