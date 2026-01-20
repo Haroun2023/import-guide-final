@@ -308,29 +308,14 @@ export default function Home() {
           <p className="text-gray-300 mb-6">
             احصل على الدليل الشامل والموارد المتعددة التي تتضمن جميع المعلومات والأمثلة والنماذج والقوالب المطلوبة لاستيراد مواد السباكة والكهرباء بنجاح.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <a href="/import-guide.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
-              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
-                <Download className="w-4 h-4 ml-2" />
-                الدليل الشامل (PDF)
-              </Button>
-            </a>
-            <a href="/sources-list.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
-              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
-                <Download className="w-4 h-4 ml-2" />
-                قائمة المصادر
-              </Button>
-            </a>
-            <a href="/checklists-templates.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
-              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-semibold cursor-pointer">
-                <Download className="w-4 h-4 ml-2" />
-                النماذج والقوالب
-              </Button>
-            </a>
-            <a href="/advanced-features.pdf" target="_blank" rel="noopener noreferrer" className="w-full">
-              <Button className="w-full bg-[#0A2540] hover:bg-[#0D3050] text-white border border-[#C5A059] font-semibold cursor-pointer">
-                <Lightbulb className="w-4 h-4 ml-2" />
-                مقترحات تطويرية
+          <div className="flex justify-center">
+            <a href="/unified-import-guide.pdf" target="_blank" rel="noopener noreferrer" className="w-full md:w-2/3">
+              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-bold text-lg py-8 cursor-pointer shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <Download className="w-6 h-6 ml-3" />
+                تحميل الدليل الشامل الموحد (PDF)
+                <span className="block text-xs font-normal mt-1 mr-2 opacity-80">
+                  (يشمل الدليل، المصادر، النماذج، الموردين، والمقترحات)
+                </span>
               </Button>
             </a>
           </div>
@@ -368,7 +353,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
             <p>© 2026 الدليل الشامل للاستيراد من الصين لملتقى الأوفياء. جميع الحقوق محفوظة.</p>
-            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.3</p>
+            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.4 (النسخة الموحدة)</p>
           </div>
         </div>
       </footer>
