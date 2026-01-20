@@ -6,6 +6,8 @@ import { useState } from "react";
 import SearchEngine from "@/components/SearchEngine";
 import CostCalculator from "@/components/CostCalculator";
 import SuppliersList from "@/components/SuppliersList";
+import CityRecommendations from "@/components/CityRecommendations";
+import ImportRoadmap from "@/components/ImportRoadmap";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -54,14 +56,16 @@ export default function Home() {
 
         {/* Tabs Section */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-12">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-7 mb-8 h-auto">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-9 mb-8 h-auto gap-2">
             <TabsTrigger value="overview" className="cursor-pointer py-3">نظرة عامة</TabsTrigger>
             <TabsTrigger value="plumbing" className="cursor-pointer py-3">مواد السباكة</TabsTrigger>
             <TabsTrigger value="electrical" className="cursor-pointer py-3">مواد الكهرباء</TabsTrigger>
             <TabsTrigger value="process" className="cursor-pointer py-3">العملية</TabsTrigger>
+            <TabsTrigger value="roadmap" className="cursor-pointer py-3">خارطة الطريق</TabsTrigger>
             <TabsTrigger value="search" className="cursor-pointer py-3">البحث</TabsTrigger>
             <TabsTrigger value="calculator" className="cursor-pointer py-3">الحاسبة</TabsTrigger>
             <TabsTrigger value="suppliers" className="cursor-pointer py-3">الموردين</TabsTrigger>
+            <TabsTrigger value="cities" className="cursor-pointer py-3">توصيات المدن</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
@@ -74,12 +78,17 @@ export default function Home() {
               <p className="text-gray-700 mb-6">
                 يوفر هذا الدليل شرحاً مفصلاً وعملياً لجميع جوانب الاستيراد، مع التركيز على المتطلبات التنظيمية والرسوم الجمركية والعملية اللوجستية.
               </p>
-              <a href="/import-guide.pdf" target="_blank" rel="noopener noreferrer">
-                <Button className="bg-[#0A2540] hover:bg-[#0D3050] text-white cursor-pointer">
-                  اقرأ الدليل الكامل
-                  <Download className="w-4 h-4 mr-2" />
-                </Button>
-              </a>
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 text-center">
+                <h3 className="text-xl font-bold text-[#0A2540] mb-2">تحميل الدليل الكامل والموارد</h3>
+                <p className="text-gray-600 mb-6">احصل على الدليل الشامل والموارد المتعددة التي تتضمن جميع المعلومات والأمثلة والنماذج والقوالب المطلوبة لاستيراد مواد السباكة والكهرباء بنجاح.</p>
+                <a href="/unified-import-guide.pdf" target="_blank" rel="noopener noreferrer" className="inline-block w-full md:w-auto">
+                  <Button className="bg-[#0A2540] hover:bg-[#0D3050] text-white cursor-pointer w-full md:w-auto px-8 py-6 text-lg h-auto">
+                    <Download className="w-6 h-6 ml-3" />
+                    تحميل الدليل الشامل الموحد (PDF)
+                  </Button>
+                </a>
+                <p className="text-xs text-gray-500 mt-3">يشمل: الدليل التفصيلي، قائمة المصادر، النماذج والقوالب، قائمة الموردين، والمقترحات التطويرية</p>
+              </div>
             </Card>
 
             <Card className="p-8">
@@ -220,38 +229,56 @@ export default function Home() {
           {/* Process Tab */}
           <TabsContent value="process" className="space-y-6">
             <Card className="p-8">
-              <h2 className="text-2xl font-bold text-[#0A2540] mb-4">عملية التخليص الجمركي</h2>
-              <p className="text-gray-700 mb-6">
-                يتبع التخليص الجمركي لمواد السباكة والكهرباء 6 خطوات رئيسية:
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  { step: 1, title: "تحضير الوثائق", desc: "جمع جميع الوثائق المطلوبة (3-5 أيام)" },
-                  { step: 2, title: "الإرسال عبر FASAH", desc: "تقديم الإقرار الجمركي (5-7 أيام قبل الوصول)" },
-                  { step: 3, title: "التحقق من شهادات SABER", desc: "التحقق الآلي من الشهادات (24-48 ساعة)" },
-                  { step: 4, title: "الفحص الجمركي", desc: "فحص ذكاء اصطناعي أو فيزيائي (15 دقيقة - 48 ساعة)" },
-                  { step: 5, title: "دفع الرسوم والضرائب", desc: "دفع عبر نظام سداد (5 أيام)" },
-                  { step: 6, title: "تحرير البضائع", desc: "سحب الحاوية والنقل (1-3 أيام)" }
-                ].map((item) => (
-                  <div key={item.step} className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-[#C5A059] text-white font-bold">
-                        {item.step}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#0A2540]">{item.title}</h4>
-                      <p className="text-sm text-gray-600">{item.desc}</p>
-                    </div>
+              <h2 className="text-2xl font-bold text-[#0A2540] mb-4">عملية الاستيراد خطوة بخطوة</h2>
+              
+              <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-[#C5A059] text-slate-500 group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                    <span className="font-bold">1</span>
                   </div>
-                ))}
-              </div>
+                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
+                    <div className="flex items-center justify-between space-x-2 mb-1">
+                      <div className="font-bold text-slate-900">البحث واختيار المنتج</div>
+                    </div>
+                    <div className="text-slate-500">تحديد المواصفات، البحث في علي بابا، التواصل مع الموردين، وطلب العينات.</div>
+                  </div>
+                </div>
 
-              <div className="mt-8 p-4 bg-amber-50 border-r-4 border-amber-400 rounded">
-                <p className="text-sm text-gray-700">
-                  <strong>الوقت الإجمالي:</strong> من الإرسال إلى التحرير: 7-14 يوم
-                </p>
+                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-[#C5A059] text-slate-500 group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                    <span className="font-bold">2</span>
+                  </div>
+                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
+                    <div className="flex items-center justify-between space-x-2 mb-1">
+                      <div className="font-bold text-slate-900">التحقق من المتطلبات</div>
+                    </div>
+                    <div className="text-slate-500">التأكد من متطلبات SASO، تسجيل المنتج في SABER، وإصدار شهادة PCoC.</div>
+                  </div>
+                </div>
+
+                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-[#C5A059] text-slate-500 group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                    <span className="font-bold">3</span>
+                  </div>
+                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
+                    <div className="flex items-center justify-between space-x-2 mb-1">
+                      <div className="font-bold text-slate-900">التعاقد والدفع</div>
+                    </div>
+                    <div className="text-slate-500">توقيع العقد (PI)، دفع العربون (30%)، وبدء التصنيع.</div>
+                  </div>
+                </div>
+
+                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-[#C5A059] text-slate-500 group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                    <span className="font-bold">4</span>
+                  </div>
+                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
+                    <div className="flex items-center justify-between space-x-2 mb-1">
+                      <div className="font-bold text-slate-900">الشحن والتخليص</div>
+                    </div>
+                    <div className="text-slate-500">شحن البضاعة، إصدار شهادة SCoC، ودفع الرسوم الجمركية.</div>
+                  </div>
+                </div>
               </div>
             </Card>
 
@@ -275,86 +302,52 @@ export default function Home() {
                   <span className="font-semibold text-[#C5A059]">10%</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
-                  <span className="text-gray-700">مصابيح LED</span>
+                  <span className="text-gray-700">إضاءة LED</span>
                   <span className="font-semibold text-[#C5A059]">15%</span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-gray-50 rounded flex-row-reverse">
-                  <span className="text-gray-700">ضريبة القيمة المضافة</span>
-                  <span className="font-semibold text-[#C5A059]">15%</span>
+                <div className="flex justify-between items-center p-3 bg-blue-50 rounded mt-4 border border-blue-200 flex-row-reverse">
+                  <span className="font-bold text-[#0A2540]">ضريبة القيمة المضافة (VAT)</span>
+                  <span className="font-bold text-[#0A2540]">15%</span>
                 </div>
               </div>
             </Card>
           </TabsContent>
 
+          {/* Roadmap Tab */}
+          <TabsContent value="roadmap">
+            <ImportRoadmap />
+          </TabsContent>
+
           {/* Search Tab */}
-          <TabsContent value="search" className="space-y-6">
+          <TabsContent value="search">
             <SearchEngine />
           </TabsContent>
 
           {/* Calculator Tab */}
-          <TabsContent value="calculator" className="space-y-6">
+          <TabsContent value="calculator">
             <CostCalculator />
           </TabsContent>
 
           {/* Suppliers Tab */}
-          <TabsContent value="suppliers" className="space-y-6">
+          <TabsContent value="suppliers">
             <SuppliersList />
           </TabsContent>
-        </Tabs>
 
-        {/* Download Section */}
-        <Card className="p-8 bg-gradient-to-r from-[#0A2540] to-[#0D3050] text-white">
-          <h2 className="text-2xl font-bold mb-4">تحميل الدليل الكامل والموارد</h2>
-          <p className="text-gray-300 mb-6">
-            احصل على الدليل الشامل والموارد المتعددة التي تتضمن جميع المعلومات والأمثلة والنماذج والقوالب المطلوبة لاستيراد مواد السباكة والكهرباء بنجاح.
-          </p>
-          <div className="flex justify-center">
-            <a href="/unified-import-guide.pdf" target="_blank" rel="noopener noreferrer" className="w-full md:w-2/3">
-              <Button className="w-full bg-[#C5A059] hover:bg-[#B8964A] text-[#0A2540] font-bold text-lg py-8 cursor-pointer shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                <Download className="w-6 h-6 ml-3" />
-                تحميل الدليل الشامل الموحد (PDF)
-                <span className="block text-xs font-normal mt-1 mr-2 opacity-80">
-                  (يشمل الدليل، المصادر، النماذج، الموردين، والمقترحات)
-                </span>
-              </Button>
-            </a>
-          </div>
-        </Card>
+          {/* City Recommendations Tab */}
+          <TabsContent value="cities">
+            <CityRecommendations />
+          </TabsContent>
+        </Tabs>
       </main>
 
       {/* Footer */}
       <footer className="bg-[#0A2540] text-white py-8 mt-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="font-bold mb-4">الموارد</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-[#C5A059]">FASAH</a></li>
-                <li><a href="#" className="hover:text-[#C5A059]">SABER</a></li>
-                <li><a href="#" className="hover:text-[#C5A059]">ZATCA</a></li>
-                <li><a href="#" className="hover:text-[#C5A059]">SASO</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold mb-4">المعلومات</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-[#C5A059]">عن الدليل</a></li>
-                <li><a href="#" className="hover:text-[#C5A059]">الأسئلة الشائعة</a></li>
-                <li><a href="#" className="hover:text-[#C5A059]">اتصل بنا</a></li>
-                <li><a href="#" className="hover:text-[#C5A059]">الشروط والأحكام</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold mb-4">عن المشروع</h3>
-              <p className="text-sm text-gray-400">
-                دليل شامل متخصص في استيراد مواد السباكة والكهرباء من الصين إلى المملكة العربية السعودية.
-              </p>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-            <p>© 2026 الدليل الشامل للاستيراد من الصين لملتقى الأوفياء. جميع الحقوق محفوظة.</p>
-            <p className="mt-2">آخر تحديث: يناير 2026 | الإصدار 2.4 (النسخة الموحدة)</p>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p className="mb-4">© 2026 ملتقى الأوفياء - جميع الحقوق محفوظة</p>
+          <p className="text-sm text-gray-400">
+            إخلاء مسؤولية: المعلومات الواردة في هذا الدليل للأغراض التعليمية فقط. يرجى التحقق من المصادر الرسمية قبل اتخاذ أي قرارات تجارية.
+          </p>
+          <p className="text-xs text-gray-500 mt-4">الإصدار 2.9 (تحديث شامل)</p>
         </div>
       </footer>
     </div>
