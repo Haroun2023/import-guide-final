@@ -27,26 +27,28 @@ function Photo({ photo, sizes, className = "", eager = false }: { photo: CenterP
 }
 
 /** «زُر مركزنا»: real photos of the Madinah center + how to get there. */
-export function Visit() {
+export function Visit({ heading = true }: { heading?: boolean }) {
   const branch = site.branches[0];
   const [hero, ...rest] = centerPhotos;
   const grid = rest.slice(0, 4);
   return (
-    <section id="visit" className="py-20 md:py-28" aria-labelledby="visit-title">
-      <div className="container-x">
-        <SectionHeading
-          id="visit-title"
-          eyebrow="زُر مركزنا"
-          title={
-            <>
-              مكان هادئ ومريح…
-              <br />
-              <span className="text-brand-600">من أول خطوة</span>
-            </>
-          }
-          lead={`صور حقيقية من مركزنا في ${site.city}: استقبال واسع، وصالات انتظار مريحة، وبيئة تليق برحلة تعافيك.`}
-        />
-      </div>
+    <section id="visit" className={heading ? "py-20 md:py-28" : "py-12 md:py-16"} aria-labelledby={heading ? "visit-title" : undefined} aria-label={heading ? undefined : "صور المركز والوصول إليه"}>
+      {heading ? (
+        <div className="container-x">
+          <SectionHeading
+            id="visit-title"
+            eyebrow="زُر مركزنا"
+            title={
+              <>
+                مكان هادئ
+                <br />
+                <span className="text-brand-600">تستريح فيه من أول خطوة</span>
+              </>
+            }
+            lead={`صور حقيقية من مركزنا في ${site.city}: استقبال واسع، وصالات انتظار مريحة، وفريق يرتّب معك موعدك قبل أن تصل.`}
+          />
+        </div>
+      ) : null}
 
       {/* Phones: swipeable strip */}
       <ul className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:px-6 md:hidden" aria-label="صور المركز">
@@ -98,7 +100,7 @@ export function Visit() {
                 className="btn btn-primary"
                 onClick={() => trackEngagement("get_directions", { placement: "visit" })}
               >
-                <Navigation size={18} aria-hidden /> الاتجاهات في خرائط Google
+                <Navigation size={18} aria-hidden /> خذني إلى المركز (خرائط Google)
               </a>
               <a href={branch.mapsUrl} target="_blank" rel="noopener" className="btn btn-ghost" onClick={() => trackEngagement("open_map", { placement: "visit" })}>
                 <MapPin size={18} aria-hidden /> صفحة المركز على الخريطة

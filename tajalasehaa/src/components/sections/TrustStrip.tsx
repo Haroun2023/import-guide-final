@@ -19,7 +19,7 @@ export function TrustStrip() {
             <BadgeCheck size={17} className="text-brand-600" aria-hidden /> أخصائيون مرخّصون ومصنّفون مهنيًا
           </span>
           <span className="inline-flex items-center gap-2">
-            <BadgeCheck size={17} className="text-brand-600" aria-hidden /> بمعايير {site.partner.name} الدولية
+            <BadgeCheck size={17} className="text-brand-600" aria-hidden /> على معايير {site.partner.name} في الرعاية
           </span>
           {site.rating ? (
             <a href={site.rating.url || undefined} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5">

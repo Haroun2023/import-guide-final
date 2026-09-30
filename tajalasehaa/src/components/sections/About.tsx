@@ -35,27 +35,34 @@ function RouteArt() {
   );
 }
 
-export function About() {
+export function About({ heading = true }: { heading?: boolean }) {
   return (
-    <section id="about" className="py-20 md:py-28" aria-labelledby="about-title">
+    <section id="about" className="py-20 md:py-28" aria-labelledby={heading ? "about-title" : undefined} aria-label={heading ? undefined : "قصتنا وفريقنا"}>
       <div className="container-x grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <SectionHeading
-            id="about-title"
-            eyebrow="قصتنا"
-            title={
-              <>
-                من {site.partner.country}… <span className="text-gradient-brand">إلى {site.city}</span>
-              </>
-            }
-          />
+          {heading ? (
+            <SectionHeading
+              id="about-title"
+              eyebrow="قصتنا"
+              title={
+                <>
+                  من {site.partner.country} <span className="text-gradient-brand">إلى {site.city}</span>
+                </>
+              }
+            />
+          ) : (
+            <h2 className="h-section">
+              اسمنا من مثل <span className="text-gradient-brand">تعرفه جيدًا</span>
+            </h2>
+          )}
           <Reveal>
             <p className="lead-text mt-5">
-              {site.name} هو الفرع السعودي لمجموعة {site.partner.name} ({site.partner.nameAr}) للرعاية المتكاملة. نجمع بين العلاج الطبيعي القائم على الدليل العلمي، والتقنيات
-              الحديثة، ورعاية إنسانية تهتم بك كشخص لا كحالة.
+              {site.name} هو الفرع السعودي لمجموعة {site.partner.name} ({site.partner.nameAr}). نعالج بطرق مبنية على الدليل العلمي، ونستعين بأجهزة حديثة، ونتعامل معك كإنسان
+              له حياة وأهداف، لا كرقم ملف.
             </p>
             <p className="mt-4 leading-8 text-muted">
-              اسمنا مستوحى من المثل «الصحة تاج على رؤوس الأصحاء لا يراه إلا المرضى» — ومهمتنا أن نساعدك على استعادة هذا التاج: حركة بلا ألم، واستقلالية، وثقة في جسدك.
+              «الصحة تاج على رؤوس الأصحاء لا يراه إلا المرضى». من هذا المثل جاء اسمنا، وهذه مهمتنا: أن نساعدك على استعادة هذا التاج، فتتحرك براحة وتعود إلى يومك واثقًا من
+              جسمك.
             </p>
           </Reveal>
 

@@ -140,6 +140,20 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
   transform: translateY(22px);
 }
 
+/* Cards that lift toward you on hover (kept outside layers so the reveal
+   transition above doesn't slow the hover down) */
+.lift-card {
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  transition-delay: var(--reveal-delay, 0s), 0s, 0s, 0s; /* keep the reveal stagger, hover reacts at once */
+}
+@media (hover: hover) {
+  .lift-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgb(12 132 86 / 0.25);
+  }
+}
+
 /* A utility (not a component class) so responsive variants like md:container-x work */
 @utility container-x {
   width: 100%;
@@ -569,38 +583,97 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
     color: var(--color-deep);
     background: color-mix(in srgb, var(--glow) 82%, white);
     box-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.6);
-    transform: translate(-50%, -50%) translateZ(70px);
+    transform: translate(-50%, -50%) translateZ(24px);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
     animation: dstage-bob 6s ease-in-out infinite;
   }
-  .dstage-chip-b { transform: translate(-50%, -50%) translateZ(95px); animation-delay: -3s; }
-  /* Hotspots sit just above the photo so they stay on their part while tilting */
+  .dstage-chip-b { transform: translate(-50%, -50%) translateZ(34px); animation-delay: -3s; }
+  /* Hotspots float just above the photo (and above the stat chips) so they stay on their part while tilting */
   .dstage-hot {
     position: absolute;
     z-index: 4;
-    transform: translate(-50%, -50%) translateZ(30px);
+    transform: translate(-50%, -50%) translateZ(44px);
+    transition: opacity 0.3s ease;
   }
-  .dstage-hot[data-active] { z-index: 5; transform: translate(-50%, -50%) translateZ(60px); }
-  .dstage-callout {
+  .dstage-hot[data-active] { z-index: 5; transform: translate(-50%, -50%) translateZ(56px); }
+  /* The open part's note: a flat layer above the 3D scene (see DeviceStage.tsx) */
+  .dstage-note,
+  .dstage-caption {
     position: absolute;
-    top: 50%;
-    width: min(15rem, 46cqw);
-    transform: translateY(-50%);
+    z-index: 20;
     display: grid;
-    gap: 0.25rem;
-    padding: 0.75rem 0.9rem;
-    border-radius: 1rem;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: 0.65rem;
+    padding: 0.8rem 0.8rem 0.85rem 0.95rem;
+    border-radius: 1.1rem;
     color: #fff;
-    font-size: 0.86rem;
-    line-height: 1.65;
+    font-size: 0.9rem;
+    line-height: 1.7;
     text-align: start;
-    background: rgb(11 25 35 / 0.9);
-    border: 1px solid rgb(255 255 255 / 0.16);
-    box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.6);
+    background: rgb(11 25 35 / 0.94);
+    border: 1px solid color-mix(in srgb, var(--glow) 45%, rgb(255 255 255 / 0.15));
+    box-shadow: 0 22px 50px -14px rgb(0 0 0 / 0.7), 0 0 0 4px color-mix(in srgb, var(--glow) 12%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  .dstage-note strong,
+  .dstage-caption strong { color: var(--color-leaf-300); font-size: 0.98rem; line-height: 1.4; }
+  .dstage-note {
+    left: 0;
+    top: 0;
+    width: min(18rem, 62cqw);
+    visibility: hidden; /* placed by JS before it shows */
     animation: fade-in 0.25s ease;
   }
-  .dstage-callout strong { color: var(--color-leaf-300); font-size: 0.92rem; }
-  .dstage-callout.to-left { right: calc(100% + 0.7rem); }
-  .dstage-callout.to-right { left: calc(100% + 0.7rem); }
+  .dstage-caption {
+    inset-inline: 0.75rem;
+    bottom: 0.75rem;
+    display: none;
+    animation: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .dstage-note-num {
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-deep);
+    background: color-mix(in srgb, var(--glow) 80%, white);
+  }
+  .dstage-note-close {
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    margin: -0.25rem -0.15rem 0 0;
+    border-radius: 999px;
+    color: rgb(255 255 255 / 0.7);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .dstage-note-close:hover { color: #fff; background: rgb(255 255 255 / 0.1); }
+  .dstage-leader {
+    position: absolute;
+    inset: 0;
+    z-index: 19;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .dstage-leader[data-open] { opacity: 1; }
+  .dstage-leader line { stroke: color-mix(in srgb, var(--glow) 85%, white); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .dstage-leader circle { fill: none; stroke: color-mix(in srgb, var(--glow) 85%, white); stroke-width: 2; }
+  /* Focus: the device settles, chips and the other parts step back */
+  .dstage.has-focus .dstage-chip { opacity: 0; }
+  .dstage.has-focus .dstage-hot:not([data-active]) { opacity: 0.4; }
+  .dstage.has-focus .dstage-detail { filter: opacity(0.25) saturate(0.6); } /* filter: its entry animation owns opacity */
+  .dstage.has-focus .dstage-scan { display: none; }
   .dstage-detail {
     position: absolute;
     z-index: 2;
@@ -613,6 +686,7 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
     background: rgb(255 255 255 / 0.06);
     border: 1px solid rgb(255 255 255 / 0.14);
     backdrop-filter: blur(8px);
+    transition: filter 0.3s ease;
     animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both 0.35s;
   }
   .dstage-detail figcaption {
@@ -624,27 +698,10 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
     font-weight: 600;
     color: rgb(255 255 255 / 0.75);
   }
-  .dstage-caption {
-    position: absolute;
-    z-index: 6;
-    inset-inline: 0.75rem;
-    bottom: 0.75rem;
-    display: none;
-    gap: 0.2rem;
-    padding: 0.7rem 0.9rem;
-    border-radius: 1rem;
-    color: #fff;
-    font-size: 0.86rem;
-    line-height: 1.65;
-    background: rgb(11 25 35 / 0.9);
-    border: 1px solid rgb(255 255 255 / 0.16);
-    box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.6);
-    animation: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
-  .dstage-caption strong { color: var(--color-leaf-300); font-size: 0.92rem; }
   @media (max-width: 639px) {
     .dstage-detail,
-    .dstage-callout { display: none; }
+    .dstage-note,
+    .dstage-leader { display: none; }
     .dstage-caption { display: grid; }
     .dstage-chip { --edge: 5.5rem; font-size: 0.72rem; padding: 0.35rem 0.65rem; }
   }
@@ -669,6 +726,12 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
     background: rgb(255 255 255 / 0.12);
     box-shadow: inset 0 0 0 1.5px var(--glow), 0 12px 32px -14px var(--glow);
     transform: translateY(-2px);
+  }
+
+  html[data-device-focus] .float-cta {
+    opacity: 0;
+    pointer-events: none;
+    translate: 0 1.5rem;
   }
 
   .stage-btn {

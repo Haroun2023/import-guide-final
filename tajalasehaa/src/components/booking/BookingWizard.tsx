@@ -114,7 +114,7 @@ export function BookingWizard({
 
   const next = () => {
     if (step === "need" && !data.complaint) {
-      setErrors({ complaint: "اختر الأقرب لحالتك للمتابعة" });
+      setErrors({ complaint: "اختر أقرب وصف لحالتك لنكمل" });
       return;
     }
     go(stepIndex + 1);
@@ -178,7 +178,7 @@ export function BookingWizard({
         </div>
         <h3 className="mt-4 text-xl font-bold">أكمل طلبك عبر واتساب</h3>
         <p className="mt-2 text-muted">
-          لم نتمكن من إرسال الطلب آليًا الآن. أرسل التفاصيل الجاهزة عبر واتساب وسنؤكد موعدك فورًا.
+          لم يصلنا طلبك بسبب خلل مؤقت. أرسله عبر واتساب بضغطة واحدة، والتفاصيل مكتوبة جاهزة، ونؤكد موعدك في أقرب وقت.
         </p>
         <div className="mt-6 grid gap-3">
           <a
@@ -229,8 +229,8 @@ export function BookingWizard({
         <div key={step} className={direction > 0 ? "animate-[step-fwd_0.3s_cubic-bezier(0.2,0.7,0.2,1)]" : "animate-[step-back_0.3s_cubic-bezier(0.2,0.7,0.2,1)]"}>
           {step === "need" ? (
             <fieldset>
-              <legend className="text-lg font-bold text-ink">ما الذي تحتاج المساعدة فيه؟</legend>
-              <p className="mt-1 text-sm text-muted">اختر الأقرب لحالتك — يحدد الأخصائي التفاصيل في التقييم.</p>
+              <legend className="text-lg font-bold text-ink">بماذا نساعدك؟</legend>
+              <p className="mt-1 text-sm text-muted">اختر أقرب وصف لحالتك، والتفاصيل نفهمها معك في التقييم.</p>
               <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {complaints.map((c) => (
                   <label
@@ -387,7 +387,7 @@ export function BookingWizard({
         {step === "contact" ? (
           <button type="button" className="btn btn-primary btn-shine flex-1" onClick={submit} disabled={status === "sending"}>
             {status === "sending" ? <LoaderCircle size={20} className="animate-spin" aria-hidden /> : <Check size={20} aria-hidden />}
-            {status === "sending" ? "جارٍ الإرسال…" : "أرسل طلب الحجز"}
+            {status === "sending" ? "جارٍ الإرسال…" : "أرسل الطلب"}
           </button>
         ) : (
           <button type="button" className="btn btn-primary flex-1" onClick={next}>
@@ -402,7 +402,7 @@ export function BookingWizard({
             <Lock size={13} aria-hidden /> بياناتك سرّية وتُستخدم لتنسيق موعدك فقط.
           </p>
           <p>
-            نتواصل معك خلال <strong className="text-ink">{site.responseTimeMinutes} دقيقة</strong> في أوقات العمل.
+            نتصل بك خلال <strong className="text-ink">{site.responseTimeMinutes} دقيقة</strong> في أوقات العمل.
           </p>
         </div>
       ) : null}

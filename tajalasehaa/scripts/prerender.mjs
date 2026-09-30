@@ -12,7 +12,7 @@ const dist = path.join(root, "dist");
 const ssrDir = path.join(root, ".ssr");
 
 const template = await fs.readFile(path.join(dist, "index.html"), "utf8");
-const { render, routeMeta, prerenderRoutes, jsonLd, site } = await import(pathToFileURL(path.join(ssrDir, "entry-server.js")).href);
+const { render, routeMeta, prerenderRoutes, jsonLdFor, site } = await import(pathToFileURL(path.join(ssrDir, "entry-server.js")).href);
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -28,7 +28,7 @@ function page(route, html, { noindexOverride } = {}) {
   const extra = [
     fontPreload,
     noindex ? '<meta name="robots" content="noindex" />' : "",
-    route === "/" || route.startsWith("/lp/") ? `<script type="application/ld+json">${JSON.stringify(jsonLd()).replace(/</g, "\\u003c")}</script>` : "",
+    ...jsonLdFor(route).map((data) => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`),
   ]
     .filter(Boolean)
     .join("\n    ");

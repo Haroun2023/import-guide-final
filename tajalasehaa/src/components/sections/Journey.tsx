@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { journey } from "@/config/content";
+import { Icon3D } from "@/components/ui/Icon3D";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
+
+const ICONS = ["calendar-check", "scan-search", "clipboard-list", "activity", "sparkles"];
 
 /** Writes scroll progress through the element (0–1) to the --p CSS variable. */
 function useScrollProgress<T extends HTMLElement>() {
@@ -40,8 +43,8 @@ export function Journey() {
         <SectionHeading
           id="journey-title"
           eyebrow="رحلة التعافي"
-          title="رحلتك معنا… واضحة من اليوم الأول"
-          lead="لا مفاجآت ولا جلسات عشوائية: خطوات محددة، وأهداف مكتوبة، وقياس مستمر للتقدّم."
+          title="كيف تسير رحلتك معنا؟"
+          lead="تعرف من اليوم الأول ماذا سنفعل ولماذا. خطوات واضحة، وأهداف مكتوبة، ونراجع تقدّمك معك أولًا بأول."
           center
         />
 
@@ -60,7 +63,8 @@ export function Journey() {
                 {i + 1}
               </span>
               <div>
-                <h3 className="text-lg font-bold md:mt-4">{s.title}</h3>
+                <Icon3D name={ICONS[i % ICONS.length]} size={52} className="mb-1 hidden md:mx-auto md:mt-4 md:block" />
+                <h3 className="text-lg font-bold md:mt-2">{s.title}</h3>
                 <p className="mt-1.5 text-[0.95rem] leading-7 text-muted">{s.text}</p>
               </div>
             </Reveal>

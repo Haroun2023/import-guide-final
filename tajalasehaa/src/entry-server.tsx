@@ -2,7 +2,7 @@ import { renderToString } from "react-dom/server";
 import App from "./App";
 
 export { site } from "./config/site";
-export { jsonLd, prerenderRoutes, routeMeta } from "./seo";
+export { jsonLdFor, prerenderRoutes, routeMeta } from "./seo";
 
 /** Used by scripts/prerender.mjs to produce static HTML for every route. */
 export function render(url: string) {

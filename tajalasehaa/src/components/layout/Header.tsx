@@ -1,20 +1,13 @@
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "wouter";
 import { telLink } from "@/config/site";
 import { trackContact } from "@/lib/tracking";
 import { useBooking } from "@/components/booking/BookingContext";
 import { Logo } from "@/components/ui/Logo";
 import { DemoBanner } from "./DemoBanner";
 import { WhatsAppLink } from "./ContactLinks";
-
-const NAV = [
-  { href: "/#pain-map", label: "أين يؤلمك؟" },
-  { href: "/#programs", label: "البرامج" },
-  { href: "/#devices", label: "التقنيات" },
-  { href: "/#journey", label: "رحلة التعافي" },
-  { href: "/#about", label: "من نحن" },
-  { href: "/#faq", label: "الأسئلة" },
-];
+import { isCurrent, NAV } from "./nav";
 
 function useScrolled(threshold = 24) {
   const [scrolled, setScrolled] = useState(false);
@@ -35,6 +28,7 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
   const scrolled = useScrolled();
   const [open, setOpen] = useState(false);
   const { openBooking } = useBooking();
+  const [path] = useLocation();
   const light = overDark && !scrolled && !open;
 
   useEffect(() => {
@@ -53,25 +47,35 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
         }`}
       >
         <div className="container-x flex h-[4.25rem] items-center justify-between gap-4">
-          <a href="/" className="shrink-0" aria-label="الصفحة الرئيسية">
+          <Link href="/" className="shrink-0" aria-label="الصفحة الرئيسية">
             <Logo tone={light ? "light" : "dark"} crossfade className="h-9 sm:h-10" />
-          </a>
+          </Link>
 
           {!minimal ? (
             <nav aria-label="القائمة الرئيسية" className="hidden lg:block">
               <ul className="flex items-center gap-1">
-                {NAV.map((n) => (
-                  <li key={n.href}>
-                    <a
-                      href={n.href}
-                      className={`rounded-full px-3.5 py-2 text-[0.94rem] font-medium transition-colors ${
-                        light ? "text-white/85 hover:bg-white/10 hover:text-white" : "text-ink/80 hover:bg-mist-100 hover:text-ink"
-                      }`}
-                    >
-                      {n.label}
-                    </a>
-                  </li>
-                ))}
+                {NAV.map((n) => {
+                  const current = isCurrent(path, n.href);
+                  return (
+                    <li key={n.href}>
+                      <Link
+                        href={n.href}
+                        aria-current={current ? "page" : undefined}
+                        className={`relative rounded-full px-3.5 py-2 text-[0.94rem] font-medium transition-colors ${
+                          light
+                            ? current
+                              ? "bg-white/12 text-white"
+                              : "text-white/85 hover:bg-white/10 hover:text-white"
+                            : current
+                              ? "bg-brand-50 text-brand-800"
+                              : "text-ink/80 hover:bg-mist-100 hover:text-ink"
+                        }`}
+                      >
+                        {n.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           ) : null}
@@ -111,13 +115,21 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
           <div id="mobile-menu" className="border-t border-mist-200 bg-mist-50 lg:hidden">
             <nav aria-label="قائمة الجوال" className="container-x py-4">
               <ul className="grid gap-1">
-                {NAV.map((n) => (
-                  <li key={n.href}>
-                    <a href={n.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-lg font-medium hover:bg-mist-100">
-                      {n.label}
-                    </a>
-                  </li>
-                ))}
+                {[{ href: "/", label: "الرئيسية" }, ...NAV].map((n) => {
+                  const current = n.href === "/" ? path === "/" : isCurrent(path, n.href);
+                  return (
+                    <li key={n.href}>
+                      <Link
+                        href={n.href}
+                        aria-current={current ? "page" : undefined}
+                        onClick={() => setOpen(false)}
+                        className={`block rounded-xl px-3 py-3 text-lg font-medium ${current ? "bg-brand-50 text-brand-800" : "hover:bg-mist-100"}`}
+                      >
+                        {n.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <button

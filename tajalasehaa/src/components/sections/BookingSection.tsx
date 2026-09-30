@@ -11,16 +11,16 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
     <section id="booking" className="grain relative overflow-hidden bg-deep-radial py-20 text-white md:py-28" aria-labelledby="booking-title">
       <div className="container-x grid items-start gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
-          <p className="eyebrow eyebrow-light">احجز الآن</p>
+          <p className="eyebrow eyebrow-light">احجز تقييمك</p>
           <h2 id="booking-title" className="h-section mt-3">
             {title ?? (
               <>
-                خطوتك الأولى نحو <span className="text-gradient-leaf">حركة بلا ألم</span>
+                خذ الخطوة الأولى، <span className="text-gradient-leaf">ونكمل الطريق معك</span>
               </>
             )}
           </h2>
           <p className="lead-text mt-4 !text-white/70">
-            املأ الطلب في أقل من دقيقة، ويتواصل معك منسّق المرضى خلال {site.responseTimeMinutes} دقيقة في أوقات العمل لتأكيد الموعد الأنسب لك.
+            اترك بياناتك في أقل من دقيقة، ويتصل بك منسّق المرضى خلال {site.responseTimeMinutes} دقيقة في أوقات العمل ليختار معك الموعد المناسب.
           </p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2">

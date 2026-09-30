@@ -1,5 +1,6 @@
-import { ArrowLeft, ChevronLeft, ChevronRight, Clock, ExternalLink, Pause, Play, Repeat, Waves } from "lucide-react";
+import { ArrowLeft, Check, ChevronLeft, ChevronRight, Clock, ExternalLink, Pause, Play, Repeat, Waves } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { Link } from "wouter";
 import { devices, type Device, type DeviceId } from "@/config/devices";
 import { whatsappLink } from "@/config/site";
 import { trackContact, trackEngagement } from "@/lib/tracking";
@@ -88,7 +89,24 @@ function DeviceDock({ list, activeId, onChoose }: { list: Device[]; activeId: De
   );
 }
 
-export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevice?: DeviceId; only?: DeviceId[] }) {
+/**
+ * The device showcase. `full`: every detail (devices page). `teaser`: the
+ * stage with a short summary that links to the device's own page (home).
+ */
+export function DeviceLab({
+  initialDevice = "antigravity",
+  only,
+  heading = true,
+  variant = "full",
+  onChange,
+}: {
+  initialDevice?: DeviceId;
+  only?: DeviceId[];
+  heading?: boolean;
+  variant?: "full" | "teaser";
+  /** called when the visitor picks another device (the devices page keeps its URL in sync) */
+  onChange?: (id: DeviceId) => void;
+}) {
   const onlyKey = only?.join(",");
   const list = useMemo(() => (onlyKey ? devices.filter((d) => onlyKey.split(",").includes(d.id)) : devices), [onlyKey]);
   const [deviceId, setDeviceId] = useState<DeviceId>(list.some((d) => d.id === initialDevice) ? initialDevice : list[0].id);
@@ -100,44 +118,49 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
   const multi = list.length > 1;
 
   const choose = (id: DeviceId) => {
-    if (id !== deviceId) trackEngagement("device_view", { device: id });
+    if (id !== deviceId) {
+      trackEngagement("device_view", { device: id });
+      onChange?.(id);
+    }
     setDeviceId(id);
     setHotspot(null);
   };
   const step = (dir: 1 | -1) => choose(list[(index + dir + list.length) % list.length].id);
 
-  // The pain map can ask us to show a specific device.
-  const chooseRef = useRef(choose);
-  chooseRef.current = choose;
-  useEffect(() => {
-    const onDevice = (e: Event) => {
-      const id = (e as CustomEvent<string>).detail as DeviceId;
-      if (list.some((d) => d.id === id)) chooseRef.current(id);
-    };
-    window.addEventListener("ta:device", onDevice);
-    return () => window.removeEventListener("ta:device", onDevice);
-  }, [list]);
-
   return (
-    <section id="devices" className="grain relative overflow-hidden bg-deep-radial py-20 text-white md:py-28" aria-labelledby="devices-title">
+    <section
+      id="devices"
+      className={`grain relative overflow-hidden bg-deep-radial text-white ${heading ? "py-20 md:py-28" : "py-12 md:py-16"}`}
+      aria-labelledby={heading ? "devices-title" : undefined}
+      aria-label={heading ? undefined : "معرض الأجهزة"}
+    >
       <div className="container-x">
-        <SectionHeading
-          light
-          id="devices-title"
-          eyebrow="مختبر التقنيات"
-          title={
-            <>
-              {multi ? "أجهزة عالمية…" : "تعرّف على الجهاز…"}
-              <br />
-              <span className="text-gradient-leaf">كأنك داخل المركز</span>
-            </>
-          }
-          lead={
-            multi
-              ? "صور حقيقية للأجهزة من الشركات المصنّعة في معرض ثلاثي الأبعاد: حرّك المؤشر أو اسحب لتدوير الجهاز، واضغط الأرقام لتتعرّف على أجزائه. الأجهزة عندنا أدوات ضمن خطة تعتمد على التقييم والتمارين العلاجية — لا بديلًا عنها."
-              : "حرّك المؤشر أو اسحب لتدوير الجهاز، واضغط الأرقام لتتعرّف على أجزائه. الجهاز أداة ضمن خطة تعتمد على التقييم والتمارين العلاجية — لا بديلًا عنها."
-          }
-        />
+        {heading ? (
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              light
+              id="devices-title"
+              eyebrow="أجهزتنا"
+              title={
+                <>
+                  {multi ? "تعرّف على أجهزتنا" : "تعرّف على الجهاز"}
+                  <br />
+                  <span className="text-gradient-leaf">قبل أن تزورنا</span>
+                </>
+              }
+              lead={
+                multi
+                  ? "هذه صور الأجهزة كما صنعتها شركاتها. أدِر الجهاز بإصبعك أو بالمؤشر، واضغط الأرقام لتعرف عمل كل جزء. الجهاز يساعدك، وخطتك تبدأ دائمًا من التقييم والتمارين."
+                  : "أدِر الجهاز بإصبعك أو بالمؤشر، واضغط الأرقام لتعرف عمل كل جزء. الجهاز يساعدك، وخطتك تبدأ دائمًا من التقييم والتمارين."
+              }
+            />
+            {variant === "teaser" ? (
+              <Link href="/devices" className="btn btn-ghost-dark shrink-0 self-start md:self-auto">
+                كل الأجهزة بالتفصيل <ArrowLeft size={18} aria-hidden />
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
 
         {multi ? <DeviceDock list={list} activeId={deviceId} onChoose={choose} /> : null}
 
@@ -152,7 +175,13 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
             <div className="relative">
               <DeviceStage devices={list} activeId={deviceId} hotspot={hotspot} onHotspot={setHotspot} onSwipe={multi ? step : undefined} paused={paused} />
               {device.badge ? (
-                <p className="pointer-events-none absolute start-4 top-4 z-10 rounded-full bg-leaf-300 px-3 py-1 text-xs font-bold text-deep shadow-lg">★ {device.badge}</p>
+                <p
+                  className={`pointer-events-none absolute start-4 top-4 z-10 rounded-full bg-leaf-300 px-3 py-1 text-xs font-bold text-deep shadow-lg transition-opacity duration-300 ${
+                    hotspot ? "opacity-0" : ""
+                  }`}
+                >
+                  ★ {device.badge}
+                </p>
               ) : null}
             </div>
 
@@ -208,6 +237,42 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
           </div>
 
           {/* Info panel */}
+          {variant === "teaser" ? (
+            <div key={device.id} className="animate-rise lg:pt-6" style={{ "--glow": device.glow } as CSSProperties}>
+              <p className="text-xs font-semibold">
+                <span className="rounded-full bg-white/8 px-3 py-1 text-white/80 ring-1 ring-white/12">
+                  {device.brand} · {device.origin}
+                </span>
+              </p>
+              <h3 className="mt-3 text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{device.name}</h3>
+              <p dir="ltr" className="mt-2 text-end text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-leaf-300/80">
+                {device.model}
+              </p>
+              <p className="mt-4 text-lg leading-8 text-white/85">{device.short}</p>
+              <ul className="mt-6 grid gap-3">
+                {device.features.slice(0, 3).map((f) => (
+                  <li key={f.title} className="flex items-start gap-3">
+                    <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full text-deep" style={{ background: "color-mix(in srgb, var(--glow) 85%, white)" }}>
+                      <Check size={14} aria-hidden />
+                    </span>
+                    <span>
+                      <strong className="block">{f.title}</strong>
+                      <span className="text-[0.95rem] leading-7 text-white/65">{f.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                <Link href={`/devices/${device.id}`} className="btn btn-leaf btn-shine">
+                  تفاصيل الجهاز <ArrowLeft size={18} aria-hidden />
+                </Link>
+                <button type="button" className="btn btn-ghost-dark" onClick={() => openBooking({ placement: `device-teaser:${device.id}` })}>
+                  احجز تقييمك
+                </button>
+              </div>
+              <p className="mt-4 text-xs leading-6 text-white/45">* يحدد الأخصائي بعد التقييم إن كان الجهاز مناسبًا لحالتك.</p>
+            </div>
+          ) : (
           <div key={device.id} className="animate-rise" style={{ "--glow": device.glow } as CSSProperties}>
             <p className="flex flex-wrap items-center gap-2 text-xs font-semibold">
               <span className="rounded-full bg-white/8 px-3 py-1 text-white/80 ring-1 ring-white/12">
@@ -241,7 +306,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
 
             <details className="group mt-5 rounded-2xl bg-white/[0.035] ring-1 ring-white/10 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 font-semibold">
-                كيف يعمل الجهاز؟
+                كيف يعمل؟
                 <ChevronLeft size={18} className="text-leaf-300 transition-transform group-open:-rotate-90" aria-hidden />
               </summary>
               <p className="px-4 pb-4 leading-8 text-white/70">{device.how}</p>
@@ -261,7 +326,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
               ))}
             </dl>
 
-            <h4 className="mt-6 text-sm font-semibold text-white/60">يُستخدم ضمن خطط علاج</h4>
+            <h4 className="mt-6 text-sm font-semibold text-white/60">نستخدمه غالبًا مع</h4>
             <ul className="mt-2 flex flex-wrap gap-2">
               {device.treats.map((t) => (
                 <li key={t} className="rounded-full bg-leaf-400/12 px-3 py-1.5 text-sm text-leaf-300 ring-1 ring-leaf-400/25">
@@ -272,11 +337,11 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
 
             <div className="mt-7 grid gap-3 sm:grid-cols-[1fr_auto]">
               <button type="button" className="btn btn-leaf btn-shine" onClick={() => openBooking({ placement: `device:${device.id}` })}>
-                احجز تقييمك الآن <ArrowLeft size={18} aria-hidden />
+                احجز تقييمك <ArrowLeft size={18} aria-hidden />
               </button>
               <a
                 className="btn btn-ghost-dark"
-                href={whatsappLink(`مرحبًا، أرغب بالاستفسار عن جلسات ${device.name}.`)}
+                href={whatsappLink(`السلام عليكم، عندي سؤال عن جلسات ${device.name}.`)}
                 target="_blank"
                 rel="noopener"
                 onClick={() => trackContact("whatsapp", `device:${device.id}`)}
@@ -285,7 +350,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
               </a>
             </div>
             <p className="mt-4 text-xs leading-6 text-white/45">
-              * يحدد الأخصائي مدى ملاءمة أي جهاز لحالتك بعد التقييم. الصورة من{" "}
+              * يحدد الأخصائي بعد التقييم إن كان الجهاز مناسبًا لحالتك. الصورة من{" "}
               <a href={device.credit.url} target="_blank" rel="noopener nofollow" className="inline-flex items-center gap-1 underline decoration-white/25 underline-offset-4 hover:text-white/70">
                 {device.credit.label}
                 <ExternalLink size={11} aria-hidden />
@@ -293,6 +358,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
               للتوضيح.
             </p>
           </div>
+          )}
         </div>
       </div>
     </section>

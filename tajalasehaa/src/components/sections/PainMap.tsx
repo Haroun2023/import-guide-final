@@ -1,7 +1,9 @@
 import { ArrowLeft, RotateCcw, RotateCw, ScanSearch, SwitchCamera } from "lucide-react";
 import { lazy, useRef, useState } from "react";
+import { Link } from "wouter";
 import { areaToComplaint } from "@/config/booking";
 import { bodyAreas, bodyAreaById, type BodyAreaId } from "@/config/body";
+import { programById } from "@/config/content";
 import { deviceById } from "@/config/devices";
 import { whatsappLink } from "@/config/site";
 import { trackContact, trackEngagement } from "@/lib/tracking";
@@ -14,14 +16,12 @@ import { BodyPoster } from "@/components/three/Posters";
 
 const BodyScene = lazy(() => import("@/three/BodyScene"));
 
-/** Ask the Device Lab section to show a device (decoupled via a DOM event). */
-export function showDevice(id: string) {
-  window.dispatchEvent(new CustomEvent("ta:device", { detail: id }));
-  document.documentElement.classList.add("cv-off"); // exact position (see index.css)
-  document.getElementById("devices")?.scrollIntoView({ behavior: "smooth" });
-}
-
-export function PainMap({ initialArea = null, compact = false }: { initialArea?: BodyAreaId | null; compact?: boolean }) {
+/**
+ * «أين يؤلمك؟»: pick the painful area on the 3D body (or the list) to see the
+ * usual conditions, the matching program and devices, and book for it.
+ * `heading`: "full" (section heading), "compact" (title only) or "none" (the page has its own H1).
+ */
+export function PainMap({ initialArea = null, heading = "full" }: { initialArea?: BodyAreaId | null; heading?: "full" | "compact" | "none" }) {
   const [selected, setSelected] = useState<BodyAreaId | null>(initialArea);
   const [view, setView] = useState<"front" | "back">(initialArea ? bodyAreaById(initialArea).view : "front");
   const [spin, setSpin] = useState(0);
@@ -37,27 +37,32 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
   };
 
   return (
-    <section id="pain-map" className="relative overflow-hidden py-20 md:py-28" aria-labelledby="painmap-title">
+    <section
+      id="pain-map"
+      className={`relative overflow-hidden ${heading === "none" ? "py-12 md:py-16" : "py-20 md:py-28"}`}
+      aria-labelledby={heading === "none" ? undefined : "painmap-title"}
+      aria-label={heading === "none" ? "خريطة الألم" : undefined}
+    >
       <div className="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(60%_50%_at_20%_30%,rgb(143_227_180/0.22),transparent_70%)]" aria-hidden />
       <div className="container-x">
-        {!compact ? (
+        {heading === "full" ? (
           <SectionHeading
             id="painmap-title"
-            eyebrow="تقييم تفاعلي"
+            eyebrow="ابدأ من موضع الألم"
             title={
               <>
                 أين <span className="text-coral-500">يؤلمك</span>؟
               </>
             }
-            lead="اختر موضع الألم على المجسّم أو من القائمة، لتعرف الحالات الشائعة وكيف نتعامل معها — ثم احجز تقييمك مباشرة."
+            lead="اضغط على موضع الألم في المجسّم أو اختره من القائمة. ستجد الحالات التي نراها كثيرًا في هذه المنطقة، وكيف نبدأ معك."
           />
-        ) : (
+        ) : heading === "compact" ? (
           <h2 id="painmap-title" className="h-section">
             أين <span className="text-coral-500">يؤلمك</span>؟
           </h2>
-        )}
+        ) : null}
 
-        <div className="mt-10 grid items-start gap-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+        <div className={`grid items-start gap-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10 ${heading === "none" ? "" : "mt-10"}`}>
           {/* 3D stage */}
           <Reveal className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-white to-mist-100 ring-1 ring-mist-200">
             <LazyCanvas className="relative h-[430px] sm:h-[520px] lg:h-[600px]" poster={<BodyPoster className="mx-auto h-full w-auto py-8" />}>
@@ -126,7 +131,7 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
                   <h3 className="mt-1 text-2xl font-bold">{area.label}</h3>
                   <p className="mt-3 leading-8 text-muted">{area.insight}</p>
 
-                  <h4 className="mt-5 text-sm font-semibold">حالات شائعة نتعامل معها</h4>
+                  <h4 className="mt-5 text-sm font-semibold">حالات نراها كثيرًا هنا</h4>
                   <ul className="mt-2 flex flex-wrap gap-2">
                     {area.conditions.map((c) => (
                       <li key={c} className="rounded-full bg-mist-100 px-3 py-1.5 text-sm">
@@ -135,17 +140,22 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
                     ))}
                   </ul>
 
-                  <h4 className="mt-5 text-sm font-semibold">أدوات قد تُستخدم ضمن خطتك</h4>
+                  <h4 className="mt-5 text-sm font-semibold">أجهزة قد نستعين بها</h4>
                   <ul className="mt-2 flex flex-wrap gap-2">
                     {area.devices.map((d) => (
                       <li key={d}>
-                        <button type="button" onClick={() => showDevice(d)} className="rounded-full bg-brand-50 px-3 py-1.5 text-sm font-medium text-brand-700 ring-1 ring-brand-100 hover:bg-brand-100">
-                          {deviceById(d).name} ↖
-                        </button>
+                        <Link href={`/devices/${d}`} className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 text-sm font-medium text-brand-700 ring-1 ring-brand-100 hover:bg-brand-100">
+                          {deviceById(d).name} <ArrowLeft size={14} aria-hidden />
+                        </Link>
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-3 text-xs text-muted">* يحدد الأخصائي الخطة المناسبة بعد التقييم؛ التمارين العلاجية هي أساس أغلب البرامج.</p>
+                  <p className="mt-3 text-xs text-muted">* يحدد الأخصائي خطتك بعد التقييم، والتمارين هي الأساس في أغلب الحالات.</p>
+                  {programById(area.program) ? (
+                    <Link href={`/programs/${area.program}`} className="mt-4 inline-flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-900">
+                      اقرأ عن برنامج «{programById(area.program)!.title}» <ArrowLeft size={16} aria-hidden />
+                    </Link>
+                  ) : null}
 
                   <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto]">
                     <button
@@ -157,7 +167,7 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
                     </button>
                     <a
                       className="btn btn-ghost"
-                      href={whatsappLink(`مرحبًا، أعاني من ألم في ${area.label} وأرغب بالاستشارة.`)}
+                      href={whatsappLink(`السلام عليكم، عندي ألم في ${area.label} وأرغب في استشارة أخصائي.`)}
                       target="_blank"
                       rel="noopener"
                       onClick={() => trackContact("whatsapp", `pain-map:${area.id}`)}
@@ -171,8 +181,8 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
                   <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-coral-500/10 text-coral-500">
                     <ScanSearch size={28} aria-hidden />
                   </div>
-                  <p className="mt-4 text-lg font-semibold">اختر منطقة للبدء</p>
-                  <p className="mt-1 text-muted">الأكثر شيوعًا: أسفل الظهر، الركبة، الرقبة.</p>
+                  <p className="mt-4 text-lg font-semibold">من أين يبدأ الألم؟</p>
+                  <p className="mt-1 text-muted">أكثر ما نراه عندنا:</p>
                   <div className="mt-4 flex justify-center gap-2">
                     {(["lowerBack", "knee", "neck"] as BodyAreaId[]).map((id) => (
                       <button key={id} type="button" className="chip" onClick={() => select(id)}>

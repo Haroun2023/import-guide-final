@@ -27,8 +27,8 @@ export default function Landing({ slug }: { slug: string }) {
   const placement = `lp:${c.slug}`;
 
   const trust = [
-    `نتواصل خلال ${site.responseTimeMinutes} دقيقة`,
-    site.features.femaleTherapists ? "أخصائيات للنساء" : null,
+    `نرد عليك خلال ${site.responseTimeMinutes} دقيقة`,
+    site.features.femaleTherapists ? "أخصائيات للسيدات" : null,
     site.features.homeVisits ? "زيارات منزلية" : null,
   ].filter(Boolean) as string[];
 
@@ -98,7 +98,7 @@ export default function Landing({ slug }: { slug: string }) {
         </section>
 
         <TrustStrip />
-        {c.device ? <DeviceLab initialDevice={c.device} only={[c.device]} /> : c.area ? <PainMap initialArea={c.area} compact /> : null}
+        {c.device ? <DeviceLab initialDevice={c.device} only={[c.device]} /> : c.area ? <PainMap initialArea={c.area} heading="compact" /> : null}
         <Journey />
         <Commitments />
         <Visit />

@@ -1,4 +1,5 @@
 import { Clock, MapPin, Phone } from "lucide-react";
+import { Link } from "wouter";
 import { site, telLink } from "@/config/site";
 import { trackContact } from "@/lib/tracking";
 import { InstagramIcon, SnapchatIcon, TikTokIcon, WhatsAppIcon, XIcon } from "@/components/ui/Icons";
@@ -42,18 +43,19 @@ export function Footer() {
           <h2 className="text-sm font-semibold text-leaf-300">روابط سريعة</h2>
           <ul className="mt-4 grid gap-2.5">
             {[
-              ["/#pain-map", "أين يؤلمك؟"],
-              ["/#programs", "البرامج العلاجية"],
-              ["/#devices", "التقنيات والأجهزة"],
-              ["/#journey", "رحلة التعافي"],
-              ["/#visit", "موقعنا وصور المركز"],
-              ["/#faq", "الأسئلة الشائعة"],
+              ["/programs", "البرامج العلاجية"],
+              ["/devices", "الأجهزة"],
+              ["/conditions", "أين يؤلمك؟"],
+              ["/about", "من نحن"],
+              ["/visit", "زُر مركزنا"],
+              ["/faq", "الأسئلة الشائعة"],
+              ["/book", "احجز تقييمك"],
               ["/privacy", "سياسة الخصوصية"],
             ].map(([href, label]) => (
               <li key={href}>
-                <a href={href} className="hover:text-white">
+                <Link href={href} className="hover:text-white">
                   {label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

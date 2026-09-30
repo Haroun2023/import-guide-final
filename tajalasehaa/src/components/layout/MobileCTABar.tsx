@@ -20,8 +20,8 @@ export function MobileCTABar({ placement = "sticky-bar", complaint }: { placemen
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const targets = document.querySelectorAll("[data-hide-cta]");
     const visible = new Set<Element>();
+    const watched = new WeakSet<Element>();
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) {
         if (e.isIntersecting) visible.add(e.target);
@@ -29,10 +29,21 @@ export function MobileCTABar({ placement = "sticky-bar", complaint }: { placemen
       }
       setFormVisible(visible.size > 0);
     });
-    targets.forEach((t) => io.observe(t));
+    // Forms can mount later (dialogs, lazy sections), so keep watching the page.
+    const scan = () =>
+      document.querySelectorAll("[data-hide-cta]").forEach((t) => {
+        if (!watched.has(t)) {
+          watched.add(t);
+          io.observe(t);
+        }
+      });
+    scan();
+    const mo = new MutationObserver(scan);
+    mo.observe(document.body, { childList: true, subtree: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       io.disconnect();
+      mo.disconnect();
     };
   }, []);
 
@@ -40,7 +51,7 @@ export function MobileCTABar({ placement = "sticky-bar", complaint }: { placemen
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 transition-transform duration-300 md:hidden ${
+      className={`float-cta fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 transition-[transform,opacity,translate] duration-300 md:hidden ${
         shown ? "translate-y-0" : "pointer-events-none translate-y-[130%]"
       }`}
       aria-hidden={!shown}

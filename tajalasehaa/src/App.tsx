@@ -4,11 +4,19 @@ import { BookingProvider } from "@/components/booking/BookingContext";
 import { captureAttribution } from "@/lib/attribution";
 import { flushLeadQueue } from "@/lib/lead";
 import { initTracking, trackPageView } from "@/lib/tracking";
+import AboutPage from "@/pages/AboutPage";
+import BookPage from "@/pages/BookPage";
+import ConditionsPage from "@/pages/ConditionsPage";
+import DevicesPage from "@/pages/DevicesPage";
+import FaqPage from "@/pages/FaqPage";
 import Home from "@/pages/Home";
 import Landing from "@/pages/Landing";
 import NotFound from "@/pages/NotFound";
 import Privacy from "@/pages/Privacy";
+import ProgramPage from "@/pages/ProgramPage";
+import ProgramsPage from "@/pages/ProgramsPage";
 import ThankYou from "@/pages/ThankYou";
+import VisitPage from "@/pages/VisitPage";
 import { routeMeta } from "@/seo";
 
 /** One-time client setup + per-route title, page view and scroll reset. */
@@ -27,7 +35,10 @@ function Effects() {
     document.title = meta.title;
     document.querySelector('meta[name="description"]')?.setAttribute("content", meta.description);
     trackPageView(location);
-    if (!first.current && !window.location.hash) window.scrollTo({ top: 0 });
+    // New page: start at the top (unless jumping to a section, or the page only
+    // synced its URL, e.g. picking another device on /devices/<id>).
+    const keepScroll = (history.state as { keepScroll?: boolean } | null)?.keepScroll;
+    if (!first.current && !window.location.hash && !keepScroll) window.scrollTo({ top: 0 });
     first.current = false;
   }, [location]);
 
@@ -47,6 +58,14 @@ export default function App({ ssrPath }: { ssrPath?: string }) {
         <Effects />
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/programs" component={ProgramsPage} />
+          <Route path="/programs/:id">{(params) => <ProgramPage id={params.id} />}</Route>
+          <Route path="/devices/:id?">{(params) => <DevicesPage id={params.id} />}</Route>
+          <Route path="/conditions" component={ConditionsPage} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/visit" component={VisitPage} />
+          <Route path="/faq" component={FaqPage} />
+          <Route path="/book" component={BookPage} />
           <Route path="/lp/:slug">{(params) => <Landing slug={params.slug} />}</Route>
           <Route path="/thank-you" component={ThankYou} />
           <Route path="/privacy" component={Privacy} />

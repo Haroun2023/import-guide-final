@@ -12,10 +12,10 @@ const SpineScene = lazy(() => import("@/three/SpineScene"));
 export function Hero() {
   const { openBooking } = useBooking();
   const trust = [
-    `نتواصل معك خلال ${site.responseTimeMinutes} دقيقة`,
-    site.features.femaleTherapists ? "أخصائيات لصحة المرأة" : null,
-    site.features.homeVisits ? "علاج طبيعي منزلي" : null,
-    `خبرة دولية من ${site.partner.country}`,
+    `نرد عليك خلال ${site.responseTimeMinutes} دقيقة`,
+    site.features.femaleTherapists ? "أخصائيات للسيدات" : null,
+    site.features.homeVisits ? "نزورك في بيتك عند الحاجة" : null,
+    `خبرة ${site.partner.name} من ${site.partner.country}`,
   ].filter(Boolean) as string[];
 
   return (
@@ -45,11 +45,11 @@ export function Hero() {
           </h1>
           {/* Phones get a shorter line that leaves the left strip to the 3D spine. */}
           <p className="mt-5 animate-rise pe-[22%] text-[1.05rem] leading-8 text-white/80 [animation-delay:240ms] md:hidden">
-            علاج طبيعي وتأهيل طبي في {site.city}: تقييم دقيق، وخطة شخصية، وأجهزة عالمية منها <span dir="ltr">AlterG®</span>.
+            علاج طبيعي في {site.city} يبدأ بتقييم هادئ وخطة مكتوبة لك، مع أجهزة حديثة منها <span dir="ltr">AlterG®</span>.
           </p>
           <p className="mt-6 hidden max-w-[34rem] animate-rise text-[1.15rem] leading-9 text-white/78 [animation-delay:240ms] md:block">
-            مركز علاج طبيعي وتأهيل طبي في {site.city}. نبدأ بتقييم دقيق لمصدر الألم، ثم خطة تأهيل شخصية بأجهزة عالمية — منها جهاز المشي المضاد للجاذبية
-            <span dir="ltr"> AlterG®</span>، الأول من نوعه في المدينة.
+            ألم الظهر أو الركبة لا ينبغي أن يصبح جزءًا من يومك. نبدأ بتقييم هادئ نفهم فيه سبب الألم، ثم نمشي معك بخطة مكتوبة وأجهزة حديثة، منها جهاز
+            <span dir="ltr"> AlterG®</span> للمشي بجزء من وزنك.
           </p>
 
           <div className="mt-9 flex animate-rise flex-wrap gap-3 [animation-delay:360ms]">
@@ -58,7 +58,7 @@ export function Hero() {
               <ArrowLeft size={19} aria-hidden />
             </button>
             <WhatsAppLink placement="hero" className="btn btn-ghost-dark">
-              <WhatsAppIcon size={20} /> استشرنا عبر واتساب
+              <WhatsAppIcon size={20} /> اسألنا على واتساب
             </WhatsAppLink>
           </div>
           {site.offer.active ? (
@@ -94,7 +94,7 @@ export function Hero() {
         </div>
 
         <a href="#pain-map" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-xs text-white/60 hover:text-white md:flex">
-          اكتشف أين يؤلمك
+          أين يؤلمك؟
           <ChevronDown size={18} className="animate-[float_2.4s_ease-in-out_infinite]" aria-hidden />
         </a>
       </div>
