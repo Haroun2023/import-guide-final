@@ -27,7 +27,7 @@ export default function ThankYou() {
 
   const steps = [
     { icon: PhoneCall, title: "مكالمة تأكيد", text: `يتصل بك منسّق المرضى خلال ${site.responseTimeMinutes} دقيقة في أوقات العمل لاختيار الموعد.` },
-    { icon: ClipboardList, title: "جهّز تقاريرك", text: "أحضر أي تقارير أو أشعة أو وصفات سابقة — تساعدنا على دقة التقييم." },
+    { icon: ClipboardList, title: "جهّز تقاريرك", text: "أحضر ما لديك من تقارير أو أشعة أو وصفات سابقة، فهي تساعدنا في التقييم." },
     { icon: Shirt, title: "ملابس مريحة", text: "ارتدِ ملابس رياضية تسمح بالحركة، ونوفّر ما يلزم لخصوصيتك." },
   ];
 

@@ -13,8 +13,8 @@ export const complaints = [
   { id: "sports", label: "إصابة رياضية" },
   { id: "postop", label: "تأهيل بعد عملية" },
   { id: "women", label: "صحة المرأة" },
-  { id: "umrah", label: "برنامج المعتمرين" },
-  { id: "wellness", label: "تغذية ولياقة وتكميلي" },
+  { id: "umrah", label: "رعاية المعتمرين والزوار" },
+  { id: "wellness", label: "تغذية ولياقة ورعاية تكميلية" },
   { id: "other", label: "أخرى / لست متأكدًا" },
 ] as const;
 

@@ -24,7 +24,7 @@ export function InsuranceCheck() {
               هل يغطي تأمينك جلساتك؟
             </h2>
             <p className="mt-3 leading-8 text-muted">
-              أرسل اسم شركة التأمين وفئة بطاقتك، ونؤكد لك التغطية قبل موعدك — دون أي التزام.
+              أرسل اسم شركة التأمين وفئة بطاقتك، ونؤكد لك التغطية قبل موعدك، دون أي التزام.
             </p>
             {site.insurers.length ? (
               <ul className="mt-5 flex flex-wrap gap-2">

@@ -6,8 +6,8 @@ import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 
 const PATHS = [
   { href: "/conditions", icon: "scan-search", title: "عندي ألم ولا أعرف سببه", text: "حدّد موضع الألم على المجسّم، ونريك الحالات الشائعة فيه وكيف نبدأ معك." },
-  { href: "/programs/postop", icon: "bandage", title: "أجريت عملية مؤخرًا", text: "برنامج على مراحل بالتنسيق مع جرّاحك، حتى تعود إلى حركتك المعتادة." },
-  { href: "/programs/sports", icon: "dumbbell", title: "إصابة في الملعب", text: "نعيدك إلى البادل أو الكرة بخطة واضحة واختبارات جاهزية." },
+  { href: "/programs/postop", icon: "bandage", title: "أجريت عملية مؤخرًا", text: "برنامج على مراحل بالتنسيق مع جرّاحك، من أول خطوة بعد العملية." },
+  { href: "/programs/sports", icon: "dumbbell", title: "إصابة في الملعب", text: "خطة تتدرج معك، واختبارات جاهزية قبل أن تعود إلى البادل أو الكرة." },
   { href: "/programs/umrah", icon: "footprints", title: "أنا زائر أو معتمر", text: "برنامج قصير يناسب أيام إقامتك في المدينة، وتمارين تكملها بعد عودتك." },
   { href: "/programs/women", icon: "heart-pulse", title: "آلام الحمل وما بعد الولادة", text: "رعاية مع أخصائيات، بخصوصية تامة وخطة تناسب مرحلتكِ." },
   { href: "/programs/home", icon: "house", title: "أحتاج العلاج في البيت", text: "لكبار السن ومن يصعب عليهم الحضور، بمواعيد تناسب الأسرة." },

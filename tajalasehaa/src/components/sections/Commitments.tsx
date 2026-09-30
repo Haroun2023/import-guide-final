@@ -12,7 +12,7 @@ export function Commitments() {
           id="commit-title"
           eyebrow="وعدنا لك"
           title="هذا ما ستجده عندنا في كل زيارة"
-          lead="وعود نستطيع الوفاء بها ونحاسب أنفسنا عليها، لا شعارات."
+          lead="وعود صغيرة وواضحة نستطيع الوفاء بها، ونحاسب أنفسنا عليها."
         />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {commitments.map((c, i) => {

@@ -24,7 +24,7 @@ export function Footer() {
           <p className="mt-5 max-w-sm leading-8">
             «{site.proverb}»
             <br />
-            {site.fullName} في {site.city} — امتداد لخبرة {site.partner.name} ({site.partner.nameAr}) في {site.partner.country}.
+            {site.fullName} في {site.city}، وامتداد لخبرة {site.partner.name} ({site.partner.nameAr}) في {site.partner.country}.
           </p>
           {socials.length ? (
             <ul className="mt-6 flex gap-2">

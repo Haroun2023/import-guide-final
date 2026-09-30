@@ -31,7 +31,7 @@ export function routeMeta(path: string): RouteMeta {
   if (path === "/devices") {
     return {
       title: `أجهزة العلاج الطبيعي والتأهيل | ${site.name}`,
-      description: `تعرّف على أجهزة ${site.name} في ${site.city} بصور حقيقية: AlterG للمشي المضاد للجاذبية، والموجات التصادمية، والتيارات العلاجية، وITO، وStimaWELL.`,
+      description: `تعرّف على أجهزتنا في ${site.city} بصور حقيقية: المشي المضاد للجاذبية AlterG، والموجات التصادمية، والعلاج الكهربائي، وعلاج الظهر بالتحفيز والحرارة.`,
     };
   }
   const dev = path.match(/^\/devices\/([^/]+)$/);
