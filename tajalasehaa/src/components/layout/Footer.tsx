@@ -4,6 +4,7 @@ import { site, telLink } from "@/config/site";
 import { trackContact } from "@/lib/tracking";
 import { InstagramIcon, SnapchatIcon, TikTokIcon, WhatsAppIcon, XIcon } from "@/components/ui/Icons";
 import { Logo } from "@/components/ui/Logo";
+import { OpenStatus } from "@/components/ui/OpenStatus";
 import { WhatsAppLink } from "./ContactLinks";
 
 const SOCIAL = [
@@ -93,6 +94,7 @@ export function Footer() {
                     {h.days}: {h.time}
                   </span>
                 ))}
+                <OpenStatus className="mt-1 text-sm text-leaf-300" />
               </span>
             </li>
           </ul>

@@ -130,7 +130,7 @@ export function DeviceLab({
   return (
     <section
       id="devices"
-      className={`grain relative overflow-hidden bg-deep-radial text-white ${heading ? "py-20 md:py-28" : "py-12 md:py-16"}`}
+      className={`curve-t curve-b grain relative overflow-hidden bg-deep-radial text-white ${heading ? "py-20 md:py-28" : "py-12 md:py-16"}`}
       aria-labelledby={heading ? "devices-title" : undefined}
       aria-label={heading ? undefined : "معرض الأجهزة"}
     >

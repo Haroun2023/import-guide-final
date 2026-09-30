@@ -9,6 +9,7 @@ import { Commitments } from "@/components/sections/Commitments";
 import { FAQ } from "@/components/sections/FAQ";
 import { InsuranceCheck } from "@/components/sections/InsuranceCheck";
 import { Icon3D } from "@/components/ui/Icon3D";
+import { OpenStatus } from "@/components/ui/OpenStatus";
 
 const NEXT = [
   { icon: "message-circle", title: "نتصل بك", text: `خلال ${site.responseTimeMinutes} دقيقة في أوقات العمل، لنختار معك الموعد المناسب.` },
@@ -74,7 +75,10 @@ export default function BookPage() {
               ) : null}
               <li className="flex items-start gap-2">
                 <Clock size={17} className="mt-0.5 shrink-0 text-leaf-400" aria-hidden />
-                {site.hours.map((h) => `${h.days}: ${h.time}`).join(" · ")}
+                <span>
+                  {site.hours.map((h) => `${h.days}: ${h.time}`).join(" · ")}
+                  <OpenStatus className="ms-2 text-leaf-300" />
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <Check size={17} className="mt-0.5 shrink-0 text-leaf-400" aria-hidden /> لا نشارك تفاصيلك الصحية مع أي منصة إعلانية.

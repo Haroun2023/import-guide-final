@@ -10,7 +10,7 @@ import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 export function ConditionsIndex() {
   const { openBooking } = useBooking();
   return (
-    <section className="bg-mist-100/70 py-20 md:py-24" aria-labelledby="conditions-title">
+    <section className="curve-t curve-b bg-soft py-20 md:py-24" aria-labelledby="conditions-title">
       <div className="container-x">
         <SectionHeading
           id="conditions-title"

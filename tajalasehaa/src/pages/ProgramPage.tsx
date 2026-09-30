@@ -7,6 +7,7 @@ import { deviceById } from "@/config/devices";
 import { useBooking, type BookingPrefill } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { SiteLayout } from "@/components/layout/SiteLayout";
+import { AlterGSimulator } from "@/components/sections/AlterGSimulator";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { FAQ } from "@/components/sections/FAQ";
 import { PageHero } from "@/components/sections/PageHero";
@@ -78,7 +79,7 @@ export default function ProgramPage({ id }: { id: string }) {
 
       {/* How we work with you */}
       {p.approach?.length ? (
-        <section className="bg-mist-100/70 py-16 md:py-24" aria-labelledby="approach-title">
+        <section className="curve-t curve-b bg-soft py-16 md:py-24" aria-labelledby="approach-title">
           <div className="container-x">
             <SectionHeading id="approach-title" eyebrow="ماذا يحدث معنا؟" title="خطوة بخطوة، وأنت تعرف لماذا" center />
             <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -95,6 +96,8 @@ export default function ProgramPage({ id }: { id: string }) {
           </div>
         </section>
       ) : null}
+
+      {p.devices?.includes("antigravity") ? <AlterGSimulator placement={`program:${p.id}:alterg-sim`} complaint={complaint} /> : null}
 
       {/* Devices used in this program */}
       {related.length ? (

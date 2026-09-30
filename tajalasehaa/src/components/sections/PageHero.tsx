@@ -50,6 +50,7 @@ export function PageHero({
   whatsappText,
   aside,
   children,
+  curve = true,
 }: {
   crumbs: Crumb[];
   eyebrow?: string;
@@ -59,10 +60,12 @@ export function PageHero({
   whatsappText?: string;
   aside?: ReactNode;
   children?: ReactNode;
+  /** wavy bottom edge; turn off when a dark section follows */
+  curve?: boolean;
 }) {
   const { openBooking } = useBooking();
   return (
-    <section className="grain relative isolate overflow-hidden bg-deep-radial pb-16 pt-28 text-white md:pb-20 md:pt-36" aria-labelledby="page-title">
+    <section className={`grain relative isolate overflow-hidden bg-deep-radial pb-16 pt-28 text-white md:pb-20 md:pt-36 ${curve ? "curve-b" : ""}`} aria-labelledby="page-title">
       <div className="pointer-events-none absolute -top-40 end-[-10%] -z-10 size-[34rem] rounded-full bg-[radial-gradient(closest-side,rgb(90_206_144/0.18),transparent)]" aria-hidden />
       <div className={`container-x grid items-center gap-10 ${aside ? "lg:grid-cols-[1.35fr_1fr]" : ""}`}>
         <div className="max-w-3xl">

@@ -6,7 +6,7 @@ const ICONS = ["stethoscope", "clipboard-list", "chart-line", "user-check", "shi
 
 export function Commitments() {
   return (
-    <section className="bg-mist-100/70 py-20 md:py-24" aria-labelledby="commit-title">
+    <section className="curve-t curve-b bg-soft py-20 md:py-24" aria-labelledby="commit-title">
       <div className="container-x">
         <SectionHeading
           id="commit-title"

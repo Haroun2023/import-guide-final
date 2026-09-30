@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { centerPhotos } from "@/config/content";
 import { site } from "@/config/site";
 import { trackEngagement } from "@/lib/tracking";
+import { OpenStatus } from "@/components/ui/OpenStatus";
 import { Reveal } from "@/components/ui/Reveal";
 
 /** Home: one real photo of the center, the address and the way there. */
@@ -46,6 +47,7 @@ export function VisitTeaser() {
                       <strong>{h.days}:</strong> <span className="text-muted">{h.time}</span>
                     </span>
                   ))}
+                  <OpenStatus className="mt-1.5 text-sm text-brand-700" />
                 </span>
               </li>
             </ul>

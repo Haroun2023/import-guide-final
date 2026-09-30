@@ -1,5 +1,5 @@
 import { ArrowLeft, Check, ChevronDown } from "lucide-react";
-import { lazy } from "react";
+import { lazy, type CSSProperties } from "react";
 import { site } from "@/config/site";
 import { useBooking } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
@@ -19,7 +19,12 @@ export function Hero() {
   ].filter(Boolean) as string[];
 
   return (
-    <section id="top" className="grain relative isolate min-h-[100svh] overflow-hidden bg-deep-radial text-white" aria-labelledby="hero-title">
+    <section
+      id="top"
+      className="curve-b grain relative isolate min-h-[100svh] overflow-hidden bg-deep-radial text-white"
+      style={{ "--curve-h": "clamp(1.75rem, 5vw, 4.5rem)" } as CSSProperties}
+      aria-labelledby="hero-title"
+    >
       <LazyCanvas
         className="absolute inset-0 -z-10"
         rootMargin="0px"
@@ -35,7 +40,7 @@ export function Hero() {
       {/* Legibility scrim: strong behind the text (right in RTL), clear over the spine */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(270deg,rgb(16_40_58/0.92)_0%,rgb(16_40_58/0.7)_45%,rgb(16_40_58/0)_75%)] md:bg-[linear-gradient(270deg,rgb(16_40_58/0.75)_0%,rgb(16_40_58/0.35)_45%,rgb(16_40_58/0)_62%)]" />
 
-      <div className="container-x relative flex min-h-[100svh] flex-col justify-center pb-24 pt-32 md:pt-36">
+      <div className="container-x relative flex min-h-[calc(100svh-var(--curve-h))] flex-col justify-center pb-24 pt-32 md:pt-36">
         <div className="max-w-[40rem]">
           <p className="animate-rise text-[0.95rem] font-medium text-leaf-300/90">«{site.proverb}»</p>
           <h1 id="hero-title" className="h-display mt-4 animate-rise [animation-delay:120ms]">

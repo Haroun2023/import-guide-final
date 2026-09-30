@@ -23,7 +23,7 @@ export default function FaqPage() {
       <FAQ heading={false} />
 
       {withFaqs.length ? (
-        <section className="bg-mist-100/70 py-16 md:py-24" aria-labelledby="program-faqs-title">
+        <section className="curve-t curve-b bg-soft py-16 md:py-24" aria-labelledby="program-faqs-title">
           <div className="container-x max-w-4xl">
             <h2 id="program-faqs-title" className="h-section">
               أسئلة حسب البرنامج

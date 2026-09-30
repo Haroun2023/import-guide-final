@@ -2,6 +2,7 @@ import { Clock, MapPin, Navigation } from "lucide-react";
 import { centerPhotos, type CenterPhoto } from "@/config/content";
 import { site } from "@/config/site";
 import { trackEngagement } from "@/lib/tracking";
+import { OpenStatus } from "@/components/ui/OpenStatus";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 
 function Photo({ photo, sizes, className = "", eager = false }: { photo: CenterPhoto; sizes: string; className?: string; eager?: boolean }) {
@@ -88,6 +89,7 @@ export function Visit({ heading = true }: { heading?: boolean }) {
                         <strong>{h.days}:</strong> <span className="text-muted">{h.time}</span>
                       </span>
                     ))}
+                    <OpenStatus className="mt-1.5 text-sm text-brand-700" />
                   </span>
                 </li>
               </ul>

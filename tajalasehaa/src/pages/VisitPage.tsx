@@ -19,7 +19,7 @@ function ContactCards() {
     { key: "x", label: "إكس", Icon: XIcon },
   ] as const;
   return (
-    <section className="bg-mist-100/70 py-16 md:py-24" aria-labelledby="contact-title">
+    <section className="curve-t curve-b bg-soft py-16 md:py-24" aria-labelledby="contact-title">
       <div className="container-x">
         <SectionHeading id="contact-title" eyebrow="تواصل معنا" title="اختر الطريقة التي تريحك" lead={`نرد على المكالمات والرسائل خلال ${site.responseTimeMinutes} دقيقة في أوقات العمل.`} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

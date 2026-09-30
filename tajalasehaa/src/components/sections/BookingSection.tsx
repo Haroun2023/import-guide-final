@@ -4,11 +4,12 @@ import { site } from "@/config/site";
 import { BookingWizard } from "@/components/booking/BookingWizard";
 import type { BookingPrefill } from "@/components/booking/BookingContext";
 import { CallLink, WhatsAppLink } from "@/components/layout/ContactLinks";
+import { OpenStatus } from "@/components/ui/OpenStatus";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; title?: ReactNode }) {
   return (
-    <section id="booking" className="grain relative overflow-hidden bg-deep-radial py-20 text-white md:py-28" aria-labelledby="booking-title">
+    <section id="booking" className="curve-t grain relative overflow-hidden bg-deep-radial py-20 text-white md:py-28" aria-labelledby="booking-title">
       <div className="container-x grid items-start gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
           <p className="eyebrow eyebrow-light">احجز تقييمك</p>
@@ -48,6 +49,7 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
                     {h.days}: {h.time}
                   </span>
                 ))}
+                <OpenStatus className="mt-1 text-sm text-leaf-300" />
               </span>
             </li>
           </ul>

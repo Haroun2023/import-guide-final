@@ -556,6 +556,9 @@
 | صفحات الحملات | `src/config/campaigns.ts` · `src/pages/Landing.tsx` |
 | صفحات الموقع | `src/pages/*Page.tsx` (البرامج، البرنامج، الأجهزة، الحالات، من نحن، الزيارة، الأسئلة، الحجز) · المسارات في `src/App.tsx` · القائمة في `src/components/layout/nav.ts` |
 | الأيقونات ثلاثية الأبعاد | `public/icons3d/*` · `src/components/ui/Icon3D.tsx` |
+| حواف الأقسام المنحنية | `.curve-t` و`.curve-b` في `src/index.css` |
+| حالة «مفتوح الآن» | `src/components/ui/OpenStatus.tsx` (من ساعات `site.ts` بتوقيت المدينة) |
+| محاكي AlterG | `src/components/sections/AlterGSimulator.tsx` |
 | التتبع والمصادر | `src/lib/tracking.ts` · `src/lib/attribution.ts` |
 | استقبال الطلبات وCAPI | `api/lead.ts` · `integrations/google-sheets-webhook.gs` |
 | SEO والتوليد المسبق | `src/seo.ts` · `scripts/prerender.mjs` |

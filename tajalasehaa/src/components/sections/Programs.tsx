@@ -70,7 +70,7 @@ export function Programs({ layout = "tabs", heading = true }: { layout?: "tabs" 
 
   const list = programs.filter((p) => p.track === tab);
   return (
-    <section id="programs" className="bg-mist-100/70 py-20 md:py-28" aria-labelledby={heading ? "programs-title" : undefined}>
+    <section id="programs" className="curve-t bg-soft py-20 md:py-28" aria-labelledby={heading ? "programs-title" : undefined}>
       <div className="container-x">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           {heading ? (

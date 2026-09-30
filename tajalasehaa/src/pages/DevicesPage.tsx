@@ -6,6 +6,7 @@ import { deviceById, devices, type DeviceId } from "@/config/devices";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { CTABand } from "@/components/sections/CTABand";
+import { AlterGSimulator } from "@/components/sections/AlterGSimulator";
 import { DeviceLab } from "@/components/sections/DeviceLab";
 import { PageHero } from "@/components/sections/PageHero";
 import { Icon3D } from "@/components/ui/Icon3D";
@@ -51,6 +52,7 @@ export default function DevicesPage({ id }: { id?: string }) {
   return (
     <SiteLayout placement={`${placement}:sticky`}>
       <PageHero
+        curve={false}
         crumbs={crumbs}
         eyebrow={d ? `${d.brand} · ${d.origin}` : "أجهزتنا"}
         title={
@@ -91,6 +93,7 @@ export default function DevicesPage({ id }: { id?: string }) {
         initialDevice={(d?.id ?? "antigravity") as DeviceId}
         onChange={(next) => navigate(`/devices/${next}`, { replace: true, state: { keepScroll: true } })}
       />
+      {(d?.id ?? "antigravity") === "antigravity" ? <AlterGSimulator placement={`${placement}:alterg-sim`} /> : null}
       {d && programs.some((p) => p.devices?.includes(d.id)) ? (
         <section className="pt-16 md:pt-20" aria-labelledby="device-programs-title">
           <div className="container-x">

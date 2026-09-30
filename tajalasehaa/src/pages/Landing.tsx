@@ -5,6 +5,7 @@ import { BookingWizard } from "@/components/booking/BookingWizard";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileCTABar } from "@/components/layout/MobileCTABar";
+import { AlterGSimulator } from "@/components/sections/AlterGSimulator";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { Commitments } from "@/components/sections/Commitments";
 import { DeviceLab } from "@/components/sections/DeviceLab";
@@ -36,7 +37,7 @@ export default function Landing({ slug }: { slug: string }) {
     <>
       <Header minimal />
       <main id="main">
-        <section className="grain relative overflow-hidden bg-deep-radial pb-24 pt-28 text-white md:pt-32" aria-labelledby="lp-title">
+        <section className="curve-b grain relative overflow-hidden bg-deep-radial pb-24 pt-28 text-white md:pt-32" aria-labelledby="lp-title">
           <div className="container-x grid items-start gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
             <div className="lg:pt-8">
               <p className="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1.5 text-sm font-semibold text-leaf-300 ring-1 ring-white/15">
@@ -97,8 +98,9 @@ export default function Landing({ slug }: { slug: string }) {
           </div>
         </section>
 
-        <TrustStrip />
+        <TrustStrip links={false} />
         {c.device ? <DeviceLab initialDevice={c.device} only={[c.device]} /> : c.area ? <PainMap initialArea={c.area} heading="compact" /> : null}
+        {c.device === "antigravity" ? <AlterGSimulator placement={`${placement}:alterg-sim`} complaint={c.complaint} /> : null}
         <Journey />
         <Commitments />
         <Visit />

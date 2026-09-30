@@ -130,6 +130,53 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
   contain-intrinsic-size: auto 900px;
 }
 
+/* Soft curved edges between sections, cut with a mask so gradients stay whole.
+   .curve-t: the section rises over the one before it with a wavy top edge, and
+   whatever is behind shows through the cut, so any neighbour works (the one
+   before needs bottom padding of at least --curve-h).
+   .curve-b: the section ends in a wavy edge that shows the page background, so
+   use it only when the next section sits on the page background.
+   Both add their curve zone as a transparent border, never over content. */
+:root {
+  --curve-h: clamp(1.4rem, 3.8vw, 3.4rem);
+  --curve-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100V62C300 94 560 96 820 58C1040 26 1250 6 1440 18V100Z'/%3E%3C/svg%3E");
+  --curve-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V44C1180 10 940 8 700 40C470 72 250 98 0 80Z'/%3E%3C/svg%3E");
+}
+.curve-t,
+.curve-b,
+#main:not(:has(> section.bg-deep-radial:last-child)) + footer {
+  --ct: 0px;
+  --cb: 0px;
+  background-origin: border-box;
+  -webkit-mask:
+    var(--curve-top) 50% 0 / 100% var(--ct) no-repeat,
+    linear-gradient(#000 0 0) 50% calc(var(--ct) - 1px) / 100% calc(100% - var(--ct) - var(--cb) + 2px) no-repeat,
+    var(--curve-bottom) 50% 100% / 100% var(--cb) no-repeat;
+  mask:
+    var(--curve-top) 50% 0 / 100% var(--ct) no-repeat,
+    linear-gradient(#000 0 0) 50% calc(var(--ct) - 1px) / 100% calc(100% - var(--ct) - var(--cb) + 2px) no-repeat,
+    var(--curve-bottom) 50% 100% / 100% var(--cb) no-repeat;
+}
+.curve-t,
+#main:not(:has(> section.bg-deep-radial:last-child)) + footer {
+  --ct: var(--curve-h);
+  position: relative;
+  margin-top: calc(-1 * var(--curve-h));
+  border-top: var(--curve-h) solid transparent;
+}
+.curve-b {
+  --cb: var(--curve-h);
+  border-bottom: var(--curve-h) solid transparent;
+}
+/* The trust card has no bottom padding of its own: leave room for a curve after it. */
+.trust-strip:has(+ .curve-t) {
+  padding-bottom: calc(var(--curve-h) + 1rem);
+}
+/* A curved footer drops the straight hairline it has under a dark section. */
+#main:not(:has(> section.bg-deep-radial:last-child)) + footer > .hairline-leaf {
+  display: none;
+}
+
 /* Scroll reveals (see the inline observer in index.html) */
 [data-reveal] {
   transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -348,6 +395,10 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
       radial-gradient(120% 80% at 15% 20%, rgb(12 132 86 / 0.3), transparent 60%),
       radial-gradient(90% 70% at 90% 90%, rgb(68 113 141 / 0.3), transparent 60%),
       linear-gradient(180deg, #16344a 0%, #10283a 55%, #0b1923 100%);
+  }
+  /* Light sections that break the page rhythm: a faint mint wash that makes their curves read */
+  .bg-soft {
+    background: linear-gradient(180deg, #e8f5ee 0%, #edf4f1 45%, #eef3f3 100%);
   }
   .grain::before {
     content: "";
