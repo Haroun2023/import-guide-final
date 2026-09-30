@@ -30,7 +30,7 @@ const drawScreen: ScreenDraw = (ctx, w, h, t) => {
   ctx.font = "700 58px system-ui, sans-serif";
   ctx.fillText("2.0", 26, 112);
   ctx.font = "500 22px system-ui, sans-serif";
-  ctx.fillStyle = "#9fc3c9";
+  ctx.fillStyle = "#a2bdcd";
   ctx.fillText("bar", 118, 112);
   const shots = 1500 + (Math.floor(t * 12) % 500);
   const rows: [string, string][] = [
@@ -38,7 +38,7 @@ const drawScreen: ScreenDraw = (ctx, w, h, t) => {
     ["SHOTS", `${shots.toLocaleString("en-US")} / 2,000`],
   ];
   rows.forEach(([k, v], i) => {
-    ctx.fillStyle = "#9fc3c9";
+    ctx.fillStyle = "#a2bdcd";
     ctx.font = "500 15px system-ui, sans-serif";
     ctx.fillText(k, 300, 78 + i * 52);
     ctx.fillStyle = "#ffffff";
@@ -46,7 +46,7 @@ const drawScreen: ScreenDraw = (ctx, w, h, t) => {
     ctx.fillText(v, 300, 102 + i * 52);
   });
   // pulse train
-  ctx.strokeStyle = "#45d6bf";
+  ctx.strokeStyle = "#5ace90";
   ctx.lineWidth = 3;
   ctx.beginPath();
   const base = 250;
@@ -65,7 +65,7 @@ const drawScreen: ScreenDraw = (ctx, w, h, t) => {
 function Applicator({ animate }: { animate: boolean }) {
   const ref = useRef<THREE.Group>(null);
   const quat = useMemo(() => new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), DIR), []);
-  const tipGlow = useMemo(() => glowMaterial("#7fe8d6"), []);
+  const tipGlow = useMemo(() => glowMaterial("#8fe3b4"), []);
   useEffect(() => () => tipGlow.dispose(), [tipGlow]);
   useFrame(({ clock }) => {
     if (!ref.current) return;
@@ -80,10 +80,10 @@ function Applicator({ animate }: { animate: boolean }) {
       <mesh material={mat.shell} position={[0, -0.03, 0]}>
         <cylinderGeometry args={[0.06, 0.056, 0.28, 24]} />
       </mesh>
-      <mesh material={mat.teal} position={[0, 0.09, 0]} rotation={[Math.PI / 2, 0, 0]}>
+      <mesh material={mat.brand} position={[0, 0.09, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[0.059, 0.008, 8, 32]} />
       </mesh>
-      <mesh material={mat.gold} position={[0.052, -0.06, 0]}>
+      <mesh material={mat.accent} position={[0.052, -0.06, 0]}>
         <boxGeometry args={[0.02, 0.05, 0.03]} />
       </mesh>
       <mesh material={mat.chrome} position={[0, 0.14, 0]}>
@@ -120,15 +120,15 @@ export function Shockwave({ animate }: { animate: boolean }) {
         <Caster key={i} position={p} />
       ))}
       <RoundedBox args={[0.17, 0.84, 0.2]} radius={0.05} smoothness={3} position={[0, 0.56, -0.08]} material={mat.shell} />
-      <mesh material={mat.teal} position={[0, 0.56, 0.022]}>
+      <mesh material={mat.brand} position={[0, 0.56, 0.022]}>
         <boxGeometry args={[0.03, 0.66, 0.01]} />
       </mesh>
 
       {/* Generator unit */}
       <RoundedBox args={[0.74, 0.34, 0.54]} radius={0.06} smoothness={4} position={[0, 1.14, 0]} material={mat.shell} />
-      <RoundedBox args={[0.746, 0.06, 0.546]} radius={0.02} smoothness={2} position={[0, 1.02, 0]} material={mat.teal} />
+      <RoundedBox args={[0.746, 0.06, 0.546]} radius={0.02} smoothness={2} position={[0, 1.02, 0]} material={mat.brand} />
       {[-0.12, -0.06, 0, 0.06, 0.12].map((x) => (
-        <mesh key={x} material={mat.tealDeep} position={[x - 0.1, 1.16, 0.272]}>
+        <mesh key={x} material={mat.navy} position={[x - 0.1, 1.16, 0.272]}>
           <boxGeometry args={[0.03, 0.12, 0.004]} />
         </mesh>
       ))}
@@ -142,13 +142,13 @@ export function Shockwave({ animate }: { animate: boolean }) {
       <mesh material={mat.shellWarm} position={[0.42, 1.12, 0.14]}>
         <cylinderGeometry args={[0.055, 0.045, 0.14, 24, 1, true]} />
       </mesh>
-      <mesh material={mat.gold} position={[0.42, 1.19, 0.14]} rotation={[Math.PI / 2, 0, 0]}>
+      <mesh material={mat.accent} position={[0.42, 1.19, 0.14]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[0.055, 0.008, 8, 32]} />
       </mesh>
 
       <Applicator animate={animate} />
       <Cable points={CABLE} radius={0.016} />
-      {animate ? <PulseRings position={ringPos} rotation={ringRotation} color="#45d6bf" count={3} speed={1.1} radius={0.07} maxScale={0.9} /> : null}
+      {animate ? <PulseRings position={ringPos} rotation={ringRotation} color="#5ace90" count={3} speed={1.1} radius={0.07} maxScale={0.9} /> : null}
     </group>
   );
 }

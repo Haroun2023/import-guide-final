@@ -1,54 +1,68 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Design tokens — "Clinical luxury": warm ivory, deep teal, crown gold.
+   Design tokens — taken from the official logo: navy #24475D (navy-700)
+   and leaf green #0C8456 (brand-600), with the logo's navy→green gradient.
    Change the brand here; every component reads these tokens.
 ------------------------------------------------------------------- */
 @theme {
   --font-sans: "Readex Pro Variable", "Readex Pro", ui-sans-serif, system-ui, "Segoe UI", Tahoma, sans-serif;
 
-  --color-ink: #0a1e24;
-  --color-muted: #52666c;
-  --color-deep: #04272a;
+  --color-ink: #0f2231;
+  --color-muted: #51646f;
+  --color-deep: #0b1923;
 
-  --color-brand-50: #eef8f7;
-  --color-brand-100: #d5efec;
-  --color-brand-200: #a9ddd8;
-  --color-brand-300: #74c6bf;
-  --color-brand-400: #3fa9a3;
-  --color-brand-500: #1a8d88;
-  --color-brand-600: #0e7471;
-  --color-brand-700: #0b5d5c;
-  --color-brand-800: #0a4a4b;
-  --color-brand-900: #073a3c;
-  --color-brand-950: #04272a;
+  /* Logo green */
+  --color-brand-50: #f0faf5;
+  --color-brand-100: #d9f2e6;
+  --color-brand-200: #b4e4ce;
+  --color-brand-300: #7bcca9;
+  --color-brand-400: #37ae7d;
+  --color-brand-500: #189563;
+  --color-brand-600: #0c8456;
+  --color-brand-700: #0a6644;
+  --color-brand-800: #0a4d35;
+  --color-brand-900: #093a29;
+  --color-brand-950: #04251b;
 
-  --color-gold-100: #f7efd9;
-  --color-gold-200: #eeddae;
-  --color-gold-300: #e3c77e;
-  --color-gold-400: #d4af5c;
-  --color-gold-500: #c29a45;
-  --color-gold-600: #a07c33;
-  --color-gold-700: #7e6128;
+  /* Logo navy */
+  --color-navy-50: #f4f8fa;
+  --color-navy-100: #e6eff4;
+  --color-navy-200: #ccdce6;
+  --color-navy-300: #a2bdcd;
+  --color-navy-400: #6a94af;
+  --color-navy-500: #44718d;
+  --color-navy-600: #315972;
+  --color-navy-700: #24475d;
+  --color-navy-800: #1a3647;
+  --color-navy-900: #132735;
+  --color-navy-950: #0b1923;
 
-  --color-sand-50: #fcfaf6;
-  --color-sand-100: #f6f1e8;
-  --color-sand-200: #ece4d6;
-  --color-sand-300: #ddd1be;
-  --color-sand-400: #c3b39a;
+  /* Fresh-leaf accent (the logo's light tone) — highlights on dark surfaces */
+  --color-leaf-100: #e3f8eb;
+  --color-leaf-200: #bfeed3;
+  --color-leaf-300: #8fe3b4;
+  --color-leaf-400: #5ace90;
+  --color-leaf-500: #34b273;
+  --color-leaf-600: #218c5a;
+  --color-leaf-700: #176e48;
 
-  --color-mint-300: #7fe8d6;
-  --color-mint-400: #45d6bf;
-  --color-mint-500: #1fbfa6;
+  /* Cool clinical neutrals */
+  --color-mist-50: #f7fafa;
+  --color-mist-100: #eef3f3;
+  --color-mist-200: #dee7e7;
+  --color-mist-300: #c8d3d5;
+  --color-mist-400: #a4b3b7;
 
+  /* Pain / attention (pain map only) */
   --color-coral-300: #ffb3a8;
   --color-coral-400: #f88578;
   --color-coral-500: #ee5d52;
   --color-coral-600: #d24439;
 
-  --shadow-soft: 0 1px 2px rgb(10 30 36 / 0.04), 0 8px 24px -8px rgb(10 30 36 / 0.12);
-  --shadow-lift: 0 2px 4px rgb(10 30 36 / 0.05), 0 24px 48px -16px rgb(10 30 36 / 0.22);
-  --shadow-glow: 0 0 0 1px rgb(69 214 191 / 0.25), 0 12px 40px -8px rgb(31 191 166 / 0.45);
+  --shadow-soft: 0 1px 2px rgb(11 25 35 / 0.04), 0 8px 24px -8px rgb(11 25 35 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(11 25 35 / 0.05), 0 24px 48px -16px rgb(11 25 35 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(90 206 144 / 0.25), 0 12px 40px -8px rgb(52 178 115 / 0.45);
 
   --radius-card: 1.5rem;
 
@@ -106,6 +120,17 @@
   transform: translateY(22px);
 }
 
+/* A utility (not a component class) so responsive variants like md:container-x work */
+@utility container-x {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
@@ -113,7 +138,7 @@
     scroll-padding-top: 7rem;
   }
   body {
-    background: var(--color-sand-50);
+    background: var(--color-mist-50);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
@@ -128,9 +153,9 @@
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
-  ::selection { background: var(--color-mint-300); color: var(--color-deep); }
+  ::selection { background: var(--color-leaf-200); color: var(--color-deep); }
   :focus-visible {
-    outline: 2px solid var(--color-gold-400);
+    outline: 2px solid var(--color-brand-600);
     outline-offset: 3px;
     border-radius: 0.5rem;
   }
@@ -140,16 +165,6 @@
 }
 
 @layer components {
-  .container-x {
-    width: 100%;
-    max-width: 76rem;
-    margin-inline: auto;
-    padding-inline: 1rem;
-  }
-  @media (min-width: 640px) {
-    .container-x { padding-inline: 1.5rem; }
-  }
-
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -163,9 +178,10 @@
     content: "";
     width: 1.75rem;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-gold-500));
+    background: linear-gradient(90deg, transparent, var(--color-brand-500));
   }
-  .eyebrow-light { color: var(--color-mint-300); }
+  .eyebrow-light { color: var(--color-leaf-300); }
+  .eyebrow-light::before { background: linear-gradient(90deg, transparent, var(--color-leaf-400)); }
 
   .h-display {
     font-size: clamp(2.15rem, 1.2rem + 4.4vw, 4.35rem);
@@ -202,22 +218,25 @@
     white-space: nowrap;
   }
   .btn:active { transform: scale(0.97); }
+  .btn > svg { flex-shrink: 0; }
+  /* The logo's own navy→green gradient: on-brand and distinct from WhatsApp green */
   .btn-primary {
     color: #fff;
-    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
-    box-shadow: 0 10px 30px -10px rgb(14 116 113 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.18);
+    background: linear-gradient(135deg, var(--color-navy-700), var(--color-brand-600));
+    box-shadow: 0 10px 30px -10px rgb(12 132 86 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.16);
   }
-  .btn-primary:hover { box-shadow: 0 16px 40px -12px rgb(14 116 113 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.22); transform: translateY(-1px); }
-  .btn-gold {
+  .btn-primary:hover { box-shadow: 0 16px 40px -12px rgb(12 132 86 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.2); transform: translateY(-1px); }
+  /* Main call to action on dark surfaces */
+  .btn-leaf {
     color: var(--color-deep);
-    background: linear-gradient(135deg, var(--color-gold-200), var(--color-gold-400));
-    box-shadow: 0 10px 30px -10px rgb(194 154 69 / 0.8), inset 0 1px 0 rgb(255 255 255 / 0.5);
+    background: linear-gradient(135deg, var(--color-leaf-200), var(--color-leaf-400));
+    box-shadow: 0 10px 30px -10px rgb(90 206 144 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.5);
   }
-  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 16px 44px -12px rgb(194 154 69 / 0.9), inset 0 1px 0 rgb(255 255 255 / 0.5); }
+  .btn-leaf:hover { transform: translateY(-1px); box-shadow: 0 16px 44px -12px rgb(90 206 144 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.5); }
   .btn-ghost {
     color: var(--color-ink);
     background: rgb(255 255 255 / 0.7);
-    box-shadow: inset 0 0 0 1px var(--color-sand-300);
+    box-shadow: inset 0 0 0 1px var(--color-mist-300);
   }
   .btn-ghost:hover { background: #fff; box-shadow: inset 0 0 0 1px var(--color-brand-300); }
   .btn-ghost-dark {
@@ -246,7 +265,7 @@
     background: #fff;
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-soft);
-    border: 1px solid rgb(221 209 190 / 0.6);
+    border: 1px solid rgb(200 211 213 / 0.7);
   }
   .glass-dark {
     background: linear-gradient(160deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.03));
@@ -264,7 +283,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     background: #fff;
-    border: 1px solid var(--color-sand-300);
+    border: 1px solid var(--color-mist-300);
     color: var(--color-ink);
     transition: all 0.2s ease;
     -webkit-tap-highlight-color: transparent;
@@ -282,19 +301,19 @@
     padding: 0.75rem 1rem;
     border-radius: 1rem;
     background: #fff;
-    border: 1.5px solid var(--color-sand-300);
+    border: 1.5px solid var(--color-mist-300);
     color: var(--color-ink);
     font-size: 1rem; /* 16px avoids iOS zoom-on-focus */
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .field:focus { outline: none; border-color: var(--color-brand-500); box-shadow: 0 0 0 4px rgb(26 141 136 / 0.14); }
+  .field:focus { outline: none; border-color: var(--color-brand-500); box-shadow: 0 0 0 4px rgb(24 149 99 / 0.15); }
   .field[aria-invalid="true"] { border-color: var(--color-coral-500); box-shadow: 0 0 0 4px rgb(238 93 82 / 0.12); }
 
   .bg-deep-radial {
     background:
-      radial-gradient(120% 80% at 15% 20%, rgb(26 141 136 / 0.35), transparent 60%),
-      radial-gradient(90% 70% at 90% 90%, rgb(194 154 69 / 0.16), transparent 60%),
-      linear-gradient(180deg, #05302f 0%, #04272a 55%, #021a1c 100%);
+      radial-gradient(120% 80% at 15% 20%, rgb(12 132 86 / 0.3), transparent 60%),
+      radial-gradient(90% 70% at 90% 90%, rgb(68 113 141 / 0.3), transparent 60%),
+      linear-gradient(180deg, #16344a 0%, #10283a 55%, #0b1923 100%);
   }
   .grain::before {
     content: "";
@@ -305,18 +324,20 @@
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
-  .hairline-gold {
+  .hairline-leaf {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-gold-400), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-leaf-400), transparent);
   }
-  .text-gradient-gold {
-    background: linear-gradient(135deg, var(--color-gold-200), var(--color-gold-400) 45%, var(--color-gold-200));
+  /* Highlight words on dark surfaces (white → the logo's light leaf) */
+  .text-gradient-leaf {
+    background: linear-gradient(135deg, #fff 0%, var(--color-leaf-200) 35%, var(--color-leaf-300) 70%, var(--color-leaf-400));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  .text-gradient-mint {
-    background: linear-gradient(135deg, #fff, var(--color-mint-300) 60%, var(--color-mint-400));
+  /* Highlight words on light surfaces (the logo gradient) */
+  .text-gradient-brand {
+    background: linear-gradient(135deg, var(--color-navy-700), var(--color-brand-600));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -336,12 +357,12 @@
     color: var(--color-brand-800);
     font-size: 0.8rem;
     font-weight: 700;
-    box-shadow: 0 0 0 2px var(--color-mint-400), 0 6px 18px -4px rgb(0 0 0 / 0.35);
+    box-shadow: 0 0 0 2px var(--color-leaf-400), 0 6px 18px -4px rgb(0 0 0 / 0.35);
     transition: opacity 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
-  .hotspot:hover { box-shadow: 0 0 0 3px var(--color-gold-300), 0 8px 22px -4px rgb(0 0 0 / 0.4); }
+  .hotspot:hover { box-shadow: 0 0 0 3px var(--color-leaf-300), 0 8px 22px -4px rgb(0 0 0 / 0.4); }
   .hotspot-abs {
     position: absolute;
     left: 0;
@@ -354,15 +375,15 @@
     position: absolute;
     inset: 0;
     border-radius: 999px;
-    box-shadow: 0 0 0 2px var(--color-mint-400);
+    box-shadow: 0 0 0 2px var(--color-leaf-400);
     animation: var(--animate-pulse-ring);
   }
   .hotspot[data-active="true"] {
-    background: var(--color-gold-300);
+    background: var(--color-leaf-300);
     color: var(--color-deep);
     box-shadow: 0 0 0 3px #fff, 0 10px 24px -4px rgb(0 0 0 / 0.45);
   }
-  .hotspot-coral { color: var(--color-coral-600); box-shadow: 0 0 0 2px var(--color-coral-400), 0 6px 18px -4px rgb(10 30 36 / 0.3); }
+  .hotspot-coral { color: var(--color-coral-600); box-shadow: 0 0 0 2px var(--color-coral-400), 0 6px 18px -4px rgb(11 25 35 / 0.3); }
   .hotspot-coral .hotspot-ring { box-shadow: 0 0 0 2px var(--color-coral-400); }
   .hotspot-coral[data-active="true"] { background: var(--color-coral-500); color: #fff; }
 

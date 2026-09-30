@@ -4,7 +4,7 @@ import { site } from "@/config/site";
 export function DemoBanner() {
   if (!site.isDemo) return null;
   return (
-    <div className="relative z-[60] bg-gold-200 px-4 py-1.5 text-center text-[0.78rem] font-medium text-gold-700">
+    <div className="relative z-[60] bg-leaf-200 px-4 py-1.5 text-center text-[0.78rem] font-medium text-leaf-700">
       نسخة عرض — بعض البيانات بانتظار اعتماد المركز
       <span className="hidden sm:inline">
         {" "}

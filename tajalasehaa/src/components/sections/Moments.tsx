@@ -35,7 +35,7 @@ export function Moments() {
           const Icon = ICONS[m.icon];
           return (
             <Reveal key={m.id} delay={i * 0.06} className="card group relative w-[78%] shrink-0 snap-center overflow-hidden p-6 transition-shadow hover:shadow-[var(--shadow-lift)] sm:w-[46%] md:w-auto">
-              <div className="absolute -top-10 -end-10 size-32 rounded-full bg-mint-300/15 transition-transform duration-500 group-hover:scale-125" aria-hidden />
+              <div className="absolute -top-10 -end-10 size-32 rounded-full bg-leaf-300/15 transition-transform duration-500 group-hover:scale-125" aria-hidden />
               <div className="relative grid size-14 place-items-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100">
                 <Icon size={28} aria-hidden />
               </div>

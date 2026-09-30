@@ -6,7 +6,7 @@ export function TrustStrip() {
   return (
     <section aria-label="أرقام وثقة" className="relative z-10 -mt-14">
       <div className="container-x">
-        <Reveal className="card grid grid-cols-2 gap-px overflow-hidden bg-sand-200 p-0 md:grid-cols-4">
+        <Reveal className="card grid grid-cols-2 gap-px overflow-hidden bg-mist-200 p-0 md:grid-cols-4">
           {site.stats.map((s) => (
             <div key={s.label} className="bg-white px-4 py-6 text-center sm:px-6">
               <p className="text-[1.9rem] font-bold leading-none text-brand-700 tabular sm:text-[2.2rem]">{s.value}</p>
@@ -23,7 +23,7 @@ export function TrustStrip() {
           </span>
           {site.rating ? (
             <a href={site.rating.url || undefined} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5">
-              <Star size={17} className="fill-gold-400 text-gold-400" aria-hidden />
+              <Star size={17} className="fill-leaf-400 text-leaf-400" aria-hidden />
               <strong className="text-ink">{site.rating.value}</strong> من {site.rating.count.toLocaleString("en-US")} تقييم على {site.rating.source}
             </a>
           ) : null}

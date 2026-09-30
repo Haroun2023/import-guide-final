@@ -16,10 +16,10 @@ export function Footer() {
   const socials = SOCIAL.filter((s) => site.social[s.key]);
   return (
     <footer className="relative overflow-hidden bg-deep text-white/75 grain">
-      <div className="hairline-gold opacity-60" />
+      <div className="hairline-leaf opacity-60" />
       <div className="container-x relative grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1.2fr]">
         <div>
-          <Logo tone="light" />
+          <Logo tone="light" variant="stacked" className="h-28" />
           <p className="mt-5 max-w-sm leading-8">
             «{site.proverb}»
             <br />
@@ -39,7 +39,7 @@ export function Footer() {
         </div>
 
         <nav aria-label="روابط سريعة">
-          <h2 className="text-sm font-semibold text-gold-300">روابط سريعة</h2>
+          <h2 className="text-sm font-semibold text-leaf-300">روابط سريعة</h2>
           <ul className="mt-4 grid gap-2.5">
             {[
               ["/#pain-map", "أين يؤلمك؟"],
@@ -59,23 +59,23 @@ export function Footer() {
         </nav>
 
         <div>
-          <h2 className="text-sm font-semibold text-gold-300">تواصل وزيارة</h2>
+          <h2 className="text-sm font-semibold text-leaf-300">تواصل وزيارة</h2>
           <ul className="mt-4 grid gap-3.5">
             <li>
               <a href={telLink()} onClick={() => trackContact("call", "footer")} className="flex items-center gap-3 hover:text-white">
-                <Phone size={18} className="text-mint-400" aria-hidden />
+                <Phone size={18} className="text-leaf-400" aria-hidden />
                 <span dir="ltr" className="tabular">{site.contact.phoneDisplay}</span>
               </a>
             </li>
             <li>
               <WhatsAppLink placement="footer" className="flex items-center gap-3 hover:text-white">
-                <WhatsAppIcon size={18} className="text-mint-400" /> واتساب مباشر
+                <WhatsAppIcon size={18} className="text-leaf-400" /> واتساب مباشر
               </WhatsAppLink>
             </li>
             {site.branches.map((b) => (
               <li key={b.id}>
                 <a href={b.mapsUrl} target="_blank" rel="noopener" className="flex items-start gap-3 hover:text-white">
-                  <MapPin size={18} className="mt-1 shrink-0 text-mint-400" aria-hidden />
+                  <MapPin size={18} className="mt-1 shrink-0 text-leaf-400" aria-hidden />
                   <span>
                     {b.name} — {b.address}
                   </span>
@@ -83,7 +83,7 @@ export function Footer() {
               </li>
             ))}
             <li className="flex items-start gap-3">
-              <Clock size={18} className="mt-1 shrink-0 text-mint-400" aria-hidden />
+              <Clock size={18} className="mt-1 shrink-0 text-leaf-400" aria-hidden />
               <span>
                 {site.hours.map((h) => (
                   <span key={h.days} className="block">

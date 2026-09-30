@@ -33,15 +33,15 @@ export function Hero() {
       </LazyCanvas>
 
       {/* Legibility scrim: strong behind the text (right in RTL), clear over the spine */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(270deg,rgb(4_39_42/0.92)_0%,rgb(4_39_42/0.7)_45%,rgb(4_39_42/0)_75%)] md:bg-[linear-gradient(270deg,rgb(4_39_42/0.75)_0%,rgb(4_39_42/0.35)_45%,rgb(4_39_42/0)_62%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(270deg,rgb(16_40_58/0.92)_0%,rgb(16_40_58/0.7)_45%,rgb(16_40_58/0)_75%)] md:bg-[linear-gradient(270deg,rgb(16_40_58/0.75)_0%,rgb(16_40_58/0.35)_45%,rgb(16_40_58/0)_62%)]" />
 
       <div className="container-x relative flex min-h-[100svh] flex-col justify-center pb-24 pt-32 md:pt-36">
         <div className="max-w-[40rem]">
-          <p className="animate-rise text-[0.95rem] font-medium text-gold-300/90">«{site.proverb}»</p>
+          <p className="animate-rise text-[0.95rem] font-medium text-leaf-300/90">«{site.proverb}»</p>
           <h1 id="hero-title" className="h-display mt-4 animate-rise [animation-delay:120ms]">
             الصحة تاج…
             <br />
-            <span className="text-gradient-gold">نستعيده معًا</span>
+            <span className="text-gradient-leaf">نستعيده معًا</span>
           </h1>
           {/* Phones get a shorter line that leaves the left strip to the 3D spine. */}
           <p className="mt-5 animate-rise pe-[22%] text-[1.05rem] leading-8 text-white/80 [animation-delay:240ms] md:hidden">
@@ -53,7 +53,7 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex animate-rise flex-wrap gap-3 [animation-delay:360ms]">
-            <button type="button" className="btn btn-gold btn-shine text-[1.02rem]" onClick={() => openBooking({ placement: "hero" })}>
+            <button type="button" className="btn btn-leaf btn-shine text-[1.02rem]" onClick={() => openBooking({ placement: "hero" })}>
               {site.offer.active ? "احجز تقييمك المجاني" : "احجز تقييمك الآن"}
               <ArrowLeft size={19} aria-hidden />
             </button>
@@ -68,7 +68,7 @@ export function Hero() {
           <ul className="mt-8 grid animate-rise gap-x-6 gap-y-2.5 pe-[22%] text-[0.92rem] text-white/75 [animation-delay:480ms] sm:grid-cols-2 md:mt-9 md:pe-0">
             {trust.map((t) => (
               <li key={t} className="flex items-center gap-2">
-                <span className="grid size-5 place-items-center rounded-full bg-mint-400/20 text-mint-300">
+                <span className="grid size-5 place-items-center rounded-full bg-leaf-400/20 text-leaf-300">
                   <Check size={13} aria-hidden />
                 </span>
                 {t}
@@ -85,10 +85,10 @@ export function Hero() {
               <span className="size-2.5 rounded-full bg-coral-500" /> ضغط وألم
             </li>
             <li className="flex items-center gap-2">
-              <span className="size-2.5 rounded-full bg-mint-400" /> توازن وحركة
+              <span className="size-2.5 rounded-full bg-leaf-400" /> توازن وحركة
             </li>
             <li className="flex items-center gap-2">
-              <span className="size-2.5 rounded-full bg-gold-400" /> تاج الصحة
+              <span className="size-2.5 rounded-full bg-leaf-400" /> تاج الصحة
             </li>
           </ul>
         </div>

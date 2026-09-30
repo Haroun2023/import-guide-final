@@ -69,7 +69,7 @@ export function MobileCTABar({ placement = "sticky-bar", complaint }: { placemen
         <button
           type="button"
           onClick={() => openBooking({ placement, complaint })}
-          className="btn btn-gold btn-shine min-h-12 flex-1 rounded-2xl text-[1rem]"
+          className="btn btn-leaf btn-shine min-h-12 flex-1 rounded-2xl text-[1rem]"
           tabIndex={shown ? 0 : -1}
         >
           <CalendarCheck size={19} aria-hidden /> {site.offer.active ? "احجز تقييمك المجاني" : "احجز تقييمك"}

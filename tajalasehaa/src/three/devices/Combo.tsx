@@ -33,24 +33,24 @@ const PROBE_CABLE: V3[] = [
 ];
 
 const drawScreen: ScreenDraw = (ctx, w, h, t) => {
-  screenBase(ctx, w, h, "COMBINED THERAPY", "#7fe8d6");
+  screenBase(ctx, w, h, "COMBINED THERAPY", "#8fe3b4");
   const rows: [string, string, string][] = [
-    ["TENS", "80 Hz", "#7fe8d6"],
+    ["TENS", "80 Hz", "#8fe3b4"],
     ["IFC", "4 kHz", "#9ad8ff"],
-    ["US", "1 MHz · 1.2 W/cm²", "#f5c24a"],
+    ["US", "1 MHz · 1.2 W/cm²", "#cfe872"],
   ];
   rows.forEach(([k, v, c], i) => {
     const y = 88 + i * 46;
     ctx.fillStyle = c;
     ctx.fillRect(24, y - 16, 6, 24);
-    ctx.fillStyle = "#9fc3c9";
+    ctx.fillStyle = "#a2bdcd";
     ctx.font = "600 17px system-ui, sans-serif";
     ctx.fillText(k, 42, y);
     ctx.fillStyle = "#ffffff";
     ctx.font = "700 22px system-ui, sans-serif";
     ctx.fillText(v, 110, y);
   });
-  ctx.strokeStyle = "#7fe8d6";
+  ctx.strokeStyle = "#8fe3b4";
   ctx.lineWidth = 3;
   ctx.beginPath();
   for (let x = 24; x < w - 24; x += 2) {
@@ -67,7 +67,7 @@ export function Combo({ animate }: { animate: boolean }) {
     const e = new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), PROBE_DIR));
     return [e.x, e.y, e.z] as V3;
   }, []);
-  const padMat = useMemo(() => new THREE.MeshStandardMaterial({ color: "#2b3a3f", roughness: 0.6 }), []);
+  const padMat = useMemo(() => new THREE.MeshStandardMaterial({ color: "#243642", roughness: 0.6 }), []);
   useEffect(() => () => padMat.dispose(), [padMat]);
 
   return (
@@ -94,11 +94,11 @@ export function Combo({ animate }: { animate: boolean }) {
       <group position={[-0.08, 1.07, 0.16]} rotation={[-0.5, 0, 0]}>
         <ScreenPanel width={0.36} height={0.22} draw={drawScreen} animated={animate} />
       </group>
-      <mesh material={mat.gold} position={[0.2, 1.06, 0.17]} rotation={[Math.PI / 2 - 0.5, 0, 0]}>
+      <mesh material={mat.accent} position={[0.2, 1.06, 0.17]} rotation={[Math.PI / 2 - 0.5, 0, 0]}>
         <cylinderGeometry args={[0.05, 0.055, 0.04, 32]} />
       </mesh>
       {[0.14, 0.26].map((x) => (
-        <mesh key={x} material={mat.teal} position={[x, 0.99, 0.19]}>
+        <mesh key={x} material={mat.brand} position={[x, 0.99, 0.19]}>
           <boxGeometry args={[0.07, 0.025, 0.02]} />
         </mesh>
       ))}
@@ -116,17 +116,17 @@ export function Combo({ animate }: { animate: boolean }) {
         </mesh>
       </group>
       <Cable points={PROBE_CABLE} radius={0.012} />
-      {animate ? <PulseRings position={[PROBE_HEAD.x, PROBE_HEAD.y, PROBE_HEAD.z]} rotation={rippleRot} color="#f5c24a" count={3} speed={0.8} radius={0.05} maxScale={0.6} /> : null}
+      {animate ? <PulseRings position={[PROBE_HEAD.x, PROBE_HEAD.y, PROBE_HEAD.z]} rotation={rippleRot} color="#cfe872" count={3} speed={0.8} radius={0.05} maxScale={0.6} /> : null}
 
       {/* Electrode leads and pads */}
       {LEADS.map((pts, i) => (
         <group key={i}>
           <Cable points={pts} radius={0.008} material={mat.cable} />
-          {animate ? <FlowTube points={pts} radius={0.012} color={i % 2 ? "#9ad8ff" : "#7fe8d6"} speed={0.6 + i * 0.07} opacity={0.8} /> : null}
+          {animate ? <FlowTube points={pts} radius={0.012} color={i % 2 ? "#9ad8ff" : "#8fe3b4"} speed={0.6 + i * 0.07} opacity={0.8} /> : null}
           <RoundedBox args={[0.12, 0.012, 0.09]} radius={0.005} smoothness={2} position={PADS[i]} material={padMat} />
           <mesh position={[PADS[i][0], PADS[i][1] + 0.007, PADS[i][2]]} rotation={[-Math.PI / 2, 0, 0]}>
             <ringGeometry args={[0.03, 0.036, 24]} />
-            <meshBasicMaterial color={i % 2 ? "#9ad8ff" : "#7fe8d6"} toneMapped={false} />
+            <meshBasicMaterial color={i % 2 ? "#9ad8ff" : "#8fe3b4"} toneMapped={false} />
           </mesh>
         </group>
       ))}

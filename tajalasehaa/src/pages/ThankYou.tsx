@@ -34,7 +34,7 @@ export default function ThankYou() {
   return (
     <>
       <Header overDark={false} minimal />
-      <main id="main" className="min-h-[80vh] bg-sand-50 pb-20 pt-32">
+      <main id="main" className="min-h-[80vh] bg-mist-50 pb-20 pt-32">
         <div className="container-x max-w-2xl text-center">
           <div className="mx-auto grid size-24 animate-rise place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-white shadow-[var(--shadow-glow)]">
             <Check size={48} strokeWidth={2.5} aria-hidden />
@@ -46,7 +46,7 @@ export default function ThankYou() {
             سيتواصل معك فريق {site.name} قريبًا لتأكيد موعد {lead?.complaintLabel ? `تقييم «${lead.complaintLabel}»` : "التقييم"}.
           </p>
           {lead?.ref ? (
-            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm shadow-sm ring-1 ring-sand-200">
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm shadow-sm ring-1 ring-mist-200">
               رقم طلبك: <strong dir="ltr" className="tabular">{lead.ref}</strong>
             </p>
           ) : null}

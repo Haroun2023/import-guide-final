@@ -16,7 +16,7 @@ export function Stories() {
           {stories.map((s, i) => (
             <Reveal as="li" key={i} delay={i * 0.06} className="card relative p-6">
               {s.sample ? (
-                <span className="absolute end-5 top-5 rounded-full bg-gold-100 px-2.5 py-1 text-xs font-semibold text-gold-700">نموذج توضيحي</span>
+                <span className="absolute end-5 top-5 rounded-full bg-leaf-100 px-2.5 py-1 text-xs font-semibold text-leaf-700">نموذج توضيحي</span>
               ) : null}
               <Quote size={28} className="text-brand-300" aria-hidden />
               <blockquote className="mt-3 leading-8">{s.quote}</blockquote>

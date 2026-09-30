@@ -31,10 +31,10 @@ const LEADS: V3[][] = PADS.map((p, i) => {
     [p.pos[0], p.pos[1] - 0.04, p.pos[2] + 0.012],
   ];
 });
-const CH_COLORS = ["#f5c24a", "#f5c24a", "#7fe8d6", "#7fe8d6"];
+const CH_COLORS = ["#cfe872", "#cfe872", "#8fe3b4", "#8fe3b4"];
 
 const drawScreen: ScreenDraw = (ctx, w, h, t) => {
-  screenBase(ctx, w, h, "EMS · 4 CHANNELS", "#f5c24a");
+  screenBase(ctx, w, h, "EMS · 4 CHANNELS", "#cfe872");
   const bw = 70;
   for (let i = 0; i < 4; i++) {
     const x = 34 + i * (bw + 26);
@@ -44,7 +44,7 @@ const drawScreen: ScreenDraw = (ctx, w, h, t) => {
     ctx.fillRect(x, 70, bw, 150);
     ctx.fillStyle = CH_COLORS[i];
     ctx.fillRect(x, 220 - bh, bw, bh);
-    ctx.fillStyle = "#cfe3e6";
+    ctx.fillStyle = "#ccdce6";
     ctx.font = "600 16px system-ui, sans-serif";
     ctx.fillText(`CH${i + 1}`, x + 16, 246);
   }
@@ -63,7 +63,7 @@ export function EMS({ animate }: { animate: boolean }) {
   const torso = useMemo(() => new THREE.LatheGeometry(TORSO_PROFILE.map(([x, y]) => new THREE.Vector2(x, y)), 48), []);
   useEffect(() => () => torso.dispose(), [torso]);
   const padMats = useMemo(
-    () => PADS.map((_, i) => new THREE.MeshStandardMaterial({ color: "#26363b", roughness: 0.55, emissive: new THREE.Color(CH_COLORS[i]), emissiveIntensity: 0.2 })),
+    () => PADS.map((_, i) => new THREE.MeshStandardMaterial({ color: "#243642", roughness: 0.55, emissive: new THREE.Color(CH_COLORS[i]), emissiveIntensity: 0.2 })),
     [],
   );
   useEffect(() => () => padMats.forEach((m) => m.dispose()), [padMats]);
@@ -79,7 +79,7 @@ export function EMS({ animate }: { animate: boolean }) {
       <mesh material={mat.shellWarm} position={[0, 0.02, 0]}>
         <cylinderGeometry args={[0.28, 0.3, 0.04, 48]} />
       </mesh>
-      <mesh material={mat.gold} position={[0, 0.042, 0]} rotation={[Math.PI / 2, 0, 0]}>
+      <mesh material={mat.accent} position={[0, 0.042, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[0.28, 0.006, 6, 64]} />
       </mesh>
       <mesh material={mat.chrome} position={[0, 0.33, 0]}>
@@ -88,7 +88,7 @@ export function EMS({ animate }: { animate: boolean }) {
 
       {/* Torso form: a lathed dress-form silhouette (neck → shoulders → waist → hips) */}
       <mesh material={mat.porcelain} geometry={torso} scale={[1, 1, 0.62]} />
-      <mesh material={mat.gold} position={[0, 2.005, 0]}>
+      <mesh material={mat.accent} position={[0, 2.005, 0]}>
         <cylinderGeometry args={[0.078, 0.078, 0.018, 28]} />
       </mesh>
       {[1, -1].map((s) => (
@@ -103,7 +103,7 @@ export function EMS({ animate }: { animate: boolean }) {
           <RoundedBox args={[0.1, 0.14, 0.012]} radius={0.005} smoothness={2} material={padMats[i]} />
         </group>
       ))}
-      {animate ? <PulseRings position={[0, 1.2, 0.17]} color="#f5c24a" count={2} speed={0.5} radius={0.1} maxScale={0.7} /> : null}
+      {animate ? <PulseRings position={[0, 1.2, 0.17]} color="#cfe872" count={2} speed={0.5} radius={0.1} maxScale={0.7} /> : null}
 
       {/* Control unit on a pedestal */}
       <mesh material={mat.shell} position={[0.78, 0.36, 0]}>

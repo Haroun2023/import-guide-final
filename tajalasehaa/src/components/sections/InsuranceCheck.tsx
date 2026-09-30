@@ -29,7 +29,7 @@ export function InsuranceCheck() {
             {site.insurers.length ? (
               <ul className="mt-5 flex flex-wrap gap-2">
                 {site.insurers.map((i) => (
-                  <li key={i} className="rounded-full bg-sand-100 px-3 py-1.5 text-sm font-medium">
+                  <li key={i} className="rounded-full bg-mist-100 px-3 py-1.5 text-sm font-medium">
                     {i}
                   </li>
                 ))}

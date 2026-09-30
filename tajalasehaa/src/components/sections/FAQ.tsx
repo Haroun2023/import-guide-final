@@ -14,7 +14,7 @@ export function FAQ({ limit }: { limit?: number }) {
             <details key={f.q} className="card group p-0 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[1.02rem] font-semibold">
                 {f.q}
-                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sand-100 text-brand-700 transition-transform duration-300 group-open:rotate-45">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-mist-100 text-brand-700 transition-transform duration-300 group-open:rotate-45">
                   <Plus size={17} aria-hidden />
                 </span>
               </summary>

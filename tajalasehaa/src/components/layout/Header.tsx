@@ -49,12 +49,12 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
       <DemoBanner />
       <div
         className={`transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
-          light ? "bg-transparent" : "bg-sand-50/90 shadow-[0_1px_0_rgb(221_209_190/0.7)] backdrop-blur-xl"
+          light ? "bg-transparent" : "bg-mist-50/90 shadow-[0_1px_0_rgb(200_211_213/0.8)] backdrop-blur-xl"
         }`}
       >
         <div className="container-x flex h-[4.25rem] items-center justify-between gap-4">
           <a href="/" className="shrink-0" aria-label="الصفحة الرئيسية">
-            <Logo tone={light ? "light" : "dark"} compact />
+            <Logo tone={light ? "light" : "dark"} crossfade className="h-9 sm:h-10" />
           </a>
 
           {!minimal ? (
@@ -65,7 +65,7 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
                     <a
                       href={n.href}
                       className={`rounded-full px-3.5 py-2 text-[0.94rem] font-medium transition-colors ${
-                        light ? "text-white/85 hover:bg-white/10 hover:text-white" : "text-ink/80 hover:bg-sand-100 hover:text-ink"
+                        light ? "text-white/85 hover:bg-white/10 hover:text-white" : "text-ink/80 hover:bg-mist-100 hover:text-ink"
                       }`}
                     >
                       {n.label}
@@ -80,14 +80,14 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
             <a
               href={telLink()}
               onClick={() => trackContact("call", "header")}
-              className={`grid size-11 place-items-center rounded-full transition-colors ${light ? "text-white hover:bg-white/10" : "text-ink hover:bg-sand-100"}`}
+              className={`grid size-11 place-items-center rounded-full transition-colors ${light ? "text-white hover:bg-white/10" : "text-ink hover:bg-mist-100"}`}
               aria-label="اتصل بنا"
             >
               <Phone size={20} aria-hidden />
             </a>
             <button
               type="button"
-              className={`btn ${light ? "btn-gold" : "btn-primary"} hidden min-h-11 px-5 text-[0.95rem] sm:inline-flex`}
+              className={`btn ${light ? "btn-leaf" : "btn-primary"} hidden min-h-11 px-5 text-[0.95rem] sm:inline-flex`}
               onClick={() => openBooking({ placement: minimal ? "lp-header" : "header" })}
             >
               احجز تقييمك
@@ -95,7 +95,7 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
             {!minimal ? (
               <button
                 type="button"
-                className={`grid size-11 place-items-center rounded-full lg:hidden ${light ? "text-white hover:bg-white/10" : "text-ink hover:bg-sand-100"}`}
+                className={`grid size-11 place-items-center rounded-full lg:hidden ${light ? "text-white hover:bg-white/10" : "text-ink hover:bg-mist-100"}`}
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
@@ -108,12 +108,12 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
         </div>
 
         {open && !minimal ? (
-          <div id="mobile-menu" className="border-t border-sand-200 bg-sand-50 lg:hidden">
+          <div id="mobile-menu" className="border-t border-mist-200 bg-mist-50 lg:hidden">
             <nav aria-label="قائمة الجوال" className="container-x py-4">
               <ul className="grid gap-1">
                 {NAV.map((n) => (
                   <li key={n.href}>
-                    <a href={n.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-lg font-medium hover:bg-sand-100">
+                    <a href={n.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-lg font-medium hover:bg-mist-100">
                       {n.label}
                     </a>
                   </li>
@@ -122,7 +122,7 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary px-4"
                   onClick={() => {
                     setOpen(false);
                     openBooking({ placement: "mobile-menu" });
@@ -130,7 +130,7 @@ export function Header({ overDark = true, minimal = false }: { overDark?: boolea
                 >
                   احجز تقييمك
                 </button>
-                <WhatsAppLink placement="mobile-menu" />
+                <WhatsAppLink placement="mobile-menu" className="btn btn-whatsapp px-4" />
               </div>
             </nav>
           </div>

@@ -37,7 +37,7 @@ const drawConsole: ScreenDraw = (ctx, w, h, t) => {
   ctx.textAlign = "center";
   ctx.fillText(`${pct}%`, cx, cy + 4);
   ctx.font = "500 16px system-ui, sans-serif";
-  ctx.fillStyle = "#9fc3c9";
+  ctx.fillStyle = "#a2bdcd";
   ctx.fillText("BODY WEIGHT", cx, cy + 44);
   ctx.textAlign = "left";
   const rows: [string, string][] = [
@@ -47,7 +47,7 @@ const drawConsole: ScreenDraw = (ctx, w, h, t) => {
   ];
   rows.forEach(([k, v], i) => {
     const y = 96 + i * 70;
-    ctx.fillStyle = "#9fc3c9";
+    ctx.fillStyle = "#a2bdcd";
     ctx.font = "500 16px system-ui, sans-serif";
     ctx.fillText(k, 270, y);
     ctx.fillStyle = "#ffffff";
@@ -62,9 +62,9 @@ function Belt() {
     c.width = 256;
     c.height = 32;
     const ctx = c.getContext("2d")!;
-    ctx.fillStyle = "#1b2327";
+    ctx.fillStyle = "#132735";
     ctx.fillRect(0, 0, 256, 32);
-    ctx.fillStyle = "#2c393e";
+    ctx.fillStyle = "#1f3a4c";
     for (let x = 0; x < 256; x += 16) ctx.fillRect(x, 0, 3, 32);
     const tex = new THREE.CanvasTexture(c);
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
@@ -126,14 +126,14 @@ export function AlterG({ animate }: { animate: boolean }) {
           </mesh>
         ))}
         {/* zip ring at the base of the chamber */}
-        <mesh material={mat.tealDeep} rotation={[Math.PI / 2, 0, 0]} scale={[0.95, 0.5, 1]}>
+        <mesh material={mat.navy} rotation={[Math.PI / 2, 0, 0]} scale={[0.95, 0.5, 1]}>
           <torusGeometry args={[1, 0.012, 6, 96]} />
         </mesh>
       </group>
 
       {/* Cockpit: the waist opening + height-adjustable frame */}
       <group position={[0.08, 1.19, 0]}>
-        <mesh material={mat.teal} rotation={[Math.PI / 2, 0, 0]}>
+        <mesh material={mat.brand} rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[0.27, 0.038, 14, 48]} />
         </mesh>
         <mesh material={mat.rubber} position={[0, -0.06, 0]}>

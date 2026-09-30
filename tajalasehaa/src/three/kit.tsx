@@ -4,22 +4,23 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 /* ------------------------------------------------------------------ */
-/* Materials — "clinical luxury": glossy ivory shells, teal, crown gold */
+/* Materials — clinical whites + the logo's green and navy             */
 /* ------------------------------------------------------------------ */
 
 export const mat = {
-  shell: new THREE.MeshPhysicalMaterial({ color: "#f4f0e8", roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.16 }),
-  shellWarm: new THREE.MeshPhysicalMaterial({ color: "#e7dfd1", roughness: 0.38, clearcoat: 0.5, clearcoatRoughness: 0.25 }),
-  porcelain: new THREE.MeshPhysicalMaterial({ color: "#efe8dd", roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: new THREE.Color("#fff4e0") }),
-  teal: new THREE.MeshStandardMaterial({ color: "#0e7471", roughness: 0.32, metalness: 0.25 }),
-  tealDeep: new THREE.MeshStandardMaterial({ color: "#0a4a4b", roughness: 0.4, metalness: 0.2 }),
-  gold: new THREE.MeshStandardMaterial({ color: "#caa24c", roughness: 0.26, metalness: 1 }),
+  shell: new THREE.MeshPhysicalMaterial({ color: "#f3f6f6", roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.16 }),
+  shellWarm: new THREE.MeshPhysicalMaterial({ color: "#dfe6e6", roughness: 0.38, clearcoat: 0.5, clearcoatRoughness: 0.25 }),
+  porcelain: new THREE.MeshPhysicalMaterial({ color: "#ebf0ef", roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: new THREE.Color("#effaf4") }),
+  brand: new THREE.MeshStandardMaterial({ color: "#0c8456", roughness: 0.32, metalness: 0.25 }),
+  navy: new THREE.MeshStandardMaterial({ color: "#24475d", roughness: 0.4, metalness: 0.2 }),
+  /** anodised leaf-green trim (replaces the old gold accents) */
+  accent: new THREE.MeshStandardMaterial({ color: "#4cc387", roughness: 0.28, metalness: 0.85 }),
   chrome: new THREE.MeshStandardMaterial({ color: "#e3e9ea", roughness: 0.14, metalness: 1 }),
   steel: new THREE.MeshStandardMaterial({ color: "#9aa7ab", roughness: 0.35, metalness: 0.9 }),
   rubber: new THREE.MeshStandardMaterial({ color: "#1c2428", roughness: 0.82 }),
   cable: new THREE.MeshStandardMaterial({ color: "#2a3438", roughness: 0.55 }),
-  cableLight: new THREE.MeshStandardMaterial({ color: "#d9d4ca", roughness: 0.5 }),
-  glassDark: new THREE.MeshPhysicalMaterial({ color: "#0b1b22", roughness: 0.06, metalness: 0.2, clearcoat: 1 }),
+  cableLight: new THREE.MeshStandardMaterial({ color: "#d3dada", roughness: 0.5 }),
+  glassDark: new THREE.MeshPhysicalMaterial({ color: "#0b1923", roughness: 0.06, metalness: 0.2, clearcoat: 1 }),
   bubble: new THREE.MeshPhysicalMaterial({
     color: "#eaf6ff",
     roughness: 0.18,
@@ -43,13 +44,13 @@ export function Studio({ intensity = 1 }: { intensity?: number }) {
     <>
       <ambientLight intensity={0.35 * intensity} />
       <directionalLight position={[3.5, 6, 5]} intensity={1.7 * intensity} />
-      <directionalLight position={[-5, 2.5, -3]} intensity={0.7 * intensity} color="#9ee6ff" />
+      <directionalLight position={[-5, 2.5, -3]} intensity={0.7 * intensity} color="#a9d6f0" />
       <Environment resolution={128} frames={1}>
         <Lightformer form="rect" intensity={2.4} position={[0, 5, 3]} scale={[10, 2.5, 1]} />
-        <Lightformer form="rect" intensity={1.3} position={[-6, 1.5, 1]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} color="#c9f5ec" />
-        <Lightformer form="rect" intensity={1.1} position={[6, 1.5, -1]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} color="#ffe7b8" />
+        <Lightformer form="rect" intensity={1.3} position={[-6, 1.5, 1]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} color="#d4f7e4" />
+        <Lightformer form="rect" intensity={1.1} position={[6, 1.5, -1]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} color="#fff1dc" />
         <Lightformer form="ring" intensity={1.6} position={[0, 2, -6]} scale={4} />
-        <Lightformer form="rect" intensity={0.6} position={[0, -3, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} color="#0e7471" />
+        <Lightformer form="rect" intensity={0.6} position={[0, -3, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} color="#0c8456" />
       </Environment>
     </>
   );
@@ -74,7 +75,7 @@ export function Cable({ points, radius = 0.018, material = mat.cable, segments =
 export function FlowTube({
   points,
   radius = 0.02,
-  color = "#45d6bf",
+  color = "#5ace90",
   speed = 0.5,
   opacity = 1,
   reverse = false,
@@ -146,7 +147,7 @@ export function FlowTube({
 export function PulseRings({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
-  color = "#45d6bf",
+  color = "#5ace90",
   count = 3,
   speed = 0.9,
   maxScale = 1,
@@ -273,10 +274,10 @@ export function ScreenPanel({
 }
 
 /** Shared screen chrome: dark gradient background + header bar. */
-export function screenBase(ctx: CanvasRenderingContext2D, w: number, h: number, title: string, accent = "#45d6bf") {
+export function screenBase(ctx: CanvasRenderingContext2D, w: number, h: number, title: string, accent = "#5ace90") {
   const g = ctx.createLinearGradient(0, 0, 0, h);
-  g.addColorStop(0, "#0b2a30");
-  g.addColorStop(1, "#061a1f");
+  g.addColorStop(0, "#13304a");
+  g.addColorStop(1, "#0b1923");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, w, h);
   ctx.fillStyle = "rgba(255,255,255,0.06)";
@@ -285,7 +286,7 @@ export function screenBase(ctx: CanvasRenderingContext2D, w: number, h: number, 
   ctx.beginPath();
   ctx.arc(24, 22, 7, 0, Math.PI * 2);
   ctx.fill();
-  ctx.fillStyle = "#e8f6f3";
+  ctx.fillStyle = "#eef6f2";
   ctx.font = "600 20px system-ui, sans-serif";
   ctx.textBaseline = "middle";
   ctx.fillText(title, 42, 23);

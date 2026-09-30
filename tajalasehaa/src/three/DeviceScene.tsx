@@ -23,7 +23,7 @@ type Entry = { Model: ComponentType<{ animate: boolean }>; anchors: Record<strin
 
 const REGISTRY: Record<DeviceId, Entry> = {
   antigravity: { Model: AlterG, anchors: alterAnchors, scale: 1.3 },
-  shockwave: { Model: Shockwave, anchors: shockAnchors, scale: 1.62 },
+  shockwave: { Model: Shockwave, anchors: shockAnchors, scale: 1.46 },
   combo: { Model: Combo, anchors: comboAnchors, scale: 1.95 },
   ems: { Model: EMS, anchors: emsAnchors, scale: 1.34 },
 };
@@ -139,7 +139,7 @@ function Turntable({ device, selected, spin, paused, reducedMotion, registry }: 
 
 function Stage() {
   const platform = useMemo(
-    () => new THREE.MeshPhysicalMaterial({ color: "#0c2c31", roughness: 0.28, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.2 }),
+    () => new THREE.MeshPhysicalMaterial({ color: "#10283a", roughness: 0.28, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.2 }),
     [],
   );
   useEffect(() => () => platform.dispose(), [platform]);
@@ -150,12 +150,12 @@ function Stage() {
       </mesh>
       <mesh position={[0, 0.002, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1.68, 1.73, 128]} />
-        <meshBasicMaterial color="#45d6bf" toneMapped={false} />
+        <meshBasicMaterial color="#5ace90" toneMapped={false} />
       </mesh>
       {[0.7, 1.15].map((r) => (
         <mesh key={r} position={[0, 0.003, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <ringGeometry args={[r, r + 0.008, 128]} />
-          <meshBasicMaterial color="#45d6bf" transparent opacity={0.22} toneMapped={false} />
+          <meshBasicMaterial color="#5ace90" transparent opacity={0.22} toneMapped={false} />
         </mesh>
       ))}
       {/* soft volumetric light cone */}

@@ -15,7 +15,7 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
           <h2 id="booking-title" className="h-section mt-3">
             {title ?? (
               <>
-                خطوتك الأولى نحو <span className="text-gradient-gold">حركة بلا ألم</span>
+                خطوتك الأولى نحو <span className="text-gradient-leaf">حركة بلا ألم</span>
               </>
             )}
           </h2>
@@ -32,7 +32,7 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
             {site.branches.map((b) => (
               <li key={b.id}>
                 <a href={b.mapsUrl} target="_blank" rel="noopener" className="flex items-start gap-3 hover:text-white">
-                  <MapPin size={20} className="mt-1 shrink-0 text-mint-400" aria-hidden />
+                  <MapPin size={20} className="mt-1 shrink-0 text-leaf-400" aria-hidden />
                   <span>
                     <strong className="block text-white">{b.name}</strong>
                     {b.address} · افتح الخريطة
@@ -41,7 +41,7 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
               </li>
             ))}
             <li className="flex items-start gap-3">
-              <Clock size={20} className="mt-1 shrink-0 text-mint-400" aria-hidden />
+              <Clock size={20} className="mt-1 shrink-0 text-leaf-400" aria-hidden />
               <span>
                 {site.hours.map((h) => (
                   <span key={h.days} className="block">
@@ -53,7 +53,7 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
           </ul>
         </div>
 
-        <Reveal className="rounded-[2rem] bg-sand-50 p-5 text-ink shadow-2xl sm:p-8" >
+        <Reveal className="rounded-[2rem] bg-mist-50 p-5 text-ink shadow-2xl sm:p-8" >
           <div data-hide-cta>
             <BookingWizard prefill={prefill ?? { placement: "booking-section" }} />
           </div>

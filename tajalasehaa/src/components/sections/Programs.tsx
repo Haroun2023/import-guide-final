@@ -16,7 +16,7 @@ export function Programs() {
   const list = programs.filter((p) => p.track === tab);
 
   return (
-    <section id="programs" className="bg-sand-100/70 py-20 md:py-28" aria-labelledby="programs-title">
+    <section id="programs" className="bg-mist-100/70 py-20 md:py-28" aria-labelledby="programs-title">
       <div className="container-x">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
@@ -25,7 +25,7 @@ export function Programs() {
             title="برنامج لكل حالة… وخطة لكل شخص"
             lead="التأهيل الطبي هو أساس عملنا، وتكمّله خدمات رعاية داعمة عند الحاجة — ضمن خطة واحدة متكاملة."
           />
-          <div role="tablist" aria-label="نوع البرامج" className="inline-flex shrink-0 rounded-full bg-white p-1 shadow-sm ring-1 ring-sand-200">
+          <div role="tablist" aria-label="نوع البرامج" className="inline-flex shrink-0 rounded-full bg-white p-1 shadow-sm ring-1 ring-mist-200">
             {TABS.map((t) => (
               <button
                 key={t.id}
@@ -55,11 +55,11 @@ export function Programs() {
           return (
             <Reveal key={p.id} delay={(i % 3) * 0.06} as="article" className="card relative flex w-[84%] shrink-0 snap-center flex-col p-6 sm:w-[60%] md:w-auto">
               {p.featured ? (
-                <span className="absolute end-5 top-5 inline-flex items-center gap-1 rounded-full bg-gold-100 px-2.5 py-1 text-xs font-semibold text-gold-700">
+                <span className="absolute end-5 top-5 inline-flex items-center gap-1 rounded-full bg-leaf-100 px-2.5 py-1 text-xs font-semibold text-leaf-700">
                   <Sparkles size={13} aria-hidden /> {p.featured}
                 </span>
               ) : null}
-              <div className={`grid size-13 place-items-center rounded-2xl ${p.track === "rehab" ? "bg-brand-700 text-white" : "bg-gold-100 text-gold-700"}`}>
+              <div className={`grid size-13 place-items-center rounded-2xl ${p.track === "rehab" ? "bg-brand-700 text-white" : "bg-leaf-100 text-leaf-700"}`}>
                 <Icon size={26} aria-hidden />
               </div>
               <h3 className="mt-5 text-xl font-bold">{p.title}</h3>

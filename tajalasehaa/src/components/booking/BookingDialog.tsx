@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { site } from "@/config/site";
-import { CrownMark } from "@/components/ui/Icons";
+import { BrandMark } from "@/components/ui/Logo";
 import { BookingWizard } from "./BookingWizard";
 import type { BookingPrefill } from "./BookingContext";
 
@@ -56,11 +56,11 @@ export default function BookingDialog({ prefill, onClose }: { prefill: BookingPr
           role="dialog"
           aria-modal="true"
           aria-labelledby="booking-title"
-          className="relative max-h-[92dvh] w-full animate-[sheet-in_0.32s_cubic-bezier(0.2,0.7,0.2,1)] overflow-y-auto rounded-t-[1.75rem] bg-sand-50 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl sm:max-w-xl sm:rounded-[1.75rem] sm:p-8"
+          className="relative max-h-[92dvh] w-full animate-[sheet-in_0.32s_cubic-bezier(0.2,0.7,0.2,1)] overflow-y-auto rounded-t-[1.75rem] bg-mist-50 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl sm:max-w-xl sm:rounded-[1.75rem] sm:p-8"
         >
           <div className="mb-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <CrownMark size={36} />
+              <BrandMark size={34} />
               <div>
                 <h2 id="booking-title" className="text-lg font-bold leading-tight">
                   احجز تقييمك في {site.name}
@@ -68,7 +68,7 @@ export default function BookingDialog({ prefill, onClose }: { prefill: BookingPr
                 <p className="text-sm text-muted">أقل من دقيقة · بدون أي التزام</p>
               </div>
             </div>
-            <button type="button" onClick={onClose} className="grid size-11 place-items-center rounded-full bg-white shadow-sm ring-1 ring-sand-200" aria-label="إغلاق">
+            <button type="button" onClick={onClose} className="grid size-11 place-items-center rounded-full bg-white shadow-sm ring-1 ring-mist-200" aria-label="إغلاق">
               <X size={20} aria-hidden />
             </button>
           </div>

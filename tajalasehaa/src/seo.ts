@@ -39,7 +39,7 @@ export function jsonLd() {
     url: site.url,
     telephone: site.contact.phoneE164,
     image: `${site.url}/og.jpg`,
-    logo: `${site.url}/favicon.svg`,
+    logo: `${site.url}/brand/logo.png`,
     medicalSpecialty: ["Physiotherapy", "Musculoskeletal"],
     address: {
       "@type": "PostalAddress",

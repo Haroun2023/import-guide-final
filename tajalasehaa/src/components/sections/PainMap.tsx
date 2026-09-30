@@ -37,7 +37,7 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
 
   return (
     <section id="pain-map" className="relative overflow-hidden py-20 md:py-28" aria-labelledby="painmap-title">
-      <div className="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(60%_50%_at_20%_30%,rgb(127_232_214/0.18),transparent_70%)]" aria-hidden />
+      <div className="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(60%_50%_at_20%_30%,rgb(143_227_180/0.22),transparent_70%)]" aria-hidden />
       <div className="container-x">
         {!compact ? (
           <SectionHeading
@@ -58,7 +58,7 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
 
         <div className="mt-10 grid items-start gap-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
           {/* 3D stage */}
-          <Reveal className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-white to-sand-100 ring-1 ring-sand-200">
+          <Reveal className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-white to-mist-100 ring-1 ring-mist-200">
             <LazyCanvas className="relative h-[430px] sm:h-[520px] lg:h-[600px]" poster={<BodyPoster className="mx-auto h-full w-auto py-8" />}>
               {(base) => (
                 <>
@@ -128,7 +128,7 @@ export function PainMap({ initialArea = null, compact = false }: { initialArea?:
                   <h4 className="mt-5 text-sm font-semibold">حالات شائعة نتعامل معها</h4>
                   <ul className="mt-2 flex flex-wrap gap-2">
                     {area.conditions.map((c) => (
-                      <li key={c} className="rounded-full bg-sand-100 px-3 py-1.5 text-sm">
+                      <li key={c} className="rounded-full bg-mist-100 px-3 py-1.5 text-sm">
                         {c}
                       </li>
                     ))}

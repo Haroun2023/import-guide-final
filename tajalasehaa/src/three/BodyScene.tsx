@@ -105,9 +105,9 @@ function Mannequin() {
       {/* Neck + head */}
       <Limb from={[0, 2.83, 0]} to={[0, 2.64, 0]} r0={0.07} r1={0.08} />
       <Joint at={[0, 2.99, 0.01]} r={1} scale={[0.172, 0.21, 0.185]} />
-      {/* Brand detail: a line of gold "vertebrae" down the back */}
+      {/* Brand detail: a line of leaf-green "vertebrae" down the back */}
       {spineDots.map((p, i) => (
-        <mesh key={i} position={p} material={mat.gold}>
+        <mesh key={i} position={p} material={mat.accent}>
           <sphereGeometry args={[0.02, 12, 10]} />
         </mesh>
       ))}
@@ -176,7 +176,7 @@ function ScanRing({ targetY, reducedMotion }: { targetY: number | null; reducedM
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]} position={[0, 1.6, 0]}>
       <ringGeometry args={[0.96, 1, 96]} />
-      <meshBasicMaterial ref={matRef} color="#1fbfa6" transparent depthWrite={false} side={THREE.DoubleSide} toneMapped={false} />
+      <meshBasicMaterial ref={matRef} color="#34b273" transparent depthWrite={false} side={THREE.DoubleSide} toneMapped={false} />
     </mesh>
   );
 }
@@ -224,7 +224,7 @@ export default function BodyScene({ active, reducedMotion, onReady, hotspotDom, 
         </mesh>
         <mesh position={[0, 0.002, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <ringGeometry args={[0.9, 0.94, 96]} />
-          <meshBasicMaterial color="#1fbfa6" toneMapped={false} />
+          <meshBasicMaterial color="#34b273" toneMapped={false} />
         </mesh>
       </PresentationControls>
       <ContactShadows position={[0, -0.06, 0]} opacity={0.35} scale={4} blur={2.4} far={3.5} resolution={256} frames={1} />

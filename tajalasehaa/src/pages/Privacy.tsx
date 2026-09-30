@@ -80,13 +80,13 @@ export default function Privacy() {
   return (
     <>
       <Header overDark={false} />
-      <main id="main" className="bg-sand-50 pb-20 pt-32">
+      <main id="main" className="bg-mist-50 pb-20 pt-32">
         <article className="container-x max-w-3xl">
           <p className="eyebrow">سياسة الخصوصية</p>
           <h1 className="h-section mt-3">سياسة الخصوصية وحماية البيانات</h1>
           <p className="mt-3 text-muted">آخر تحديث: سبتمبر 2026</p>
           {site.isDemo ? (
-            <p className="mt-4 rounded-2xl bg-gold-100 px-4 py-3 text-sm text-gold-700">نموذج مبدئي — تجب مراجعته من مستشار نظامي واعتماده من إدارة المركز قبل النشر.</p>
+            <p className="mt-4 rounded-2xl bg-leaf-100 px-4 py-3 text-sm text-leaf-700">نموذج مبدئي — تجب مراجعته من مستشار نظامي واعتماده من إدارة المركز قبل النشر.</p>
           ) : null}
           <div className="mt-10 grid gap-8">
             {sections.map((s) => (

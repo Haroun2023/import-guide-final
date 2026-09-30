@@ -80,27 +80,3 @@ export function PadelIcon({ size, ...rest }: P) {
     </svg>
   );
 }
-
-/** Crown mark — the brand symbol (from «الصحة تاج على رؤوس الأصحاء»). */
-export function CrownMark({ size = 40, ...rest }: P) {
-  return (
-    <svg viewBox="0 0 48 48" {...base(size, rest)}>
-      <defs>
-        <linearGradient id="crown-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f3e2b0" />
-          <stop offset="0.5" stopColor="#d4af5c" />
-          <stop offset="1" stopColor="#a07c33" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M9 34.5 7.2 16.8a1 1 0 0 1 1.63-.87l7.32 6.07a1 1 0 0 0 1.5-.28l5.47-9.66a1 1 0 0 1 1.76 0l5.47 9.66a1 1 0 0 0 1.5.28l7.32-6.07a1 1 0 0 1 1.63.87L39 34.5z"
-        fill="url(#crown-g)"
-      />
-      <circle cx="24" cy="8.2" r="2.6" fill="#45d6bf" />
-      <circle cx="7.6" cy="13" r="2" fill="url(#crown-g)" />
-      <circle cx="40.4" cy="13" r="2" fill="url(#crown-g)" />
-      <rect x="9" y="37" width="30" height="3.4" rx="1.7" fill="url(#crown-g)" />
-      <path d="M17 29.5c2.2 1.6 4.5 2.4 7 2.4s4.8-.8 7-2.4" fill="none" stroke="#04272a" strokeOpacity=".55" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}

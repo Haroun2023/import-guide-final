@@ -49,7 +49,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
             <>
               أجهزة عالمية…
               <br />
-              <span className="text-gradient-mint">أمامك بتقنية ثلاثية الأبعاد</span>
+              <span className="text-gradient-leaf">أمامك بتقنية ثلاثية الأبعاد</span>
             </>
           }
           lead="اسحب لتدوير الجهاز واضغط النقاط المرقّمة لتعرف كيف يعمل. الأجهزة عندنا أدوات ضمن خطة تعتمد على التقييم والتمارين العلاجية — لا بديلًا عنها."
@@ -66,7 +66,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
                 aria-controls="device-panel"
                 onClick={() => choose(d.id)}
                 className={`shrink-0 rounded-full px-4 py-2.5 text-[0.93rem] font-semibold transition-colors ${
-                  d.id === deviceId ? "bg-gold-300 text-deep" : "bg-white/8 text-white/80 ring-1 ring-white/15 hover:bg-white/14"
+                  d.id === deviceId ? "bg-leaf-300 text-deep" : "bg-white/8 text-white/80 ring-1 ring-white/15 hover:bg-white/14"
                 }`}
               >
                 {d.name}
@@ -77,7 +77,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
 
         <div id="device-panel" role="tabpanel" className="mt-6 grid items-start gap-6 lg:grid-cols-[1.25fr_1fr] lg:gap-10">
           {/* Stage */}
-          <div className="relative overflow-hidden rounded-[2rem] bg-[radial-gradient(80%_60%_at_50%_35%,rgb(26_141_136/0.28),transparent_70%)] ring-1 ring-white/10">
+          <div className="relative overflow-hidden rounded-[2rem] bg-[radial-gradient(80%_60%_at_50%_35%,rgb(12_132_86/0.3),transparent_70%)] ring-1 ring-white/10">
             <LazyCanvas className="relative h-[400px] sm:h-[500px] lg:h-[580px]" poster={<StagePoster className="h-full w-full p-6" />}>
               {(base) => (
                 <>
@@ -92,7 +92,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
               )}
             </LazyCanvas>
             {device.badge ? (
-              <p className="absolute start-4 top-4 rounded-full bg-gold-300 px-3 py-1 text-xs font-bold text-deep">★ {device.badge}</p>
+              <p className="absolute start-4 top-4 rounded-full bg-leaf-300 px-3 py-1 text-xs font-bold text-deep">★ {device.badge}</p>
             ) : null}
             <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2">
               <button type="button" className="stage-btn stage-btn-dark" aria-label="تدوير لليمين" onClick={() => setSpin((s) => s - Math.PI / 3)}>
@@ -109,7 +109,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
 
           {/* Info panel */}
           <div key={device.id} className="animate-rise">
-            <p dir="ltr" className="text-end text-xs font-semibold uppercase tracking-[0.18em] text-mint-300/80">
+            <p dir="ltr" className="text-end text-xs font-semibold uppercase tracking-[0.18em] text-leaf-300/80">
               {device.nameEn}
             </p>
             <h3 className="mt-2 text-[1.9rem] font-bold leading-tight">{device.name}</h3>
@@ -125,10 +125,10 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
                       type="button"
                       aria-expanded={active}
                       onClick={() => setHotspot(active ? null : h.id)}
-                      className={`w-full rounded-2xl px-4 py-3 text-start transition-colors ${active ? "bg-white/12 ring-1 ring-gold-300/60" : "bg-white/5 hover:bg-white/9"}`}
+                      className={`w-full rounded-2xl px-4 py-3 text-start transition-colors ${active ? "bg-white/12 ring-1 ring-leaf-300/60" : "bg-white/5 hover:bg-white/9"}`}
                     >
                       <span className="flex items-center gap-3">
-                        <span className={`grid size-7 shrink-0 place-items-center rounded-full text-sm font-bold ${active ? "bg-gold-300 text-deep" : "bg-white/12 text-white"}`}>{i + 1}</span>
+                        <span className={`grid size-7 shrink-0 place-items-center rounded-full text-sm font-bold ${active ? "bg-leaf-300 text-deep" : "bg-white/12 text-white"}`}>{i + 1}</span>
                         <span className="font-semibold">{h.title}</span>
                       </span>
                       {active ? <span className="mt-2 block ps-10 text-[0.95rem] leading-7 text-white/70">{h.text}</span> : null}
@@ -145,7 +145,7 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
                 { icon: Waves, k: "الإحساس", v: device.feel },
               ].map(({ icon: Icon, k, v }) => (
                 <div key={k} className="rounded-2xl bg-white/6 px-2 py-3 ring-1 ring-white/10">
-                  <Icon size={18} className="mx-auto text-mint-300" aria-hidden />
+                  <Icon size={18} className="mx-auto text-leaf-300" aria-hidden />
                   <dt className="mt-1.5 text-[0.72rem] text-white/55">{k}</dt>
                   <dd className="mt-0.5 text-[0.82rem] font-semibold leading-snug">{v}</dd>
                 </div>
@@ -155,14 +155,14 @@ export function DeviceLab({ initialDevice = "antigravity", only }: { initialDevi
             <h4 className="mt-6 text-sm font-semibold text-white/80">يُستخدم ضمن خطط علاج</h4>
             <ul className="mt-2 flex flex-wrap gap-2">
               {device.treats.map((t) => (
-                <li key={t} className="rounded-full bg-mint-400/12 px-3 py-1.5 text-sm text-mint-300 ring-1 ring-mint-400/25">
+                <li key={t} className="rounded-full bg-leaf-400/12 px-3 py-1.5 text-sm text-leaf-300 ring-1 ring-leaf-400/25">
                   {t}
                 </li>
               ))}
             </ul>
 
             <div className="mt-7 grid gap-3 sm:grid-cols-[1fr_auto]">
-              <button type="button" className="btn btn-gold btn-shine" onClick={() => openBooking({ placement: `device:${device.id}` })}>
+              <button type="button" className="btn btn-leaf btn-shine" onClick={() => openBooking({ placement: `device:${device.id}` })}>
                 احجز تقييمك الآن <ArrowLeft size={18} aria-hidden />
               </button>
               <a

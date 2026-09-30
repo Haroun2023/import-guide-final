@@ -173,7 +173,7 @@ export function BookingWizard({
     const input = buildInput();
     return (
       <div className="text-center" role="alert">
-        <div className="mx-auto grid size-14 place-items-center rounded-full bg-gold-100 text-gold-700">
+        <div className="mx-auto grid size-14 place-items-center rounded-full bg-leaf-100 text-leaf-700">
           <WhatsAppIcon size={26} />
         </div>
         <h3 className="mt-4 text-xl font-bold">أكمل طلبك عبر واتساب</h3>
@@ -204,7 +204,7 @@ export function BookingWizard({
       {title ? <div className="mb-5">{title}</div> : null}
 
       {site.offer.active ? (
-        <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-gold-100 px-3 py-1.5 text-sm font-semibold text-gold-700">
+        <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-leaf-100 px-3 py-1.5 text-sm font-semibold text-leaf-700">
           <Gift size={16} aria-hidden /> {site.offer.label}
         </p>
       ) : null}
@@ -214,7 +214,7 @@ export function BookingWizard({
         {steps.map((s, i) => (
           <li key={s} className="flex flex-1 flex-col gap-1.5">
             <span
-              className={`h-1.5 rounded-full transition-colors duration-500 ${i <= stepIndex ? "bg-brand-500" : "bg-sand-200"}`}
+              className={`h-1.5 rounded-full transition-colors duration-500 ${i <= stepIndex ? "bg-brand-500" : "bg-mist-200"}`}
               aria-hidden
             />
             <span className={`text-xs font-medium ${i === stepIndex ? "text-brand-700" : "text-muted"}`} aria-current={i === stepIndex ? "step" : undefined}>
@@ -235,7 +235,7 @@ export function BookingWizard({
                 {complaints.map((c) => (
                   <label
                     key={c.id}
-                    className="chip cursor-pointer justify-center py-2.5 text-center text-[0.92rem] leading-snug has-checked:border-brand-700 has-checked:bg-brand-700 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-gold-400"
+                    className="chip cursor-pointer justify-center py-2.5 text-center text-[0.92rem] leading-snug has-checked:border-brand-700 has-checked:bg-brand-700 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-leaf-400"
                   >
                     <input
                       type="radio"
@@ -432,7 +432,7 @@ function ChoiceGroup<T extends string>({
         {options.map((opt) => (
           <label
             key={opt}
-            className="chip cursor-pointer justify-center px-2 py-2 text-center text-[0.9rem] has-checked:border-brand-700 has-checked:bg-brand-700 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-gold-400"
+            className="chip cursor-pointer justify-center px-2 py-2 text-center text-[0.9rem] has-checked:border-brand-700 has-checked:bg-brand-700 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-leaf-400"
           >
             <input type="radio" name={name} value={opt} checked={value === opt} onChange={() => onChange(opt)} className="sr-only" />
             {opt}

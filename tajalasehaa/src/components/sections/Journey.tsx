@@ -47,11 +47,11 @@ export function Journey() {
 
         <ol ref={ref} className="relative mx-auto mt-14 grid max-w-5xl gap-8 md:grid-cols-5 md:gap-4">
           {/* progress line: vertical on phones, horizontal on desktop */}
-          <div className="absolute bottom-6 start-[1.35rem] top-6 w-0.5 bg-sand-200 md:hidden" aria-hidden>
-            <div className="h-full w-full origin-top scale-y-[var(--p,0)] bg-gradient-to-b from-brand-500 to-gold-400 transition-transform duration-300 ease-out" />
+          <div className="absolute bottom-6 start-[1.35rem] top-6 w-0.5 bg-mist-200 md:hidden" aria-hidden>
+            <div className="h-full w-full origin-top scale-y-[var(--p,0)] bg-gradient-to-b from-brand-500 to-leaf-400 transition-transform duration-300 ease-out" />
           </div>
-          <div className="absolute inset-x-[10%] top-[1.35rem] hidden h-0.5 bg-sand-200 md:block" aria-hidden>
-            <div className="h-full origin-right scale-x-[var(--p,0)] bg-gradient-to-l from-brand-500 to-gold-400 transition-transform duration-300 ease-out" />
+          <div className="absolute inset-x-[10%] top-[1.35rem] hidden h-0.5 bg-mist-200 md:block" aria-hidden>
+            <div className="h-full origin-right scale-x-[var(--p,0)] bg-gradient-to-l from-brand-500 to-leaf-400 transition-transform duration-300 ease-out" />
           </div>
 
           {journey.map((s, i) => (
