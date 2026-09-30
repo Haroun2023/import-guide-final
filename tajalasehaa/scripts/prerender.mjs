@@ -54,6 +54,16 @@ for (const route of prerenderRoutes) {
 }
 await fs.writeFile(path.join(dist, "404.html"), page("/404", render("/404"), { noindexOverride: true }));
 
+// The demo CMS (/admin) renders in the browser only: an empty, unindexed shell.
+await fs.mkdir(path.join(dist, "admin"), { recursive: true });
+await fs.writeFile(
+  path.join(dist, "admin", "index.html"),
+  template
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>لوحة التحكم | ${esc(site.name)}</title>`)
+    .replace("<!--head-extra-->", '<meta name="robots" content="noindex, nofollow" />')
+    .replace(/<link rel="canonical"[^>]*>/, ""),
+);
+
 const indexable = prerenderRoutes.filter((r) => !routeMeta(r).noindex);
 const today = new Date().toISOString().slice(0, 10);
 await fs.writeFile(
@@ -62,7 +72,7 @@ await fs.writeFile(
     .map((r) => `  <url><loc>${site.url}${r === "/" ? "/" : r}</loc><lastmod>${today}</lastmod></url>`)
     .join("\n")}\n</urlset>\n`,
 );
-await fs.writeFile(path.join(dist, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /thank-you\n\nSitemap: ${site.url}/sitemap.xml\n`);
+await fs.writeFile(path.join(dist, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /thank-you\nDisallow: /admin\n\nSitemap: ${site.url}/sitemap.xml\n`);
 
 await fs.rm(ssrDir, { recursive: true, force: true });
-console.log(`✓ prerendered ${count} routes + 404.html, sitemap.xml, robots.txt`);
+console.log(`✓ prerendered ${count} routes + 404.html, admin shell, sitemap.xml, robots.txt`);

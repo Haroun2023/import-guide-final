@@ -1,6 +1,7 @@
 import { ArrowLeft, Clock, MapPin, Navigation } from "lucide-react";
 import { Link } from "wouter";
 import { centerPhotos } from "@/config/content";
+import { copy, fill } from "@/config/copy";
 import { site } from "@/config/site";
 import { trackEngagement } from "@/lib/tracking";
 import { OpenStatus } from "@/components/ui/OpenStatus";
@@ -29,11 +30,11 @@ export function VisitTeaser() {
             />
           </div>
           <div className="p-7 sm:p-10">
-            <p className="eyebrow">زُر مركزنا</p>
+            <p className="eyebrow">{copy.visit.eyebrow}</p>
             <h2 id="visit-teaser-title" className="mt-3 text-2xl font-bold md:text-3xl">
-              مكان هادئ في {site.city}، وفريق ينتظرك
+              {fill(copy.visit.title, { city: site.city })}
             </h2>
-            <p className="mt-3 leading-8 text-muted">صالات انتظار مريحة، وخصوصية في غرف العلاج، واستقبال يرتّب معك كل شيء قبل أن تصل.</p>
+            <p className="mt-3 leading-8 text-muted">{fill(copy.visit.lead, { city: site.city })}</p>
             <ul className="mt-6 grid gap-3.5">
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="mt-1 shrink-0 text-brand-600" aria-hidden />

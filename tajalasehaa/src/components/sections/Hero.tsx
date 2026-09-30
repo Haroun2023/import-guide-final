@@ -1,10 +1,11 @@
 import { ArrowLeft, Check, ChevronDown } from "lucide-react";
 import { lazy } from "react";
+import { copy, fill } from "@/config/copy";
 import { site } from "@/config/site";
 import { useBooking } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { WhatsAppIcon } from "@/components/ui/Icons";
-import { Swoosh } from "@/components/ui/Kinetic";
+import { RichText, Swoosh } from "@/components/ui/Kinetic";
 import { LazyCanvas } from "@/components/three/LazyCanvas";
 import { SpinePoster } from "@/components/three/Posters";
 
@@ -12,6 +13,7 @@ const SpineScene = lazy(() => import("@/three/SpineScene"));
 
 export function Hero() {
   const { openBooking } = useBooking();
+  const vars = { city: site.city, response: site.responseTimeMinutes };
   const trust = [
     `نرد عليك خلال ${site.responseTimeMinutes} دقيقة`,
     site.features.femaleTherapists ? "أخصائيات للسيدات" : null,
@@ -42,23 +44,21 @@ export function Hero() {
 
       <div className="container-x relative flex min-h-[calc(100svh-var(--curve-h))] flex-col justify-center pb-24 pt-32 md:pt-36">
         <div className="max-w-[40rem]">
-          <p className="animate-rise text-[0.95rem] font-medium text-leaf-300/90">«{site.proverb}»</p>
+          <p className="animate-rise text-[0.95rem] font-medium text-leaf-300/90">{copy.hero.eyebrow}</p>
           <h1 id="hero-title" className="h-display mt-4 animate-rise [animation-delay:120ms]">
-            الصحة تاج…
-            <br />
-            <span className="text-gradient-leaf relative inline-block">
-              نستعيده معًا
-              <Swoosh />
-            </span>
+            <RichText
+              text={copy.hero.title}
+              hl={(part, key) => (
+                <span key={key} className="text-gradient-leaf relative inline-block">
+                  {part}
+                  <Swoosh />
+                </span>
+              )}
+            />
           </h1>
           {/* Phones get a shorter line that leaves the left strip to the 3D spine. */}
-          <p className="mt-5 animate-rise pe-[22%] text-[1.05rem] leading-8 text-white/80 [animation-delay:240ms] md:hidden">
-            علاج طبيعي في {site.city} يبدأ بتقييم هادئ وخطة مكتوبة لك، مع أجهزة حديثة منها <span dir="ltr">AlterG®</span>.
-          </p>
-          <p className="mt-6 hidden max-w-[34rem] animate-rise text-[1.15rem] leading-9 text-white/78 [animation-delay:240ms] md:block">
-            ألم الظهر أو الركبة لا ينبغي أن يصبح جزءًا من يومك. نبدأ بتقييم هادئ نفهم فيه سبب الألم، ثم نمشي معك بخطة مكتوبة وأجهزة حديثة، منها جهاز
-            <span dir="ltr"> AlterG®</span> للمشي بجزء من وزنك.
-          </p>
+          <p className="mt-5 animate-rise pe-[22%] text-[1.05rem] leading-8 text-white/80 [animation-delay:240ms] md:hidden">{fill(copy.hero.leadShort, vars)}</p>
+          <p className="mt-6 hidden max-w-[34rem] animate-rise text-[1.15rem] leading-9 text-white/78 [animation-delay:240ms] md:block">{fill(copy.hero.lead, vars)}</p>
 
           <div className="mt-9 flex animate-rise flex-wrap gap-3 [animation-delay:360ms]">
             <button type="button" className="btn btn-leaf btn-shine text-[1.02rem]" onClick={() => openBooking({ placement: "hero" })}>

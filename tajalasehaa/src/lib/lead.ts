@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { hasCmsDemo } from "@/cms/flag";
 import { getAttribution, sourceLabel } from "./attribution";
 import { readJSON, writeJSON } from "./storage";
 import { newEventId } from "./tracking";
@@ -73,12 +74,24 @@ export async function submitLead(input: LeadInput, meta: { startedAt: number; ho
     submittedAt: new Date().toISOString(),
   };
 
+  // Demo CMS open in this browser: the booking also lands in its inbox, which
+  // then counts as delivered (the preview has no lead webhook).
+  let captured = false;
+  if (hasCmsDemo()) {
+    try {
+      captured = (await import("@/cms/capture")).captureLead(payload);
+    } catch {
+      /* the site works the same without the demo */
+    }
+  }
+
   try {
     const res = await post(payload);
-    if (res.ok) return { ok: true, ref: res.ref ?? ref, eventId };
+    if (res.ok || captured) return { ok: true, ref: res.ref ?? ref, eventId };
     enqueue(payload);
     return { ok: false, ref, eventId, reason: res.error };
   } catch {
+    if (captured) return { ok: true, ref, eventId };
     enqueue(payload);
     return { ok: false, ref, eventId, reason: "network" };
   }

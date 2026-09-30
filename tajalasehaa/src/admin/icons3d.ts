@@ -1,0 +1,2 @@
+/** The 3D brand icons in public/icons3d (tile variant), for the icon pickers. */
+export const ICONS_3D = ["activity", "apple", "award", "baby", "bandage", "biceps", "bone", "calendar-check", "car", "chart-line", "clipboard-list", "clock", "crown", "droplets", "dumbbell", "footprints", "gift", "hand-heart", "heart-handshake", "heart-pulse", "house", "laptop", "map-pin", "message-circle", "navigation", "padel", "phone", "prayer", "scan-search", "shield-check", "sparkles", "spine", "stethoscope", "target", "timer", "user-check", "users"];

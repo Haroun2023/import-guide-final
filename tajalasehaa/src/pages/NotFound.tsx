@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
+import { cmsRuntime } from "@/cms/flag";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { NAV } from "@/components/layout/nav";
 import { BrandMark } from "@/components/ui/Logo";
 
 export default function NotFound() {
+  // Demo CMS: record the broken link for the redirects plugin's 404 log
+  useEffect(() => {
+    if (cmsRuntime.active) void import("@/cms/capture").then((m) => m.log404(location.pathname));
+  }, []);
   return (
     <>
       <Header overDark={false} />

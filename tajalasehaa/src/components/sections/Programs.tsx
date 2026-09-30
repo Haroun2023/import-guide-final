@@ -2,6 +2,7 @@ import { ArrowLeft, Check, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 import { programs, type Program } from "@/config/content";
+import { copy } from "@/config/copy";
 import { Icon3D } from "@/components/ui/Icon3D";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 
@@ -87,12 +88,7 @@ export function Programs({ layout = "tabs", heading = true }: { layout?: "tabs" 
       <div className="container-x">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           {heading ? (
-            <SectionHeading
-              id="programs-title"
-              eyebrow="البرامج العلاجية"
-              title="لكل حالة برنامج، *ولكل شخص خطته*"
-              lead="نبدأ دائمًا بالتأهيل الطبي، ونضيف الرعاية التكميلية فقط حين تخدم هدفك."
-            />
+            <SectionHeading id="programs-title" eyebrow={copy.programs.eyebrow} title={copy.programs.title} lead={copy.programs.lead} />
           ) : (
             <span />
           )}

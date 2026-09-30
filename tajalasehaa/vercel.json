@@ -47,6 +47,60 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/admin/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/optional-home-physiotherapy",
+      "destination": "/programs/home",
+      "permanent": true
+    },
+    {
+      "source": "/techniques-technologies",
+      "destination": "/devices",
+      "permanent": true
+    },
+    {
+      "source": "/advanced-rehab-tech",
+      "destination": "/devices",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin"
     }
   ]
 }

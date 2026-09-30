@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { areaToComplaint } from "@/config/booking";
 import { bodyAreas, bodyAreaById, type BodyAreaId } from "@/config/body";
 import { programById } from "@/config/content";
+import { copy } from "@/config/copy";
 import { deviceById } from "@/config/devices";
 import { whatsappLink } from "@/config/site";
 import { trackContact, trackEngagement } from "@/lib/tracking";
@@ -46,13 +47,7 @@ export function PainMap({ initialArea = null, heading = "full" }: { initialArea?
       <div className="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(60%_50%_at_20%_30%,rgb(143_227_180/0.22),transparent_70%)]" aria-hidden />
       <div className="container-x">
         {heading === "full" ? (
-          <SectionHeading
-            id="painmap-title"
-            eyebrow="ابدأ من موضع الألم"
-            title="أين *يؤلمك*؟"
-            accent="coral"
-            lead="اضغط على موضع الألم في المجسّم أو اختره من القائمة. ستجد الحالات التي نراها كثيرًا في هذه المنطقة، وكيف نبدأ معك."
-          />
+          <SectionHeading id="painmap-title" eyebrow={copy.painMap.eyebrow} title={copy.painMap.title} accent="coral" lead={copy.painMap.lead} />
         ) : heading === "compact" ? (
           <h2 id="painmap-title" className="h-section">
             أين <span className="text-coral-500">يؤلمك</span>؟

@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import { copy } from "@/config/copy";
 import { site } from "@/config/site";
 import { Icon3D } from "@/components/ui/Icon3D";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
@@ -19,12 +20,7 @@ export function QuickPaths() {
   return (
     <section className="py-20 md:py-24" aria-labelledby="paths-title">
       <div className="container-x">
-        <SectionHeading
-          id="paths-title"
-          eyebrow="من أين تبدأ؟"
-          title="اختر ما *يشبه حالتك*"
-          lead="كل بطاقة تأخذك إلى صفحة تشرح خطوتك التالية بهدوء، ومنها تحجز تقييمك متى شئت."
-        />
+        <SectionHeading id="paths-title" eyebrow={copy.quickPaths.eyebrow} title={copy.quickPaths.title} lead={copy.quickPaths.lead} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {paths.map((p, i) => (
             <Reveal as="li" key={p.href} delay={(i % 3) * 0.06} className="glow-card group relative flex items-start gap-4 p-5">

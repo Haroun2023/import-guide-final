@@ -1,17 +1,14 @@
 import type { CSSProperties } from "react";
+import { copy } from "@/config/copy";
 import { site } from "@/config/site";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { Icon3D } from "@/components/ui/Icon3D";
-
-/** How we work, in one paragraph; *starred* words stay in the brand green. */
-const TEXT =
-  "لا نبدأ بالجهاز، ولا بعدد الجلسات. *نبدأ بك:* بما يؤلمك، وبما تريد أن تعود إليه. نفحصك بهدوء، ونشرح لك ما وجدناه، ثم نكتب معك *خطة تعرفها من اليوم الأول،* ونمشي فيها معك *خطوة بخطوة.*";
 
 /** A large paragraph whose words light up one by one as it scrolls through the view. */
 export function Manifesto() {
   const ref = useScrollProgress<HTMLParagraphElement>(0.88, 0.42);
   const words: { w: string; hl: boolean }[] = [];
-  TEXT.split(/(\*[^*]+\*)/)
+  copy.manifesto.text.split(/(\*[^*]+\*)/)
     .filter(Boolean)
     .forEach((seg) => {
       const hl = seg.startsWith("*");
@@ -26,7 +23,7 @@ export function Manifesto() {
     <section className="py-20 md:py-28" aria-labelledby="manifesto-title">
       <div className="container-x max-w-4xl text-center">
         <h2 id="manifesto-title" className="eyebrow justify-center">
-          طريقتنا في العلاج
+          {copy.manifesto.eyebrow}
         </h2>
         <p
           ref={ref}

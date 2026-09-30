@@ -21,6 +21,16 @@
     <meta name="twitter:card" content="summary_large_image" />
     <!--head-extra-->
     <script>
+      /* A browser that opened the demo CMS (/admin) shows its edits: keep the
+         prerendered page hidden until they are applied (see src/main.tsx). */
+      try {
+        if (localStorage.getItem("taj_cms_v1") || location.pathname.indexOf("/admin") === 0) {
+          document.documentElement.classList.add("cms-pending");
+          setTimeout(function () { document.documentElement.classList.remove("cms-pending"); }, 4000);
+        }
+      } catch (e) {}
+    </script>
+    <script>
       /* Scroll reveals without waiting for the app bundle: elements marked
          [data-reveal] fade in once they enter the viewport. */
       (function () {

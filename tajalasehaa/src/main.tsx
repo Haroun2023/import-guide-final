@@ -3,6 +3,7 @@ import "./index.css";
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
+import { hasCmsDemo } from "./cms/flag";
 
 // Canonical paths have no trailing slash (matches vercel.json).
 if (location.pathname.length > 1 && location.pathname.endsWith("/")) {
@@ -44,10 +45,32 @@ const app = (
     <App />
   </StrictMode>
 );
+const reveal = () => document.documentElement.classList.remove("cms-pending");
 
-// Hydrate only when the prerendered HTML belongs to this exact route;
-// otherwise (dev server, fallback pages) render from scratch.
-if (root.dataset.route && root.dataset.route === location.pathname) {
+if (location.pathname === "/admin" || location.pathname.startsWith("/admin/")) {
+  // The demo CMS: its own bundle, loaded only here.
+  import("./admin/boot").then((m) => m.boot(root)).finally(reveal);
+} else if (hasCmsDemo()) {
+  // This browser opened the demo CMS: show its edits (rendered fresh, since
+  // they differ from the prerendered page).
+  import("./cms/apply")
+    .then(async ({ applyCms }) => {
+      const { maintenance, redirectTo } = applyCms();
+      if (redirectTo) return location.replace(redirectTo);
+      root.textContent = "";
+      if (maintenance) {
+        const { MaintenancePage } = await import("./cms/SiteExtras");
+        createRoot(root).render(<MaintenancePage />);
+      } else createRoot(root).render(app);
+    })
+    .catch(() => {
+      root.textContent = "";
+      createRoot(root).render(app);
+    })
+    .finally(() => requestAnimationFrame(reveal));
+} else if (root.dataset.route && root.dataset.route === location.pathname) {
+  // Hydrate only when the prerendered HTML belongs to this exact route;
+  // otherwise (dev server, fallback pages) render from scratch.
   // Let the browser paint the prerendered page first (faster FCP/LCP on slow
   // phones), then hydrate on the next frame.
   requestAnimationFrame(() => setTimeout(() => hydrateRoot(root, app), 0));

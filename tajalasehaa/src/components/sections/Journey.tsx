@@ -1,4 +1,5 @@
 import { journey } from "@/config/content";
+import { copy } from "@/config/copy";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { Icon3D } from "@/components/ui/Icon3D";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
@@ -13,9 +14,9 @@ export function Journey() {
       <div className="container-x">
         <SectionHeading
           id="journey-title"
-          eyebrow="رحلة التعافي"
-          title="كيف تسير *رحلتك معنا*؟"
-          lead="تعرف من اليوم الأول ماذا سنفعل ولماذا. خطوات واضحة، وأهداف مكتوبة، ونراجع تقدّمك معك أولًا بأول."
+          eyebrow={copy.journey.eyebrow}
+          title={copy.journey.title}
+          lead={copy.journey.lead}
           center
         />
 

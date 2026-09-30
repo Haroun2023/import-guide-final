@@ -1,9 +1,11 @@
 import { Clock, MapPin } from "lucide-react";
 import type { ReactNode } from "react";
+import { copy, fill } from "@/config/copy";
 import { site } from "@/config/site";
 import { BookingWizard } from "@/components/booking/BookingWizard";
 import type { BookingPrefill } from "@/components/booking/BookingContext";
 import { CallLink, WhatsAppLink } from "@/components/layout/ContactLinks";
+import { RichText } from "@/components/ui/Kinetic";
 import { OpenStatus } from "@/components/ui/OpenStatus";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -12,17 +14,20 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
     <section id="booking" className="curve-t grain relative overflow-hidden bg-deep-radial py-20 text-white md:py-28" aria-labelledby="booking-title">
       <div className="container-x grid items-start gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
-          <p className="eyebrow eyebrow-light">احجز تقييمك</p>
+          <p className="eyebrow eyebrow-light">{copy.booking.eyebrow}</p>
           <h2 id="booking-title" className="h-section mt-3">
             {title ?? (
-              <>
-                خذ الخطوة الأولى، <span className="text-gradient-leaf">ونكمل الطريق معك</span>
-              </>
+              <RichText
+                text={copy.booking.title}
+                hl={(part, key) => (
+                  <span key={key} className="text-gradient-leaf">
+                    {part}
+                  </span>
+                )}
+              />
             )}
           </h2>
-          <p className="lead-text mt-4 !text-white/70">
-            اترك بياناتك في أقل من دقيقة، ويتصل بك منسّق المرضى خلال {site.responseTimeMinutes} دقيقة في أوقات العمل ليختار معك الموعد المناسب.
-          </p>
+          <p className="lead-text mt-4 !text-white/70">{fill(copy.booking.lead, { response: site.responseTimeMinutes, city: site.city })}</p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             <WhatsAppLink placement="booking-section" className="btn btn-whatsapp" />

@@ -1,6 +1,7 @@
 import { ArrowLeft, Check, ChevronLeft, ChevronRight, Clock, ExternalLink, Pause, Play, Repeat, Waves } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { Link } from "wouter";
+import { copy } from "@/config/copy";
 import { devices, type Device, type DeviceId } from "@/config/devices";
 import { whatsappLink } from "@/config/site";
 import { trackContact, trackEngagement } from "@/lib/tracking";
@@ -140,11 +141,11 @@ export function DeviceLab({
             <SectionHeading
               light
               id="devices-title"
-              eyebrow="أجهزتنا"
-              title={`${multi ? "تعرّف على أجهزتنا" : "تعرّف على الجهاز"}\n*قبل أن تزورنا*`}
+              eyebrow={copy.devices.eyebrow}
+              title={multi ? copy.devices.title : "تعرّف على الجهاز\n*قبل أن تزورنا*"}
               lead={
                 multi
-                  ? "هذه صور الأجهزة كما صنعتها شركاتها. أدِر الجهاز بإصبعك أو بالمؤشر، واضغط الأرقام لتعرف عمل كل جزء. الجهاز يساعدك، وخطتك تبدأ دائمًا من التقييم والتمارين."
+                  ? copy.devices.lead
                   : "أدِر الجهاز بإصبعك أو بالمؤشر، واضغط الأرقام لتعرف عمل كل جزء. الجهاز يساعدك، وخطتك تبدأ دائمًا من التقييم والتمارين."
               }
             />
@@ -350,6 +351,12 @@ export function DeviceLab({
                 <ExternalLink size={11} aria-hidden />
               </a>{" "}
               للتوضيح.
+              {device.mdma ? (
+                <>
+                  {" "}
+                  إذن التسويق من هيئة الغذاء والدواء: <span dir="ltr">{device.mdma}</span>.
+                </>
+              ) : null}
             </p>
           </div>
           )}

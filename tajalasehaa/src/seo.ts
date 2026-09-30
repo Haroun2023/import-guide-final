@@ -5,7 +5,17 @@ import { site } from "./config/site";
 
 export type RouteMeta = { title: string; description: string; noindex?: boolean };
 
+/** Titles and descriptions set in the CMS (demo browsers only; empty on the server). */
+export const seoOverrides: Record<string, { title?: string; description?: string }> = {};
+
 export function routeMeta(path: string): RouteMeta {
+  const base = baseMeta(path);
+  const o = seoOverrides[path];
+  if (!o) return base;
+  return { ...base, ...(o.title ? { title: o.title } : {}), ...(o.description ? { description: o.description } : {}) };
+}
+
+function baseMeta(path: string): RouteMeta {
   if (path === "/") {
     return {
       title: `${site.name} | علاج طبيعي وتأهيل طبي في ${site.city}`,

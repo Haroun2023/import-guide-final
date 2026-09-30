@@ -1,6 +1,7 @@
 import { ArrowLeft, Plus } from "lucide-react";
 import { Link } from "wouter";
 import { faqs } from "@/config/content";
+import { copy } from "@/config/copy";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { WhatsAppIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/Reveal";
@@ -11,7 +12,7 @@ type QA = { q: string; a: string };
 export function FAQ({
   limit,
   items,
-  title = "أسئلة *نسمعها كثيرًا*",
+  title = copy.faq.title,
   heading = true,
   moreLink = false,
 }: {
@@ -30,7 +31,7 @@ export function FAQ({
       <div className={`container-x grid gap-10 ${heading ? "lg:grid-cols-[0.8fr_1.2fr]" : "max-w-4xl"}`}>
         {heading ? (
           <div>
-            <SectionHeading id="faq-title" eyebrow="الأسئلة الشائعة" title={title} lead="ما وجدت سؤالك؟ اكتب لنا على واتساب، ويرد عليك أحد أخصائيينا." />
+            <SectionHeading id="faq-title" eyebrow={copy.faq.eyebrow} title={title} lead={copy.faq.lead} />
             <div className="mt-6 flex flex-wrap gap-3">
               <WhatsAppLink placement="faq" message="السلام عليكم، عندي سؤال قبل الحجز:" className="btn btn-whatsapp">
                 <WhatsAppIcon size={20} /> اسأل سؤالك

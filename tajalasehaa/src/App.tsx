@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { Route, Router, Switch, useLocation } from "wouter";
 import { BookingProvider } from "@/components/booking/BookingContext";
 import { captureAttribution } from "@/lib/attribution";
@@ -18,6 +18,9 @@ import ProgramsPage from "@/pages/ProgramsPage";
 import ThankYou from "@/pages/ThankYou";
 import VisitPage from "@/pages/VisitPage";
 import { routeMeta } from "@/seo";
+
+/** Articles from the demo CMS (only where it is open; see src/cms/Blog.tsx). */
+const Blog = lazy(() => import("@/cms/Blog"));
 
 /** One-time client setup + per-route title, page view and scroll reset. */
 function Effects() {
@@ -69,6 +72,13 @@ export default function App({ ssrPath }: { ssrPath?: string }) {
           <Route path="/lp/:slug">{(params) => <Landing slug={params.slug} />}</Route>
           <Route path="/thank-you" component={ThankYou} />
           <Route path="/privacy" component={Privacy} />
+          <Route path="/blog/:slug?">
+            {(params) => (
+              <Suspense fallback={null}>
+                <Blog slug={params.slug} />
+              </Suspense>
+            )}
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </BookingProvider>
