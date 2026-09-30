@@ -15,22 +15,25 @@ export function ConditionsIndex() {
         <SectionHeading
           id="conditions-title"
           eyebrow="الحالات حسب المنطقة"
-          title="ما الذي نراه كثيرًا في كل منطقة؟"
+          title="ما الذي نراه كثيرًا *في كل منطقة*؟"
           lead="هذه أمثلة لا تشخيص. الأخصائي هو من يحدد سبب ألمك بعد التقييم."
         />
         <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {bodyAreas.map((a, i) => {
             const program = programById(a.program);
             return (
-              <Reveal as="li" key={a.id} delay={(i % 3) * 0.05} className="card flex flex-col p-6">
-                <h3 className="flex items-center gap-2 text-xl font-bold">
-                  <span className="size-2.5 rounded-full bg-coral-500" aria-hidden />
+              <Reveal as="li" key={a.id} delay={(i % 3) * 0.05} className="glow-card group flex flex-col p-6">
+                <h3 className="flex items-center gap-3 text-xl font-bold">
+                  <span className="relative grid size-4 place-items-center" aria-hidden>
+                    <span className="absolute inset-0 animate-ping rounded-full bg-coral-400/50 motion-reduce:hidden" />
+                    <span className="size-2.5 rounded-full bg-coral-500 ring-4 ring-coral-300/30" />
+                  </span>
                   {a.label}
                 </h3>
                 <p className="mt-2 leading-7 text-muted">{a.insight}</p>
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {a.conditions.map((c) => (
-                    <li key={c} className="rounded-full bg-mist-100 px-3 py-1.5 text-sm">
+                    <li key={c} className="rounded-full bg-white px-3 py-1.5 text-sm shadow-[0_1px_2px_rgb(11_25_35/0.05)] ring-1 ring-mist-200 transition-colors group-hover:ring-brand-100">
                       {c}
                     </li>
                   ))}

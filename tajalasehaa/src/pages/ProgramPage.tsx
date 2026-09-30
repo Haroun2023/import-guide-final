@@ -53,7 +53,7 @@ export default function ProgramPage({ id }: { id: string }) {
       <section className="py-16 md:py-24" aria-labelledby="signs-title">
         <div className="container-x grid items-start gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
           <div>
-            <SectionHeading id="signs-title" eyebrow="هل هذا البرنامج لك؟" title="إن كان شيء من هذا يشبه يومك، فنحن هنا" />
+            <SectionHeading id="signs-title" eyebrow="هل هذا البرنامج لك؟" title="إن كان شيء من هذا يشبه يومك، *فنحن هنا*" />
             <p className="mt-4 leading-8 text-muted">هذه علامات نسمعها كثيرًا من مراجعينا. التقييم وحده يؤكد السبب ويحدد ما تحتاجه فعلًا.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <button type="button" className="btn btn-primary btn-shine" onClick={() => openBooking({ ...booking, placement: `program:${p.id}:signs` })}>
@@ -66,9 +66,9 @@ export default function ProgramPage({ id }: { id: string }) {
           </div>
           <ul className="grid gap-3 sm:grid-cols-2">
             {signs.map((s, i) => (
-              <Reveal as="li" key={s} delay={(i % 2) * 0.05} className="card flex items-start gap-3 p-4">
-                <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-700 ring-1 ring-brand-100">
-                  <Check size={16} aria-hidden />
+              <Reveal as="li" key={s} delay={(i % 2) * 0.05} className="glow-card group flex items-start gap-3 p-4">
+                <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-[0_6px_14px_-6px_rgb(12_132_86/0.8)] transition-transform duration-300 group-hover:scale-110">
+                  <Check size={15} strokeWidth={3} aria-hidden />
                 </span>
                 <span className="leading-7">{s}</span>
               </Reveal>
@@ -81,14 +81,14 @@ export default function ProgramPage({ id }: { id: string }) {
       {p.approach?.length ? (
         <section className="curve-t curve-b bg-soft py-16 md:py-24" aria-labelledby="approach-title">
           <div className="container-x">
-            <SectionHeading id="approach-title" eyebrow="ماذا يحدث معنا؟" title="خطوة بخطوة، وأنت تعرف لماذا" center />
+            <SectionHeading id="approach-title" eyebrow="ماذا يحدث معنا؟" title="خطوة بخطوة، *وأنت تعرف لماذا*" center />
             <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {p.approach.map((s, i) => (
-                <Reveal as="li" key={s.title} delay={i * 0.07} className="card relative p-6">
-                  <span className="text-5xl font-bold leading-none text-brand-100" aria-hidden>
+                <Reveal as="li" key={s.title} delay={i * 0.07} className="glow-card group relative p-6 pt-20">
+                  <span className="num-outline !end-auto !start-5 !top-5" aria-hidden>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 text-lg font-bold">{s.title}</h3>
+                  <h3 className="text-lg font-bold">{s.title}</h3>
                   <p className="mt-2 leading-7 text-muted">{s.text}</p>
                 </Reveal>
               ))}
@@ -104,20 +104,20 @@ export default function ProgramPage({ id }: { id: string }) {
         <section className="py-16 md:py-24" aria-labelledby="program-devices-title">
           <div className="container-x">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <SectionHeading id="program-devices-title" eyebrow="أجهزة قد نستعين بها" title="أدوات تساعدك، ضمن خطة تقوم على التمارين" />
+              <SectionHeading id="program-devices-title" eyebrow="أجهزة قد نستعين بها" title="أدوات تساعدك، *ضمن خطة تقوم على التمارين*" />
               <Link href="/devices" className="btn btn-ghost shrink-0 self-start md:self-auto">
                 كل الأجهزة <ArrowLeft size={18} aria-hidden />
               </Link>
             </div>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((d, i) => (
-                <Reveal as="li" key={d.id} delay={i * 0.06} className="card lift-card group relative flex items-center gap-4 overflow-hidden p-5">
+                <Reveal as="li" key={d.id} delay={i * 0.06} className="glow-card group relative flex items-center gap-4 overflow-hidden p-5">
                   <span className="grid size-24 shrink-0 place-items-center rounded-2xl bg-[radial-gradient(closest-side,rgb(143_227_180/0.35),transparent)]">
                     <img src={`/devices/${d.image.id}-thumb.webp`} alt="" width={Math.round(88 * d.image.aspect)} height={88} loading="lazy" decoding="async" className="max-h-22 w-auto max-w-24 object-contain transition-transform duration-500 group-hover:scale-105" />
                   </span>
                   <span className="min-w-0">
                     <strong className="block text-lg">
-                      <Link href={`/devices/${d.id}`} className="after:absolute after:inset-0 after:content-['']">
+                      <Link href={`/devices/${d.id}`} className="after:absolute after:inset-0 after:z-[2] after:content-['']">
                         {d.name}
                       </Link>
                     </strong>
@@ -136,7 +136,7 @@ export default function ProgramPage({ id }: { id: string }) {
       {area ? (
         <section className="pb-4" aria-label="المنطقة المرتبطة">
           <div className="container-x">
-            <Reveal className="card flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
+            <Reveal className="glow-card flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="leading-8">
                 <strong>ألمك في {area.label}؟</strong> <span className="text-muted">جرّب خريطة الألم التفاعلية لترى الحالات الشائعة في هذه المنطقة.</span>
               </p>
@@ -148,7 +148,7 @@ export default function ProgramPage({ id }: { id: string }) {
         </section>
       ) : null}
 
-      {p.faqs?.length ? <FAQ items={p.faqs} title={`أسئلة عن ${p.title}`} /> : null}
+      {p.faqs?.length ? <FAQ items={p.faqs} title={`أسئلة عن *${p.title}*`} /> : null}
 
       {others.length ? (
         <section className="pb-16" aria-labelledby="others-title">
@@ -159,7 +159,7 @@ export default function ProgramPage({ id }: { id: string }) {
             <ul className="mt-5 flex flex-wrap gap-3">
               {others.map((o) => (
                 <li key={o.id}>
-                  <Link href={`/programs/${o.id}`} className="card inline-flex items-center gap-3 px-4 py-3 font-semibold transition-colors hover:border-brand-300">
+                  <Link href={`/programs/${o.id}`} className="glow-card inline-flex items-center gap-3 !rounded-full py-2 pe-5 ps-2.5 font-semibold">
                     <Icon3D name={o.icon3d} size={36} />
                     {o.title}
                   </Link>

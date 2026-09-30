@@ -39,13 +39,7 @@ export function Visit({ heading = true }: { heading?: boolean }) {
           <SectionHeading
             id="visit-title"
             eyebrow="زُر مركزنا"
-            title={
-              <>
-                مكان هادئ
-                <br />
-                <span className="text-brand-600">تستريح فيه من أول خطوة</span>
-              </>
-            }
+            title={"مكان هادئ\n*تستريح فيه من أول خطوة*"}
             lead={`صور حقيقية من مركزنا في ${site.city}: استقبال واسع، وصالات انتظار مريحة، وفريق يرتّب معك موعدك قبل أن تصل.`}
           />
         </div>

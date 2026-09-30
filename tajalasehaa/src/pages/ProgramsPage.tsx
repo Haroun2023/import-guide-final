@@ -11,13 +11,7 @@ export default function ProgramsPage() {
       <PageHero
         crumbs={[{ href: "/programs", label: "البرامج" }]}
         eyebrow="البرامج العلاجية"
-        title={
-          <>
-            برنامج يناسب حالتك،
-            <br />
-            <span className="text-gradient-leaf">وخطة تُكتب لك أنت</span>
-          </>
-        }
+        title={"برنامج يناسب حالتك،\n*وخطة تُكتب لك أنت*"}
         lead="كل برنامج يبدأ بتقييم نفهم فيه سبب ألمك وما تريد العودة إليه. بعدها نضع معك خطة مكتوبة بعدد جلسات تقديري، ونراجعها كلما تقدّمت."
         booking={{ placement: "programs:hero" }}
         whatsappText="السلام عليكم، أريد أن أعرف أي برنامج يناسب حالتي."

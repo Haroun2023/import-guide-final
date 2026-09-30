@@ -223,6 +223,269 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
   }
 }
 
+/* ------------------------------------------------------------------
+   Glow cards: a gradient hairline edge, a soft light that follows the
+   pointer (--px/--py, set in main.tsx) and a gentle tilt toward it.
+   Without a mouse they rest with a faint light on their top edge.
+------------------------------------------------------------------- */
+.glow-card {
+  --mx: 50%;
+  --my: -45%;
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-card);
+  background:
+    radial-gradient(26rem circle at var(--mx) var(--my), rgb(90 206 144 / 0.12), transparent 44%),
+    linear-gradient(180deg, #fff 0%, #fbfdfc 100%);
+  box-shadow:
+    0 1px 1px rgb(11 25 35 / 0.03),
+    0 3px 8px -3px rgb(11 25 35 / 0.06),
+    0 18px 38px -20px rgb(16 40 58 / 0.25);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.5s ease;
+  transition-delay: var(--reveal-delay, 0s), 0s, 0s;
+}
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background:
+    radial-gradient(15rem circle at var(--mx) var(--my), rgb(12 132 86 / 0.7), transparent 70%),
+    linear-gradient(165deg, rgb(255 255 255 / 0.95), rgb(200 211 213 / 0.85) 28%, rgb(222 231 231 / 0.7) 70%, rgb(164 179 183 / 0.6));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+/* Featured: a brand edge and a mint wash from the top */
+.glow-card[data-featured] {
+  background:
+    radial-gradient(26rem circle at var(--mx) var(--my), rgb(90 206 144 / 0.14), transparent 44%),
+    radial-gradient(120% 60% at 50% -10%, rgb(191 238 211 / 0.55), transparent 70%),
+    #fff;
+}
+.glow-card[data-featured]::before {
+  background:
+    radial-gradient(15rem circle at var(--mx) var(--my), rgb(12 132 86 / 0.9), transparent 70%),
+    linear-gradient(160deg, var(--color-leaf-300), var(--color-brand-500) 45%, var(--color-navy-400));
+}
+@media (hover: hover) and (pointer: fine) {
+  .glow-card:hover {
+    --mx: var(--px, 50%);
+    --my: var(--py, 0%);
+    transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-5px);
+    box-shadow:
+      0 2px 4px rgb(11 25 35 / 0.04),
+      0 30px 56px -24px rgb(10 77 53 / 0.38),
+      0 0 0 1px rgb(12 132 86 / 0.05);
+  }
+}
+/* A card's big step number, drawn as an outline in the corner */
+.num-outline {
+  position: absolute;
+  top: 0.9rem;
+  inset-inline-end: 1.15rem;
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(12 132 86 / 0.22);
+  pointer-events: none;
+  transition: -webkit-text-stroke-color 0.4s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.group:hover .num-outline {
+  -webkit-text-stroke-color: rgb(12 132 86 / 0.5);
+  transform: translateY(-3px);
+}
+/* Round arrow that fills with the brand color when its card is hovered */
+.arrow-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  color: var(--color-brand-700);
+  background: var(--color-brand-50);
+  box-shadow: inset 0 0 0 1px var(--color-brand-100);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
+}
+.group:hover .arrow-dot {
+  color: #fff;
+  background: var(--color-brand-600);
+  box-shadow: 0 8px 18px -8px rgb(12 132 86 / 0.8);
+  transform: translateX(-4px);
+}
+/* Thin rings spreading from behind a card's icon (moments), like a calm pulse */
+.ripples {
+  position: absolute;
+  top: -3.1rem;
+  inset-inline-start: -3.1rem;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 999px;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, var(--tint, rgb(143 227 180 / 0.3)) 0 30%, transparent 31%),
+    repeating-radial-gradient(circle, transparent 0 1.25rem, var(--tint, rgb(143 227 180 / 0.3)) 1.25rem calc(1.25rem + 1.5px));
+  -webkit-mask: radial-gradient(closest-side, #000 40%, transparent);
+  mask: radial-gradient(closest-side, #000 40%, transparent);
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.group:hover .ripples { transform: scale(1.18); }
+
+/* ------------------------------------------------------------------
+   Kinetic headings (Kinetic.tsx): each word rises into place in turn
+   when its block is revealed. Whole words only: Arabic letters join.
+------------------------------------------------------------------- */
+.kw {
+  display: inline-block;
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.6s ease;
+  transition-delay: calc(var(--reveal-delay, 0s) + var(--i, 0) * 60ms);
+}
+.js [data-reveal]:not([data-in]) .kw {
+  opacity: 0;
+  transform: translateY(0.5em) rotate(1.5deg);
+  filter: blur(8px);
+}
+/* The heading block itself stays put; its words, eyebrow and lead move instead */
+.js [data-reveal].kinetic:not([data-in]) {
+  opacity: 1;
+  transform: none;
+}
+.kinetic .eyebrow,
+.kinetic .lead-text {
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.kinetic .lead-text { transition-delay: calc(var(--reveal-delay, 0s) + 0.35s); }
+.kinetic .eyebrow::before {
+  transform-origin: right;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s;
+}
+.js .kinetic:not([data-in]) .eyebrow,
+.js .kinetic:not([data-in]) .lead-text {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.js .kinetic:not([data-in]) .eyebrow::before { transform: scaleX(0); }
+
+/* Marker highlight on light surfaces: a brush stroke drawn from the right */
+.hl {
+  --hl-stroke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'%3E%3Cpath d='M5 21C70 12 160 8 296 14l-4 18C198 37 96 39 3 34z' fill='%238fe3b4' fill-opacity='.62'/%3E%3C/svg%3E");
+  color: inherit;
+  background: var(--hl-stroke) no-repeat right 0 bottom 0.06em / 100% 0.58em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: 0.06em;
+  transition: background-size 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--reveal-delay, 0s) + var(--hl-i, 0) * 60ms + 0.35s);
+}
+.hl-coral {
+  --hl-stroke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'%3E%3Cpath d='M5 21C70 12 160 8 296 14l-4 18C198 37 96 39 3 34z' fill='%23ffb3a8' fill-opacity='.7'/%3E%3C/svg%3E");
+}
+/* On dark surfaces: leaf gradient words over a glowing swoosh */
+.hl-dark {
+  color: inherit;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14C80 5 190 3 297 9' fill='none' stroke='%235ace90' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 0 bottom -0.05em / 100% 0.32em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--reveal-delay, 0s) + var(--hl-i, 0) * 60ms + 0.35s);
+}
+.hl-dark .kw {
+  background: linear-gradient(135deg, #fff 0%, var(--color-leaf-200) 35%, var(--color-leaf-300) 70%, var(--color-leaf-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.js [data-reveal]:not([data-in]) .hl { background-size: 0% 0.58em; }
+.js [data-reveal]:not([data-in]) .hl-dark { background-size: 0% 0.32em; }
+
+/* Hand-drawn line under the hero's last words, drawn from the right after load */
+.swoosh {
+  position: absolute;
+  inset-inline: -3%;
+  bottom: -0.16em;
+  width: 106%;
+  height: 0.3em;
+  overflow: visible;
+  pointer-events: none;
+}
+.swoosh path {
+  fill: none;
+  stroke: var(--color-leaf-400);
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 6px rgb(90 206 144 / 0.6));
+  animation: swoosh-draw 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.9s forwards;
+}
+.swoosh-coral path {
+  stroke: var(--color-coral-400);
+  filter: drop-shadow(0 0 6px rgb(248 133 120 / 0.55));
+}
+@keyframes swoosh-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* A phrase that changes in place (RotatingWords.tsx) */
+.rotator {
+  display: inline-grid;
+  vertical-align: top;
+}
+.rotator > span {
+  grid-area: 1 / 1;
+  transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.55s ease;
+}
+.rotator > [data-state="wait"] { opacity: 0; transform: translateY(0.45em); filter: blur(6px); }
+.rotator > [data-state="out"] { opacity: 0; transform: translateY(-0.45em); filter: blur(6px); }
+
+/* Words that light up as the paragraph scrolls through the view (Manifesto.tsx) */
+.lit-word {
+  opacity: clamp(0.14, calc(var(--p, 1) * var(--n, 1) * 1.35 - var(--i, 0)), 1);
+  transition: opacity 0.25s linear, color 0.4s ease;
+}
+
+/* A slow band of the conditions we treat, in outlined type */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: var(--animate-marquee);
+}
+.marquee-band:hover .marquee-track { animation-play-state: paused; }
+.outline-word {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-navy-300);
+}
+
+/* Open FAQ: a green edge and a soft wash; the answer slides open where supported */
+.faq-item { transition: box-shadow 0.3s ease, background-color 0.3s ease; }
+.faq-item[open] {
+  background: linear-gradient(180deg, #fff, #f3faf6);
+  box-shadow: 0 0 0 1.5px rgb(12 132 86 / 0.28), var(--shadow-soft);
+}
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), content-visibility 0.4s allow-discrete;
+  }
+  .faq-item[open]::details-content { block-size: auto; }
+}
+
 /* A utility (not a component class) so responsive variants like md:container-x work */
 @utility container-x {
   width: 100%;
@@ -828,4 +1091,5 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .lit-word { opacity: 1; }
 }

@@ -21,13 +21,13 @@ function ContactCards() {
   return (
     <section className="curve-t curve-b bg-soft py-16 md:py-24" aria-labelledby="contact-title">
       <div className="container-x">
-        <SectionHeading id="contact-title" eyebrow="تواصل معنا" title="اختر الطريقة التي تريحك" lead={`نرد على المكالمات والرسائل خلال ${site.responseTimeMinutes} دقيقة في أوقات العمل.`} />
+        <SectionHeading id="contact-title" eyebrow="تواصل معنا" title="اختر الطريقة *التي تريحك*" lead={`نرد على المكالمات والرسائل خلال ${site.responseTimeMinutes} دقيقة في أوقات العمل.`} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Reveal as="li" className="card lift-card group relative flex items-center gap-4 p-5">
+          <Reveal as="li" className="glow-card group relative flex items-center gap-4 p-5">
             <Icon3D name="message-circle" size={60} className="shrink-0" />
             <div>
               <p className="text-lg font-bold">
-                <WhatsAppLink placement="visit-page:card" className="after:absolute after:inset-0 after:content-['']">
+                <WhatsAppLink placement="visit-page:card" className="after:absolute after:inset-0 after:z-[2] after:content-['']">
                   واتساب
                 </WhatsAppLink>
               </p>
@@ -35,11 +35,11 @@ function ContactCards() {
             </div>
             <WhatsAppIcon size={22} className="ms-auto shrink-0 text-[#25d366]" />
           </Reveal>
-          <Reveal as="li" delay={0.06} className="card lift-card group relative flex items-center gap-4 p-5">
+          <Reveal as="li" delay={0.06} className="glow-card group relative flex items-center gap-4 p-5">
             <Icon3D name="phone" size={60} className="shrink-0" />
             <div>
               <p className="text-lg font-bold">
-                <a href={telLink()} onClick={() => trackContact("call", "visit-page:card")} className="after:absolute after:inset-0 after:content-['']">
+                <a href={telLink()} onClick={() => trackContact("call", "visit-page:card")} className="after:absolute after:inset-0 after:z-[2] after:content-['']">
                   اتصل بنا
                 </a>
               </p>
@@ -50,11 +50,11 @@ function ContactCards() {
             <Phone size={20} className="ms-auto shrink-0 text-brand-600" aria-hidden />
           </Reveal>
           {site.contact.email ? (
-            <Reveal as="li" delay={0.12} className="card lift-card group relative flex items-center gap-4 p-5">
+            <Reveal as="li" delay={0.12} className="glow-card group relative flex items-center gap-4 p-5">
               <Icon3D name="calendar-check" size={60} className="shrink-0" />
               <div className="min-w-0">
                 <p className="text-lg font-bold">
-                  <a href={`mailto:${site.contact.email}`} className="after:absolute after:inset-0 after:content-['']">
+                  <a href={`mailto:${site.contact.email}`} className="after:absolute after:inset-0 after:z-[2] after:content-['']">
                     البريد الإلكتروني
                   </a>
                 </p>
@@ -90,13 +90,7 @@ export default function VisitPage() {
       <PageHero
         crumbs={[{ href: "/visit", label: "زُر مركزنا" }]}
         eyebrow="زُر مركزنا"
-        title={
-          <>
-            نحن في {branch?.district ? `حي ${branch.district}` : site.city}،
-            <br />
-            <span className="text-gradient-leaf">وبابنا مفتوح لك</span>
-          </>
-        }
+        title={`نحن في ${branch?.district ? `حي ${branch.district}` : site.city}،\n*وبابنا مفتوح لك*`}
         lead="العنوان والاتجاهات وأوقات العمل، وصور حقيقية من داخل المركز، وكل طرق التواصل معنا في صفحة واحدة."
         booking={{ placement: "visit:hero" }}
         aside={

@@ -11,29 +11,42 @@ const TRACKS = [
 ] as const;
 
 function ProgramCard({ p, i }: { p: Program; i: number }) {
+  const Watermark = p.icon;
   return (
-    <Reveal as="article" delay={(i % 3) * 0.06} className="card lift-card group relative flex h-full flex-col p-6">
+    <Reveal
+      as="article"
+      delay={(i % 3) * 0.06}
+      className="glow-card group relative flex h-full flex-col overflow-hidden p-6"
+      data-featured={p.featured ? "" : undefined}
+    >
+      <Watermark size={150} strokeWidth={1} className="pointer-events-none absolute -bottom-8 -start-8 rotate-[-12deg] text-brand-600/[0.05] transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110" aria-hidden />
       {p.featured ? (
-        <span className="absolute end-5 top-5 inline-flex items-center gap-1 rounded-full bg-leaf-100 px-2.5 py-1 text-xs font-semibold text-leaf-700">
+        <span className="absolute end-5 top-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-l from-leaf-100 to-white px-2.5 py-1 text-xs font-semibold text-leaf-700 shadow-sm ring-1 ring-leaf-200">
           <Sparkles size={13} aria-hidden /> {p.featured}
         </span>
       ) : null}
-      <Icon3D name={p.icon3d} size={72} className="-ms-1 transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]" />
+      <Icon3D name={p.icon3d} size={72} className="-ms-1 drop-shadow-[0_12px_14px_rgb(16_40_58/0.16)] transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:rotate-[-5deg]" />
       <h3 className="mt-4 text-xl font-bold">
-        <Link href={`/programs/${p.id}`} className="after:absolute after:inset-0 after:rounded-[inherit] after:content-['']">
+        <Link href={`/programs/${p.id}`} className="after:absolute after:inset-0 after:z-[2] after:rounded-[inherit] after:content-['']">
           {p.title}
         </Link>
       </h3>
       <p className="mt-2 leading-8 text-muted">{p.short}</p>
       <ul className="mt-4 grid gap-2">
         {p.points.map((pt) => (
-          <li key={pt} className="flex items-center gap-2 text-[0.95rem]">
-            <Check size={16} className="shrink-0 text-brand-500" aria-hidden /> {pt}
+          <li key={pt} className="flex items-center gap-2.5 text-[0.95rem]">
+            <span className="grid size-5 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+              <Check size={12} strokeWidth={3} aria-hidden />
+            </span>
+            {pt}
           </li>
         ))}
       </ul>
-      <span className="mt-auto inline-flex items-center gap-2 pt-6 font-semibold text-brand-700 transition-colors group-hover:text-brand-900" aria-hidden>
-        اعرف أكثر عن البرنامج <ArrowLeft size={17} className="transition-transform group-hover:-translate-x-1" />
+      <span className="mt-auto flex items-center justify-between gap-3 pt-6 font-semibold text-brand-700" aria-hidden>
+        اعرف أكثر عن البرنامج
+        <span className="arrow-dot">
+          <ArrowLeft size={17} />
+        </span>
       </span>
     </Reveal>
   );
@@ -77,7 +90,7 @@ export function Programs({ layout = "tabs", heading = true }: { layout?: "tabs" 
             <SectionHeading
               id="programs-title"
               eyebrow="البرامج العلاجية"
-              title="لكل حالة برنامج، ولكل شخص خطته"
+              title="لكل حالة برنامج، *ولكل شخص خطته*"
               lead="نبدأ دائمًا بالتأهيل الطبي، ونضيف الرعاية التكميلية فقط حين تخدم هدفك."
             />
           ) : (

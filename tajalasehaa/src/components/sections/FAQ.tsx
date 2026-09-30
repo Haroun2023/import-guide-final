@@ -11,7 +11,7 @@ type QA = { q: string; a: string };
 export function FAQ({
   limit,
   items,
-  title = "أسئلة نسمعها كثيرًا",
+  title = "أسئلة *نسمعها كثيرًا*",
   heading = true,
   moreLink = false,
 }: {
@@ -45,10 +45,10 @@ export function FAQ({
         ) : null}
         <div className="grid content-start gap-3">
           {list.map((f) => (
-            <details key={f.q} className="card group p-0 [&_summary::-webkit-details-marker]:hidden">
+            <details key={f.q} className="faq-item card group p-0 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[1.02rem] font-semibold">
                 {f.q}
-                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-mist-100 text-brand-700 transition-transform duration-300 group-open:rotate-45">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-mist-100 text-brand-700 transition-all duration-300 group-open:rotate-45 group-open:bg-brand-600 group-open:text-white">
                   <Plus size={17} aria-hidden />
                 </span>
               </summary>

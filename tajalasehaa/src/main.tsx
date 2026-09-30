@@ -9,6 +9,35 @@ if (location.pathname.length > 1 && location.pathname.endsWith("/")) {
   history.replaceState(null, "", location.pathname.replace(/\/+$/, "") + location.search + location.hash);
 }
 
+// Glow cards: light and a slight tilt follow the mouse (see .glow-card in index.css).
+if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  let frame = 0;
+  let last: PointerEvent | null = null;
+  addEventListener(
+    "pointermove",
+    (e) => {
+      last = e;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const card = last && last.target instanceof Element ? last.target.closest<HTMLElement>(".glow-card") : null;
+        if (!card || !last) return;
+        const r = card.getBoundingClientRect();
+        const x = last.clientX - r.left;
+        const y = last.clientY - r.top;
+        card.style.setProperty("--px", `${x}px`);
+        card.style.setProperty("--py", `${y}px`);
+        if (!still.matches) {
+          card.style.setProperty("--ry", `${((x / r.width - 0.5) * 5).toFixed(2)}deg`);
+          card.style.setProperty("--rx", `${((0.5 - y / r.height) * 5).toFixed(2)}deg`);
+        }
+      });
+    },
+    { passive: true },
+  );
+}
+
 const root = document.getElementById("root")!;
 const app = (
   <StrictMode>

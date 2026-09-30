@@ -1,9 +1,11 @@
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { BookingSection } from "@/components/sections/BookingSection";
+import { ConditionsMarquee } from "@/components/sections/ConditionsMarquee";
 import { DeviceLab } from "@/components/sections/DeviceLab";
 import { FAQ } from "@/components/sections/FAQ";
 import { Hero } from "@/components/sections/Hero";
 import { Journey } from "@/components/sections/Journey";
+import { Manifesto } from "@/components/sections/Manifesto";
 import { Moments } from "@/components/sections/Moments";
 import { PainMap } from "@/components/sections/PainMap";
 import { Programs } from "@/components/sections/Programs";
@@ -21,9 +23,11 @@ export default function Home() {
       <TrustStrip />
       <QuickPaths />
       <Moments />
+      <ConditionsMarquee />
       <PainMap />
       <Programs />
       <DeviceLab variant="teaser" />
+      <Manifesto />
       <Journey />
       {showStories ? <Stories /> : null}
       <VisitTeaser />

@@ -5,6 +5,7 @@ import { site } from "@/config/site";
 import { useBooking, type BookingPrefill } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { WhatsAppIcon } from "@/components/ui/Icons";
+import { RichText, Swoosh } from "@/components/ui/Kinetic";
 
 export type Crumb = { href: string; label: string };
 
@@ -51,6 +52,7 @@ export function PageHero({
   aside,
   children,
   curve = true,
+  accent,
 }: {
   crumbs: Crumb[];
   eyebrow?: string;
@@ -62,6 +64,8 @@ export function PageHero({
   children?: ReactNode;
   /** wavy bottom edge; turn off when a dark section follows */
   curve?: boolean;
+  /** color of *starred* words in a string title (leaf gradient by default) */
+  accent?: "coral";
 }) {
   const { openBooking } = useBooking();
   return (
@@ -72,7 +76,19 @@ export function PageHero({
           <Breadcrumbs items={crumbs} />
           {eyebrow ? <p className="eyebrow eyebrow-light mt-7 animate-rise">{eyebrow}</p> : null}
           <h1 id="page-title" className="h-section mt-3 animate-rise text-white [animation-delay:80ms]">
-            {title}
+            {typeof title === "string" ? (
+              <RichText
+                text={title}
+                hl={(part, key) => (
+                  <span key={key} className={`relative inline-block ${accent === "coral" ? "text-coral-400" : "text-gradient-leaf"}`}>
+                    {part}
+                    <Swoosh coral={accent === "coral"} />
+                  </span>
+                )}
+              />
+            ) : (
+              title
+            )}
           </h1>
           {lead ? <p className="lead-text mt-5 max-w-2xl animate-rise !text-white/75 [animation-delay:160ms]">{lead}</p> : null}
           <div className="mt-8 flex animate-rise flex-wrap gap-3 [animation-delay:240ms]">

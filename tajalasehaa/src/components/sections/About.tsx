@@ -44,11 +44,7 @@ export function About({ heading = true }: { heading?: boolean }) {
             <SectionHeading
               id="about-title"
               eyebrow="قصتنا"
-              title={
-                <>
-                  من {site.partner.country} <span className="text-gradient-brand">إلى {site.city}</span>
-                </>
-              }
+              title={`من ${site.partner.country} *إلى ${site.city}*`}
             />
           ) : (
             <h2 className="h-section">
@@ -68,9 +64,9 @@ export function About({ heading = true }: { heading?: boolean }) {
 
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {team.map((m, i) => (
-              <Reveal as="li" key={m.role} delay={i * 0.06} className="card flex items-start gap-3 p-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-leaf-200 to-leaf-400 text-base font-bold text-deep">
-                  {m.name.replace("د. ", "").charAt(0)}
+              <Reveal as="li" key={m.role} delay={i * 0.06} className="glow-card group flex items-start gap-3 p-4">
+                <span className="grid size-12 shrink-0 place-items-center rounded-full bg-[conic-gradient(from_140deg,var(--color-leaf-300),var(--color-brand-600),var(--color-navy-500),var(--color-leaf-300))] p-[2px] transition-transform duration-500 group-hover:rotate-12">
+                  <span className="grid size-full place-items-center rounded-full bg-white text-base font-bold text-brand-700">{m.name.replace("د. ", "").charAt(0)}</span>
                 </span>
                 <div>
                   <p className="text-xs font-semibold text-brand-600">{m.role}</p>

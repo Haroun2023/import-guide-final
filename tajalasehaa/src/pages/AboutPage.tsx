@@ -14,13 +14,7 @@ export default function AboutPage() {
       <PageHero
         crumbs={[{ href: "/about", label: "من نحن" }]}
         eyebrow="قصتنا"
-        title={
-          <>
-            من {site.partner.country}
-            <br />
-            <span className="text-gradient-leaf">إلى {site.city}</span>
-          </>
-        }
+        title={`من ${site.partner.country}\n*إلى ${site.city}*`}
         lead={`${site.name} هو الفرع السعودي لمجموعة ${site.partner.name}. جئنا بخبرتها في الرعاية، وبنينا فريقًا يسمعك جيدًا قبل أن يعالجك.`}
         booking={{ placement: "about:hero" }}
         aside={

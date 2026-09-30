@@ -11,11 +11,8 @@ export default function ConditionsPage() {
       <PageHero
         crumbs={[{ href: "/conditions", label: "أين يؤلمك؟" }]}
         eyebrow="ابدأ من موضع الألم"
-        title={
-          <>
-            أين <span className="text-coral-400">يؤلمك</span>؟
-          </>
-        }
+        title="أين *يؤلمك*؟"
+        accent="coral"
         lead="اضغط على موضع الألم في المجسّم، واقرأ ما نراه عادةً في هذه المنطقة وكيف نبدأ. وحين تكون جاهزًا، احجز تقييمك من نفس المكان."
         booking={{ placement: "conditions:hero" }}
         whatsappText="السلام عليكم، عندي ألم وأريد أن أعرف من أين أبدأ."

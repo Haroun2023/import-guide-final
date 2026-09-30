@@ -18,10 +18,10 @@ function DeviceMatch() {
   return (
     <section className="py-16 md:py-24" aria-labelledby="match-title">
       <div className="container-x">
-        <SectionHeading id="match-title" eyebrow="دليل سريع" title="أي جهاز قد نستعين به لحالتك؟" lead="دليل مبسّط يساعدك على الفهم. الأخصائي هو من يقرر بعد التقييم إن كان الجهاز مناسبًا لك." />
+        <SectionHeading id="match-title" eyebrow="دليل سريع" title="أي جهاز قد نستعين به *لحالتك*؟" lead="دليل مبسّط يساعدك على الفهم. الأخصائي هو من يقرر بعد التقييم إن كان الجهاز مناسبًا لك." />
         <ul className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {bodyAreas.map((a, i) => (
-            <Reveal as="li" key={a.id} delay={(i % 3) * 0.05} className="card p-5">
+            <Reveal as="li" key={a.id} delay={(i % 3) * 0.05} className="glow-card p-5">
               <p className="font-bold">{a.label}</p>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {a.devices.map((id) => (
@@ -55,17 +55,7 @@ export default function DevicesPage({ id }: { id?: string }) {
         curve={false}
         crumbs={crumbs}
         eyebrow={d ? `${d.brand} · ${d.origin}` : "أجهزتنا"}
-        title={
-          d ? (
-            d.name
-          ) : (
-            <>
-              أجهزة تتعرّف عليها
-              <br />
-              <span className="text-gradient-leaf">قبل أن تزورنا</span>
-            </>
-          )
-        }
+        title={d ? d.name : "أجهزة تتعرّف عليها\n*قبل أن تزورنا*"}
         lead={
           d
             ? d.short
@@ -105,7 +95,7 @@ export default function DevicesPage({ id }: { id?: string }) {
                 .filter((p) => p.devices?.includes(d.id))
                 .map((p) => (
                   <li key={p.id}>
-                    <Link href={`/programs/${p.id}`} className="card inline-flex items-center gap-3 px-4 py-3 font-semibold transition-colors hover:border-brand-300">
+                    <Link href={`/programs/${p.id}`} className="glow-card inline-flex items-center gap-3 !rounded-full py-2 pe-5 ps-2.5 font-semibold">
                       <Icon3D name={p.icon3d} size={36} />
                       {p.title}
                       <ArrowLeft size={16} className="text-brand-600" aria-hidden />

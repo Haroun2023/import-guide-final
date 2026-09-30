@@ -1,38 +1,9 @@
-import { useEffect, useRef } from "react";
 import { journey } from "@/config/content";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { Icon3D } from "@/components/ui/Icon3D";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 
 const ICONS = ["calendar-check", "scan-search", "clipboard-list", "activity", "sparkles"];
-
-/** Writes scroll progress through the element (0–1) to the --p CSS variable. */
-function useScrollProgress<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const p = Math.min(1, Math.max(0, (vh * 0.8 - r.top) / (r.height + vh * 0.2)));
-      el.style.setProperty("--p", p.toFixed(3));
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-  return ref;
-}
 
 export function Journey() {
   const ref = useScrollProgress<HTMLOListElement>();
@@ -43,7 +14,7 @@ export function Journey() {
         <SectionHeading
           id="journey-title"
           eyebrow="رحلة التعافي"
-          title="كيف تسير رحلتك معنا؟"
+          title="كيف تسير *رحلتك معنا*؟"
           lead="تعرف من اليوم الأول ماذا سنفعل ولماذا. خطوات واضحة، وأهداف مكتوبة، ونراجع تقدّمك معك أولًا بأول."
           center
         />
@@ -59,8 +30,8 @@ export function Journey() {
 
           {journey.map((s, i) => (
             <Reveal as="li" key={s.title} delay={i * 0.08} className="relative flex gap-4 md:flex-col md:items-center md:text-center">
-              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full bg-white text-lg font-bold text-brand-700 shadow-[var(--shadow-soft)] ring-2 ring-brand-500">
-                {i + 1}
+              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full bg-[conic-gradient(from_200deg,var(--color-leaf-300),var(--color-brand-600),var(--color-navy-600),var(--color-leaf-300))] p-[2.5px] shadow-[0_10px_24px_-10px_rgb(12_132_86/0.7)]">
+                <span className="grid size-full place-items-center rounded-full bg-white text-lg font-bold text-brand-700">{i + 1}</span>
               </span>
               <div>
                 <Icon3D name={ICONS[i % ICONS.length]} size={52} className="mb-1 hidden md:mx-auto md:mt-4 md:block" />

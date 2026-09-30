@@ -4,6 +4,7 @@ import { site } from "@/config/site";
 import { useBooking } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { WhatsAppIcon } from "@/components/ui/Icons";
+import { Swoosh } from "@/components/ui/Kinetic";
 import { LazyCanvas } from "@/components/three/LazyCanvas";
 import { SpinePoster } from "@/components/three/Posters";
 
@@ -45,7 +46,10 @@ export function Hero() {
           <h1 id="hero-title" className="h-display mt-4 animate-rise [animation-delay:120ms]">
             الصحة تاج…
             <br />
-            <span className="text-gradient-leaf">نستعيده معًا</span>
+            <span className="text-gradient-leaf relative inline-block">
+              نستعيده معًا
+              <Swoosh />
+            </span>
           </h1>
           {/* Phones get a shorter line that leaves the left strip to the 3D spine. */}
           <p className="mt-5 animate-rise pe-[22%] text-[1.05rem] leading-8 text-white/80 [animation-delay:240ms] md:hidden">

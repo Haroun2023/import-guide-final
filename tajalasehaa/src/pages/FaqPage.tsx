@@ -15,7 +15,7 @@ export default function FaqPage() {
       <PageHero
         crumbs={[{ href: "/faq", label: "الأسئلة الشائعة" }]}
         eyebrow="الأسئلة الشائعة"
-        title="أسئلة نسمعها كثيرًا قبل الزيارة الأولى"
+        title="أسئلة نسمعها كثيرًا *قبل الزيارة الأولى*"
         lead="جمعنا هنا أكثر ما يسألنا عنه المراجعون. وإن لم تجد سؤالك، فاكتب لنا على واتساب ويرد عليك أحد أخصائيينا."
         booking={{ placement: "faq:hero" }}
         whatsappText="السلام عليكم، عندي سؤال قبل الحجز:"
@@ -37,10 +37,10 @@ export default function FaqPage() {
                   </h3>
                   <div className="mt-4 grid gap-3">
                     {p.faqs!.map((f) => (
-                      <details key={f.q} className="card group p-0 [&_summary::-webkit-details-marker]:hidden">
+                      <details key={f.q} className="faq-item card group p-0 [&_summary::-webkit-details-marker]:hidden">
                         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold">
                           {f.q}
-                          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-mist-100 text-brand-700 transition-transform duration-300 group-open:rotate-45" aria-hidden>
+                          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-mist-100 text-brand-700 transition-all duration-300 group-open:rotate-45 group-open:bg-brand-600 group-open:text-white" aria-hidden>
                             +
                           </span>
                         </summary>

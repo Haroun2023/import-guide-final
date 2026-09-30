@@ -49,11 +49,8 @@ export function PainMap({ initialArea = null, heading = "full" }: { initialArea?
           <SectionHeading
             id="painmap-title"
             eyebrow="ابدأ من موضع الألم"
-            title={
-              <>
-                أين <span className="text-coral-500">يؤلمك</span>؟
-              </>
-            }
+            title="أين *يؤلمك*؟"
+            accent="coral"
             lead="اضغط على موضع الألم في المجسّم أو اختره من القائمة. ستجد الحالات التي نراها كثيرًا في هذه المنطقة، وكيف نبدأ معك."
           />
         ) : heading === "compact" ? (

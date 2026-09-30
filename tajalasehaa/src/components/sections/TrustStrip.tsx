@@ -2,6 +2,7 @@ import { BadgeCheck, Star } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "wouter";
 import { site } from "@/config/site";
+import { CountUp } from "@/components/ui/CountUp";
 import { Icon3D } from "@/components/ui/Icon3D";
 import { OpenDot, useOpenState } from "@/components/ui/OpenStatus";
 import { Reveal } from "@/components/ui/Reveal";
@@ -35,7 +36,9 @@ export function TrustStrip({ links = true }: { links?: boolean }) {
         <Reveal className="card grid grid-cols-2 gap-px overflow-hidden bg-mist-200 p-0 md:grid-cols-4">
           {site.stats.map((s) => (
             <div key={s.label} className="bg-white px-4 py-6 text-center sm:px-6">
-              <p className="text-[1.9rem] font-bold leading-none text-brand-700 tabular sm:text-[2.2rem]">{s.value}</p>
+              <p className="text-gradient-brand text-[1.9rem] font-bold leading-[1.15] sm:text-[2.3rem]">
+                <CountUp value={s.value} />
+              </p>
               <p className="mt-2 text-sm text-muted">{s.label}</p>
             </div>
           ))}
