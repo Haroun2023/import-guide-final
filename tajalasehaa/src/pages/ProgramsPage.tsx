@@ -24,9 +24,9 @@ export default function ProgramsPage() {
         aside={
           <div className="relative mx-auto grid size-80 place-items-center">
             <div className="absolute inset-6 rounded-full bg-[radial-gradient(closest-side,rgb(90_206_144/0.28),transparent)]" aria-hidden />
-            <Icon3D name="spine" variant="light" size={150} className="absolute start-6 top-4 animate-[float_6s_ease-in-out_infinite]" />
-            <Icon3D name="bone" variant="light" size={120} className="absolute bottom-6 end-4 animate-[float_7s_ease-in-out_infinite] [animation-delay:-2s]" />
-            <Icon3D name="footprints" variant="light" size={100} className="absolute bottom-10 start-10 animate-[float_8s_ease-in-out_infinite] [animation-delay:-4s]" />
+            <Icon3D name="spine" size={170} className="absolute start-2 top-0 animate-[float_6s_ease-in-out_infinite] drop-shadow-[0_24px_30px_rgb(0_0_0/0.35)]" />
+            <Icon3D name="bone" variant="light" size={150} className="absolute bottom-2 end-0 animate-[float_7s_ease-in-out_infinite] [animation-delay:-2s]" />
+            <Icon3D name="footprints" variant="light" size={130} className="absolute bottom-6 start-10 animate-[float_8s_ease-in-out_infinite] [animation-delay:-4s]" />
           </div>
         }
       />
