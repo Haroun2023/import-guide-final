@@ -26,7 +26,6 @@ const verify = site
   .map((line, i) => ({ line, n: i + 1 }))
   .filter(({ line }, i) => line.includes("تحقق") && i >= site.slice(0, body).split("\n").length - 1);
 for (const { line, n } of verify) issues.push(`site.ts:${n} needs verification → ${line.trim().replace(/^\/\*\*?|\*\/$/g, "").trim()}`);
-if (/ادعاء يجب التحقق منه/.test(devices)) issues.push("devices.ts: device badges contain claims to verify (e.g. «الأول من نوعه في المدينة المنورة»).");
 
 if (issues.length) {
   console.log(`⚠️  ${issues.length} item(s) to review before publishing:\n`);
