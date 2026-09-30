@@ -12,7 +12,14 @@ export type Branch = {
   name: string;
   city: string;
   address: string;
+  /** Link that opens the branch's Google Maps listing (web + apps). */
   mapsUrl: string;
+  /** Link that starts navigation to the branch in Google Maps. */
+  directionsUrl?: string;
+  street?: string;
+  district?: string;
+  postalCode?: string;
+  plusCode?: string;
   geo?: { lat: number; lng: number };
 };
 
@@ -34,7 +41,7 @@ export const site = {
   partner: { name: "Healife", nameAr: "هي لايف", country: "ماليزيا" },
 
   contact: {
-    /** الرقم المنشور في الموقع الحالي (tajalasehaa.sa) — تحقق */
+    /** الرقم المنشور في الموقع الحالي وفي قائمة المركز على خرائط Google */
     phoneDisplay: "057 399 8384",
     phoneE164: "+966573998384",
     /** رقم واتساب بصيغة دولية أرقام فقط — تحقق */
@@ -46,24 +53,32 @@ export const site = {
   /** الوعد بسرعة التواصل بعد إرسال الطلب (بالدقائق، خلال أوقات العمل). */
   responseTimeMinutes: 15,
 
-  /** أوقات العمل — كما في الموقع الحالي («مغلق يوم الأحد والعطلات الرسمية») — تحقق: الأحد يوم عمل في المملكة */
-  hours: [
-    { days: "الإثنين – السبت", time: "10:00 ص – 7:00 م" },
-    { days: "الأحد", time: "مغلق" },
-  ],
+  /**
+   * أوقات العمل — من قائمة المركز في خرائط Google (سبتمبر 2026): 10:00 ص – 11:00 م.
+   * تحقق: الخرائط عرضت الثلاثاء والأربعاء فقط؛ أكّد الجمعة والأحد والعطلات.
+   */
+  hours: [{ days: "يوميًا", time: "10:00 ص – 11:00 م" }],
   /** بصيغة schema.org لمحركات البحث — عدّلها لتطابق الأوقات أعلاه */
   openingHoursSpec: [
-    { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "10:00", closes: "19:00" },
+    { days: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "23:00" },
   ],
 
-  /** الفروع — تحقق: أضف العنوان الدقيق ورابط خرائط Google والإحداثيات */
+  /** الفروع — العنوان والإحداثيات ورابطا الخريطة من قائمة المركز في خرائط Google (place_id: ChIJ00E183GVvRUR0BmyT7Ls7O8) */
   branches: [
     {
       id: "madinah",
       name: "فرع المدينة المنورة",
       city: "المدينة المنورة",
-      address: "المدينة المنورة، المملكة العربية السعودية",
-      mapsUrl: "https://www.google.com/maps/search/?api=1&query=%D8%AA%D8%A7%D8%AC+%D8%A7%D9%84%D8%A3%D8%B5%D8%AD%D8%A7%D8%A1+%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9+%D8%A7%D9%84%D9%85%D9%86%D9%88%D8%B1%D8%A9",
+      address: "طريق الملك عبدالله الفرعي، حي مهزور، المدينة المنورة 42319",
+      street: "طريق الملك عبدالله الفرعي",
+      district: "مهزور",
+      postalCode: "42319",
+      plusCode: "CMW8+7F",
+      geo: { lat: 24.4456744, lng: 39.6661892 },
+      mapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=%D8%AA%D8%A7%D8%AC%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AD%D8%A7%D8%A1&query_place_id=ChIJ00E183GVvRUR0BmyT7Ls7O8",
+      directionsUrl:
+        "https://www.google.com/maps/dir/?api=1&destination=%D8%AA%D8%A7%D8%AC%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AD%D8%A7%D8%A1&destination_place_id=ChIJ00E183GVvRUR0BmyT7Ls7O8",
     },
   ] as Branch[],
 

@@ -182,6 +182,22 @@ export const team = [
 /*    حقيقية (بموافقة المراجع) ثم احذف sample.                          */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Real photos of the Madinah center — the cover of its Google Maps listing and
+ * the center's own photos from its current site (public/photos/<id>-<width>.webp).
+ * No patients appear in them; keep it that way (health-advertising rules).
+ */
+export type CenterPhoto = { id: string; alt: string; caption: string; widths: number[] };
+
+export const centerPhotos: CenterPhoto[] = [
+  { id: "storefront", alt: "واجهة مركز تاج الأصحاء بلافتتَي Healife وتاج الأصحاء", caption: "الواجهة · طريق الملك عبدالله الفرعي", widths: [480, 960, 1440] },
+  { id: "reception", alt: "مكتب الاستقبال وشعار المركز المضيء على الجدار", caption: "الاستقبال", widths: [480, 960] },
+  { id: "hall", alt: "صالة الانتظار الرئيسية بمقاعد مريحة وإضاءة هادئة", caption: "صالة الانتظار", widths: [480, 960, 1440] },
+  { id: "lobby", alt: "البهو وشعار Healife في أرضية الرخام", caption: "البهو", widths: [480, 960, 1440] },
+  { id: "lounge", alt: "ركن انتظار بمقاعد زرقاء ونباتات", caption: "ركن الانتظار", widths: [480, 960] },
+  { id: "entrance", alt: "المدخل الزجاجي للمركز", caption: "المدخل", widths: [480, 960, 1440] },
+];
+
 export type Story = { quote: string; name: string; context: string; sample?: boolean };
 
 /**

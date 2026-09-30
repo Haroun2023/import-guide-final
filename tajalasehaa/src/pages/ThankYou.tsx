@@ -86,9 +86,28 @@ export default function ThankYou() {
           </ol>
 
           {branch ? (
-            <a href={branch.mapsUrl} target="_blank" rel="noopener" className="btn btn-ghost mt-8">
-              <MapPin size={18} aria-hidden /> موقعنا على الخريطة
-            </a>
+            <figure className="mt-10 overflow-hidden rounded-[1.5rem] bg-white text-start shadow-[var(--shadow-soft)] ring-1 ring-mist-200">
+              <img
+                src="/photos/storefront-960.webp"
+                srcSet="/photos/storefront-480.webp 480w, /photos/storefront-960.webp 960w"
+                sizes="(min-width: 672px) 640px, 100vw"
+                width={4}
+                height={3}
+                alt="واجهة مركز تاج الأصحاء"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <figcaption className="flex flex-wrap items-center justify-between gap-3 p-5">
+                <span>
+                  <strong className="block">هكذا تجدنا</strong>
+                  <span className="text-sm text-muted">{branch.address}</span>
+                </span>
+                <a href={branch.directionsUrl ?? branch.mapsUrl} target="_blank" rel="noopener" className="btn btn-primary min-h-11 px-5 text-[0.95rem]">
+                  <MapPin size={18} aria-hidden /> الاتجاهات
+                </a>
+              </figcaption>
+            </figure>
           ) : null}
           <p className="mt-6">
             <a href="/" className="text-brand-700 underline underline-offset-4">

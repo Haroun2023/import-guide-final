@@ -12,6 +12,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Journey } from "@/components/sections/Journey";
 import { PainMap } from "@/components/sections/PainMap";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import { Visit } from "@/components/sections/Visit";
 import { BrandMark } from "@/components/ui/Logo";
 import NotFound from "./NotFound";
 
@@ -100,6 +101,7 @@ export default function Landing({ slug }: { slug: string }) {
         {c.device ? <DeviceLab initialDevice={c.device} only={[c.device]} /> : c.area ? <PainMap initialArea={c.area} compact /> : null}
         <Journey />
         <Commitments />
+        <Visit />
         <FAQ limit={6} />
         <BookingSection
           prefill={{ complaint: c.complaint, placement: `${placement}:bottom` }}

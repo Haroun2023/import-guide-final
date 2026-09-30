@@ -20,6 +20,10 @@
 |---|---|
 | ![أين يؤلمك](docs/screenshots/desktop-pain-map.jpg) | ![مختبر التقنيات](docs/screenshots/desktop-device-lab.jpg) |
 
+«زُر مركزنا»: صور حقيقية للمركز، والعنوان وساعات العمل ورابط الاتجاهات من قائمته في خرائط Google:
+
+![زُر مركزنا](docs/screenshots/desktop-visit.jpg)
+
 صفحة هبوط حملة (AlterG) على الجوال — النموذج أعلى الصفحة والحالة مختارة مسبقًا:
 
 <img src="docs/screenshots/mobile-landing-alterg.jpg" alt="صفحة هبوط AlterG" width="320" />
@@ -58,6 +62,8 @@ npm run check:content  # قائمة البيانات التي تحتاج اعت�
 | `booking.ts` | خيارات نموذج الحجز |
 
 **الهوية:** الألوان في `src/index.css` (كتلة `@theme`)، وملفات الشعار في `public/brand/` (`logo*.svg` للترويسة والتذييل، `mark*.svg` للرمز وحده، `logo.png` للبيانات المنظَّمة)، والأيقونات `public/favicon.*` و`public/apple-touch-icon.png`. المكوّنان `Logo` و`BrandMark` في `src/components/ui/Logo.tsx`.
+
+**الصور:** صور المركز الحقيقية في `public/photos/` بثلاثة مقاسات (`<id>-480|960|1440.webp`)، وتُعرَّف في `centerPhotos` داخل `src/config/content.ts`. لإضافة صورة: ضع ملفاتها بالمقاسات نفسها وأضف سطرًا بالوصف والتعليق. لا تستخدم صورًا تُظهر مرضى.
 
 ⚠️ القيم المعلَّمة بـ «تحقق» جُمعت من الموقع الحالي ونتائج البحث عنه، ويجب اعتمادها من إدارة المركز. بعد مراجعتها اجعل `isDemo: false` في `site.ts` ليختفي شريط «نسخة عرض»، ثم شغّل `npm run check:content`.
 

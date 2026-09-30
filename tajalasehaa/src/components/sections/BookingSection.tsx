@@ -31,11 +31,11 @@ export function BookingSection({ prefill, title }: { prefill?: BookingPrefill; t
           <ul className="mt-8 grid gap-4 text-white/75">
             {site.branches.map((b) => (
               <li key={b.id}>
-                <a href={b.mapsUrl} target="_blank" rel="noopener" className="flex items-start gap-3 hover:text-white">
+                <a href={b.directionsUrl ?? b.mapsUrl} target="_blank" rel="noopener" className="flex items-start gap-3 hover:text-white">
                   <MapPin size={20} className="mt-1 shrink-0 text-leaf-400" aria-hidden />
                   <span>
                     <strong className="block text-white">{b.name}</strong>
-                    {b.address} · افتح الخريطة
+                    {b.address} · <span className="underline underline-offset-4">الاتجاهات</span>
                   </span>
                 </a>
               </li>

@@ -15,6 +15,7 @@ import { PainMap } from "@/components/sections/PainMap";
 import { Programs } from "@/components/sections/Programs";
 import { Stories } from "@/components/sections/Stories";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import { Visit } from "@/components/sections/Visit";
 import { showStories } from "@/config/content";
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
         <Commitments />
         {showStories ? <Stories /> : null}
         <About />
+        <Visit />
         <InsuranceCheck />
         <FAQ />
         <BookingSection />

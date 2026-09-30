@@ -1,5 +1,5 @@
 import { campaignBySlug, campaigns } from "./config/campaigns";
-import { programs } from "./config/content";
+import { centerPhotos, programs } from "./config/content";
 import { site } from "./config/site";
 
 export type RouteMeta = { title: string; description: string; noindex?: boolean };
@@ -38,15 +38,17 @@ export function jsonLd() {
     alternateName: [site.name, site.nameEn],
     url: site.url,
     telephone: site.contact.phoneE164,
-    image: `${site.url}/og.jpg`,
+    image: [`${site.url}/og.jpg`, ...centerPhotos.map((p) => `${site.url}/photos/${p.id}-${p.widths[p.widths.length - 1]}.webp`)],
     logo: `${site.url}/brand/logo.png`,
     medicalSpecialty: ["Physiotherapy", "Musculoskeletal"],
     address: {
       "@type": "PostalAddress",
-      streetAddress: branch?.address,
+      streetAddress: [branch?.street, branch?.district].filter(Boolean).join("، ") || branch?.address,
       addressLocality: site.city,
+      postalCode: branch?.postalCode,
       addressCountry: "SA",
     },
+    ...(branch?.mapsUrl ? { hasMap: branch.mapsUrl } : {}),
     ...(branch?.geo ? { geo: { "@type": "GeoCoordinates", latitude: branch.geo.lat, longitude: branch.geo.lng } } : {}),
     openingHoursSpecification: site.openingHoursSpec.map((o) => ({
       "@type": "OpeningHoursSpecification",
