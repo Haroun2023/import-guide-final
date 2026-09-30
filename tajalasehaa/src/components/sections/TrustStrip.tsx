@@ -7,11 +7,16 @@ import { Icon3D } from "@/components/ui/Icon3D";
 import { OpenDot, useOpenState } from "@/components/ui/OpenStatus";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** What no other center in Madinah advertises (see the competitor survey in docs/RESEARCH_AR.md). */
+/**
+ * The angles that held up when checked against every center in Madinah
+ * (docs/RESEARCH_AR.md §2.6): no other clinic there advertises AlterG, a program
+ * for visitors, or Friday hours. Licensed cupping and device lymph drainage are
+ * offered elsewhere too, so they stay on their program pages.
+ */
 const STANDOUTS = [
-  { href: "/programs/umrah", icon: "footprints", label: "برنامج للمعتمرين والزوار" },
-  { href: "/programs/lymph", icon: "droplets", label: "تصريف لمفاوي بجهاز، للكبار والأطفال" },
-  { href: "/programs/cupping", icon: "hand-heart", label: "حجامة مرخّصة" },
+  { href: "/visit", icon: "calendar-check", label: "نستقبلكم الجمعة أيضًا" },
+  { href: "/devices/antigravity", icon: "activity", label: "مشي بوزن أخف على جهاز AlterG" },
+  { href: "/programs/umrah", icon: "footprints", label: "برنامج لزوار المدينة والمعتمرين" },
 ];
 
 function Chip({ href, links, children }: { href: string; links: boolean; children: ReactNode }) {
