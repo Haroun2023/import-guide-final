@@ -138,9 +138,20 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
    use it only when the next section sits on the page background.
    Both add their curve zone as a transparent border, never over content. */
 :root {
-  --curve-h: clamp(1.4rem, 3.8vw, 3.4rem);
+  --curve-h: 3rem; /* engines without clamp() */
+  --curve-h-hero: 3.5rem;
   --curve-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100V62C300 94 560 96 820 58C1040 26 1250 6 1440 18V100Z'/%3E%3C/svg%3E");
   --curve-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V44C1180 10 940 8 700 40C470 72 250 98 0 80Z'/%3E%3C/svg%3E");
+}
+@supports (width: clamp(1px, 1vw, 2px)) {
+  :root {
+    --curve-h: clamp(1.6rem, 3.8vw, 3.4rem);
+    --curve-h-hero: clamp(2rem, 5.5vw, 5rem);
+  }
+}
+/* The home hero ends in a deeper wave */
+.curve-hero {
+  --curve-h: var(--curve-h-hero);
 }
 .curve-t,
 .curve-b,
@@ -171,6 +182,17 @@ html:not(.cv-off) #main > section:nth-child(n + 3) {
 /* The trust card has no bottom padding of its own: leave room for a curve after it. */
 .trust-strip:has(+ .curve-t) {
   padding-bottom: calc(var(--curve-h) + 1rem);
+}
+/* Without mask support the cut can't happen: keep sections square instead of stacked */
+@supports not ((mask-image: none) or (-webkit-mask-image: none)) {
+  .curve-t,
+  #main:not(:has(> section.bg-deep-radial:last-child)) + footer {
+    margin-top: 0;
+    border-top-width: 0;
+  }
+  .curve-b {
+    border-bottom-width: 0;
+  }
 }
 /* A curved footer drops the straight hairline it has under a dark section. */
 #main:not(:has(> section.bg-deep-radial:last-child)) + footer > .hairline-leaf {

@@ -30,7 +30,7 @@ export function TrustStrip({ links = true }: { links?: boolean }) {
   const hours = site.hours.map((h) => `${h.days} ${h.time}`).join(" · ");
 
   return (
-    <section aria-label="أرقام وثقة" className="trust-strip relative z-10 -mt-14">
+    <section aria-label="أرقام وثقة" className="trust-strip relative z-10 -mt-10">
       <div className="container-x">
         <Reveal className="card grid grid-cols-2 gap-px overflow-hidden bg-mist-200 p-0 md:grid-cols-4">
           {site.stats.map((s) => (

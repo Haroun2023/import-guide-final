@@ -1,5 +1,5 @@
 import { ArrowLeft, Check, ChevronDown } from "lucide-react";
-import { lazy, type CSSProperties } from "react";
+import { lazy } from "react";
 import { site } from "@/config/site";
 import { useBooking } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
@@ -21,8 +21,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="curve-b grain relative isolate min-h-[100svh] overflow-hidden bg-deep-radial text-white"
-      style={{ "--curve-h": "clamp(1.75rem, 5vw, 4.5rem)" } as CSSProperties}
+      className="curve-b curve-hero grain relative isolate min-h-[100svh] overflow-hidden bg-deep-radial text-white"
       aria-labelledby="hero-title"
     >
       <LazyCanvas
@@ -83,7 +82,7 @@ export function Hero() {
         </div>
 
         {/* Legend for the 3D story (desktop) */}
-        <div className="glass-dark absolute bottom-10 end-6 hidden rounded-2xl px-5 py-4 text-xs text-white/75 lg:block">
+        <div className="glass-dark absolute bottom-12 end-6 hidden rounded-2xl px-5 py-4 text-xs text-white/75 lg:block">
           <p className="mb-2 font-semibold text-white">من الألم… إلى التوازن</p>
           <ul className="grid gap-1.5">
             <li className="flex items-center gap-2">
@@ -98,7 +97,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <a href="#pain-map" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-xs text-white/60 hover:text-white md:flex">
+        <a href="#pain-map" className="absolute bottom-12 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-xs text-white/60 hover:text-white md:flex">
           أين يؤلمك؟
           <ChevronDown size={18} className="animate-[float_2.4s_ease-in-out_infinite]" aria-hidden />
         </a>
