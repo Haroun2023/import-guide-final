@@ -108,6 +108,26 @@
     from { opacity: 0; }
     to { opacity: 1; }
   }
+  @keyframes dstage-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes dstage-scan {
+    0% { background-position: 0 100%; }
+    60%, 100% { background-position: 0 -100%; }
+  }
+  @keyframes dstage-bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -8px; }
+  }
+}
+
+/* Long Arabic pages are costly to lay out on phones: skip rendering sections
+   far below the fold until they approach, so the first paint comes sooner.
+   index.html adds .cv-off before any in-page jump (exact positions) and once
+   the page is idle. */
+html:not(.cv-off) #main > section:nth-child(n + 3) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 /* Scroll reveals (see the inline observer in index.html) */
@@ -386,6 +406,270 @@
   .hotspot-coral { color: var(--color-coral-600); box-shadow: 0 0 0 2px var(--color-coral-400), 0 6px 18px -4px rgb(11 25 35 / 0.3); }
   .hotspot-coral .hotspot-ring { box-shadow: 0 0 0 2px var(--color-coral-400); }
   .hotspot-coral[data-active="true"] { background: var(--color-coral-500); color: #fff; }
+
+  /* ---- Device showcase: pseudo-3D product stage (DeviceStage.tsx) ---- */
+  .dstage {
+    position: relative;
+    height: 25rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    perspective: 1400px;
+    perspective-origin: 50% 30%;
+    container-type: size;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    background:
+      radial-gradient(65% 55% at 50% 40%, color-mix(in srgb, var(--glow) 20%, transparent), transparent 72%),
+      linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0) 45%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+    transition: background 0.8s ease;
+  }
+  @media (min-width: 640px) { .dstage { height: 31rem; } }
+  @media (min-width: 1024px) { .dstage { height: 36rem; } }
+  .dstage-spot {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.13), rgb(255 255 255 / 0) 78%);
+    clip-path: polygon(41% 0, 59% 0, 84% 100%, 16% 100%);
+    opacity: 0.55;
+  }
+  .dstage-floor {
+    position: absolute;
+    left: -40%;
+    right: -40%;
+    bottom: 0;
+    height: 62%;
+    pointer-events: none;
+    transform-origin: 50% 100%;
+    transform: rotateX(74deg);
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.09) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: center bottom;
+    mask-image: radial-gradient(55% 75% at 50% 100%, #000 25%, transparent 72%);
+    -webkit-mask-image: radial-gradient(55% 75% at 50% 100%, #000 25%, transparent 72%);
+  }
+  .dstage-tilt {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform-origin: 50% 78%;
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  }
+  .dstage-podium {
+    position: absolute;
+    left: 50%;
+    top: calc(83cqh - min(38cqw, 17rem));
+    width: min(76cqw, 34rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translateX(-50%) rotateX(77deg);
+    transform-style: preserve-3d;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.13), rgb(255 255 255 / 0.05) 72%, transparent 73%);
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--glow) 75%, white),
+      0 0 38px 4px color-mix(in srgb, var(--glow) 45%, transparent),
+      inset 0 0 60px color-mix(in srgb, var(--glow) 25%, transparent);
+    transition: box-shadow 0.8s ease;
+  }
+  .dstage-ring {
+    position: absolute;
+    inset: 9%;
+    border-radius: 50%;
+    border: 2px dashed color-mix(in srgb, var(--glow) 65%, transparent);
+    animation: dstage-spin 26s linear infinite;
+  }
+  .dstage-ring-2 {
+    inset: 24%;
+    border: 1px solid color-mix(in srgb, var(--glow) 40%, transparent);
+    animation-duration: 40s;
+    animation-direction: reverse;
+  }
+  .dstage-fig {
+    position: absolute;
+    left: 50%;
+    bottom: 17cqh;
+    margin: 0;
+    width: min(calc(70cqw * var(--fit, 1)), calc(62cqh * var(--ar) * var(--fit, 1)));
+    aspect-ratio: var(--ar);
+    transform-style: preserve-3d;
+    transform: translateX(-50%) translateZ(40px);
+    transition: transform 0.95s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.7s ease;
+  }
+  /* RTL: the previous device leaves to the right, the next one arrives from the left */
+  .dstage-fig.is-before { transform: translateX(-50%) translateX(70%) translateZ(-300px) rotateY(-62deg); opacity: 0; pointer-events: none; }
+  .dstage-fig.is-after { transform: translateX(-50%) translateX(-70%) translateZ(-300px) rotateY(62deg); opacity: 0; pointer-events: none; }
+  .dstage-img,
+  .dstage-reflect {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+  .dstage-img {
+    top: 0;
+    filter: drop-shadow(0 28px 32px rgb(0 0 0 / 0.5)) drop-shadow(0 0 28px color-mix(in srgb, var(--glow) 22%, transparent));
+  }
+  .dstage-reflect {
+    top: 100%;
+    transform: scaleY(-1);
+    opacity: 0.2;
+    mask-image: linear-gradient(to top, rgb(0 0 0 / 0.75), transparent 34%);
+    -webkit-mask-image: linear-gradient(to top, rgb(0 0 0 / 0.75), transparent 34%);
+  }
+  .dstage-halo {
+    position: absolute;
+    inset: -18%;
+    pointer-events: none;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--glow) 42%, transparent), transparent 74%);
+    transform: translateZ(-90px);
+  }
+  .dstage-shadow {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -5%;
+    height: 12%;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 0.6), transparent);
+    filter: blur(6px);
+  }
+  .dstage-scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background: linear-gradient(180deg, transparent 0%, transparent 44%, color-mix(in srgb, var(--glow) 60%, white) 50%, transparent 56%, transparent 100%);
+    background-size: 100% 260%;
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    animation: dstage-scan 6s ease-in-out infinite;
+  }
+  /* Floating stats: centred on (--x, --y) of the photo box, but kept inside the stage */
+  .dstage-chip {
+    --edge: 6.25rem; /* room for half a chip + the perspective/tilt swing */
+    position: absolute;
+    z-index: 3;
+    left: clamp(calc(var(--edge) - (100cqw - 100%) / 2), var(--x), calc(100% + (100cqw - 100%) / 2 - var(--edge)));
+    top: var(--y);
+    padding: 0.42rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--color-deep);
+    background: color-mix(in srgb, var(--glow) 82%, white);
+    box-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.6);
+    transform: translate(-50%, -50%) translateZ(70px);
+    animation: dstage-bob 6s ease-in-out infinite;
+  }
+  .dstage-chip-b { transform: translate(-50%, -50%) translateZ(95px); animation-delay: -3s; }
+  /* Hotspots sit just above the photo so they stay on their part while tilting */
+  .dstage-hot {
+    position: absolute;
+    z-index: 4;
+    transform: translate(-50%, -50%) translateZ(30px);
+  }
+  .dstage-hot[data-active] { z-index: 5; transform: translate(-50%, -50%) translateZ(60px); }
+  .dstage-callout {
+    position: absolute;
+    top: 50%;
+    width: min(15rem, 46cqw);
+    transform: translateY(-50%);
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 0.86rem;
+    line-height: 1.65;
+    text-align: start;
+    background: rgb(11 25 35 / 0.9);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.6);
+    animation: fade-in 0.25s ease;
+  }
+  .dstage-callout strong { color: var(--color-leaf-300); font-size: 0.92rem; }
+  .dstage-callout.to-left { right: calc(100% + 0.7rem); }
+  .dstage-callout.to-right { left: calc(100% + 0.7rem); }
+  .dstage-detail {
+    position: absolute;
+    z-index: 2;
+    top: 5%;
+    left: 4%;
+    height: 34%;
+    margin: 0;
+    padding: 0.6rem 0.6rem 1.8rem;
+    border-radius: 1.25rem;
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    backdrop-filter: blur(8px);
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both 0.35s;
+  }
+  .dstage-detail figcaption {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0.45rem;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.75);
+  }
+  .dstage-caption {
+    position: absolute;
+    z-index: 6;
+    inset-inline: 0.75rem;
+    bottom: 0.75rem;
+    display: none;
+    gap: 0.2rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 0.86rem;
+    line-height: 1.65;
+    background: rgb(11 25 35 / 0.9);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.6);
+    animation: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .dstage-caption strong { color: var(--color-leaf-300); font-size: 0.92rem; }
+  @media (max-width: 639px) {
+    .dstage-detail,
+    .dstage-callout { display: none; }
+    .dstage-caption { display: grid; }
+    .dstage-chip { --edge: 5.5rem; font-size: 0.72rem; padding: 0.35rem 0.65rem; }
+  }
+  .dstage.is-still .dstage-ring,
+  .dstage.is-still .dstage-chip { animation: none; }
+  .dstage.is-still .dstage-scan { display: none; }
+
+  .ddock-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 13.5rem;
+    padding: 0.6rem 0.8rem 0.6rem 1rem;
+    border-radius: 1.25rem;
+    text-align: start;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .ddock-card:hover { background: rgb(255 255 255 / 0.09); }
+  .ddock-card[aria-selected="true"] {
+    background: rgb(255 255 255 / 0.12);
+    box-shadow: inset 0 0 0 1.5px var(--glow), 0 12px 32px -14px var(--glow);
+    transform: translateY(-2px);
+  }
 
   .stage-btn {
     display: inline-grid;

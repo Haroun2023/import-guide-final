@@ -82,26 +82,3 @@ export function BodyPoster({ className = "" }: { className?: string }) {
     </svg>
   );
 }
-
-export function StagePoster({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 600 420" className={className} preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <radialGradient id="st-cone" cx="50%" cy="0%" r="100%">
-          <stop offset="0" stopColor="#a8d4ee" stopOpacity="0.18" />
-          <stop offset="1" stopColor="#a8d4ee" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <path d="M270 0h60l170 330H100z" fill="url(#st-cone)" />
-      <ellipse cx="300" cy="330" rx="230" ry="46" fill="#10283a" />
-      <ellipse cx="300" cy="326" rx="222" ry="42" fill="none" stroke="#5ace90" strokeWidth="3" />
-      <ellipse cx="300" cy="326" rx="140" ry="26" fill="none" stroke="#5ace90" strokeOpacity="0.25" />
-      <g fill="#eef2f1">
-        <rect x="200" y="250" width="200" height="34" rx="14" />
-        <path d="M215 250c0-70 55-110 85-110s85 40 85 110z" fill="#eaf6ff" opacity="0.35" stroke="#cfd8d8" />
-        <rect x="392" y="170" width="16" height="100" rx="8" />
-        <rect x="370" y="150" width="60" height="38" rx="8" fill="#0b1923" />
-      </g>
-    </svg>
-  );
-}

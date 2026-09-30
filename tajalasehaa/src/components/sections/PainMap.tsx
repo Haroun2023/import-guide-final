@@ -17,6 +17,7 @@ const BodyScene = lazy(() => import("@/three/BodyScene"));
 /** Ask the Device Lab section to show a device (decoupled via a DOM event). */
 export function showDevice(id: string) {
   window.dispatchEvent(new CustomEvent("ta:device", { detail: id }));
+  document.documentElement.classList.add("cv-off"); // exact position (see index.css)
   document.getElementById("devices")?.scrollIntoView({ behavior: "smooth" });
 }
 

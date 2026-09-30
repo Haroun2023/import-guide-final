@@ -53,6 +53,20 @@
           }, 150);
         }, { passive: true });
       })();
+      /* Render every section before any in-page jump (and once idle) so
+         anchors land exactly; see content-visibility in index.css. */
+      (function () {
+        var d = document.documentElement;
+        function full() { d.classList.add("cv-off"); }
+        if (location.hash) full();
+        addEventListener("click", function (e) {
+          if (e.target instanceof Element && e.target.closest("a[href*='#']")) full();
+        }, true);
+        addEventListener("load", function () {
+          if (window.requestIdleCallback) requestIdleCallback(full, { timeout: 2500 });
+          else setTimeout(full, 1200);
+        });
+      })();
     </script>
   </head>
   <body>

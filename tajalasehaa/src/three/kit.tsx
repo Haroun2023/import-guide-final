@@ -1,4 +1,4 @@
-import { Environment, Lightformer, RoundedBox } from "@react-three/drei";
+import { Environment, Lightformer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
@@ -9,31 +9,10 @@ import * as THREE from "three";
 
 export const mat = {
   shell: new THREE.MeshPhysicalMaterial({ color: "#f3f6f6", roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.16 }),
-  shellWarm: new THREE.MeshPhysicalMaterial({ color: "#dfe6e6", roughness: 0.38, clearcoat: 0.5, clearcoatRoughness: 0.25 }),
   porcelain: new THREE.MeshPhysicalMaterial({ color: "#ebf0ef", roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: new THREE.Color("#effaf4") }),
-  brand: new THREE.MeshStandardMaterial({ color: "#0c8456", roughness: 0.32, metalness: 0.25 }),
-  navy: new THREE.MeshStandardMaterial({ color: "#24475d", roughness: 0.4, metalness: 0.2 }),
   /** anodised leaf-green trim (replaces the old gold accents) */
   accent: new THREE.MeshStandardMaterial({ color: "#4cc387", roughness: 0.28, metalness: 0.85 }),
-  chrome: new THREE.MeshStandardMaterial({ color: "#e3e9ea", roughness: 0.14, metalness: 1 }),
-  steel: new THREE.MeshStandardMaterial({ color: "#9aa7ab", roughness: 0.35, metalness: 0.9 }),
-  rubber: new THREE.MeshStandardMaterial({ color: "#1c2428", roughness: 0.82 }),
-  cable: new THREE.MeshStandardMaterial({ color: "#2a3438", roughness: 0.55 }),
-  cableLight: new THREE.MeshStandardMaterial({ color: "#d3dada", roughness: 0.5 }),
-  glassDark: new THREE.MeshPhysicalMaterial({ color: "#0b1923", roughness: 0.06, metalness: 0.2, clearcoat: 1 }),
-  bubble: new THREE.MeshPhysicalMaterial({
-    color: "#eaf6ff",
-    roughness: 0.18,
-    transparent: true,
-    opacity: 0.32,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-    clearcoat: 1,
-  }),
 };
-
-export const glowMaterial = (color: string, opacity = 1) =>
-  new THREE.MeshBasicMaterial({ color, toneMapped: false, transparent: opacity < 1, opacity });
 
 /* ------------------------------------------------------------------ */
 /* Studio lighting — procedural environment, no HDR download            */
@@ -61,15 +40,6 @@ export function Studio({ intensity = 1 }: { intensity?: number }) {
 /* ------------------------------------------------------------------ */
 
 export type V3 = [number, number, number];
-
-export function Cable({ points, radius = 0.018, material = mat.cable, segments = 64 }: { points: V3[]; radius?: number; material?: THREE.Material; segments?: number }) {
-  const geometry = useMemo(() => {
-    const curve = new THREE.CatmullRomCurve3(points.map((p) => new THREE.Vector3(...p)));
-    return new THREE.TubeGeometry(curve, segments, radius, 8, false);
-  }, [points, radius, segments]);
-  useEffect(() => () => geometry.dispose(), [geometry]);
-  return <mesh geometry={geometry} material={material} />;
-}
 
 /** Tube with an animated light pulse travelling along it (nerve signal / energy). */
 export function FlowTube({
@@ -141,155 +111,6 @@ export function FlowTube({
     if (opacityRef) material.uniforms.uOpacity.value = opacity * opacityRef.current;
   });
   return <mesh geometry={geometry} material={material} />;
-}
-
-/** Concentric rings expanding from a point — shockwaves, ultrasound, EMS pulses. */
-export function PulseRings({
-  position = [0, 0, 0],
-  rotation = [0, 0, 0],
-  color = "#5ace90",
-  count = 3,
-  speed = 0.9,
-  maxScale = 1,
-  radius = 0.12,
-}: {
-  position?: V3;
-  rotation?: V3;
-  color?: string;
-  count?: number;
-  speed?: number;
-  maxScale?: number;
-  radius?: number;
-}) {
-  const group = useRef<THREE.Group>(null);
-  const geometry = useMemo(() => new THREE.TorusGeometry(radius, radius * 0.06, 8, 48), [radius]);
-  const materials = useMemo(
-    () => Array.from({ length: count }, () => new THREE.MeshBasicMaterial({ color, transparent: true, toneMapped: false, depthWrite: false, blending: THREE.AdditiveBlending })),
-    [color, count],
-  );
-  useEffect(
-    () => () => {
-      geometry.dispose();
-      materials.forEach((m) => m.dispose());
-    },
-    [geometry, materials],
-  );
-  useFrame(({ clock }) => {
-    const g = group.current;
-    if (!g) return;
-    g.children.forEach((child, i) => {
-      const t = (clock.elapsedTime * speed + i / count) % 1;
-      const s = 0.3 + t * 2.4 * maxScale;
-      child.scale.setScalar(s);
-      materials[i].opacity = (1 - t) * 0.9;
-    });
-  });
-  return (
-    <group ref={group} position={position} rotation={rotation}>
-      {materials.map((m, i) => (
-        <mesh key={i} geometry={geometry} material={m} />
-      ))}
-    </group>
-  );
-}
-
-export function Caster({ position }: { position: V3 }) {
-  return (
-    <group position={position}>
-      <mesh material={mat.steel} position={[0, 0.07, 0]}>
-        <cylinderGeometry args={[0.018, 0.018, 0.08, 10]} />
-      </mesh>
-      <mesh material={mat.rubber} rotation={[0, 0, Math.PI / 2]} position={[0, 0.035, 0]}>
-        <cylinderGeometry args={[0.035, 0.035, 0.03, 18]} />
-      </mesh>
-    </group>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Device screens — UI drawn on a canvas texture                        */
-/* ------------------------------------------------------------------ */
-
-export type ScreenDraw = (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => void;
-
-export function useScreenTexture(draw: ScreenDraw, animated = false, size: [number, number] = [512, 320]) {
-  const { canvas, texture } = useMemo(() => {
-    const c = document.createElement("canvas");
-    c.width = size[0];
-    c.height = size[1];
-    const tex = new THREE.CanvasTexture(c);
-    tex.colorSpace = THREE.SRGBColorSpace;
-    tex.anisotropy = 4;
-    return { canvas: c, texture: tex };
-  }, [size]);
-  useEffect(() => {
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      draw(ctx, canvas.width, canvas.height, 0);
-      texture.needsUpdate = true;
-    }
-    return () => texture.dispose();
-    // draw is expected to be a stable module-level function
-  }, [canvas, texture, draw]);
-  const last = useRef(0);
-  useFrame(({ clock }) => {
-    if (!animated) return;
-    if (clock.elapsedTime - last.current < 1 / 15) return; // 15 fps is plenty for a screen
-    last.current = clock.elapsedTime;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    draw(ctx, canvas.width, canvas.height, clock.elapsedTime);
-    texture.needsUpdate = true;
-  });
-  return texture;
-}
-
-export function ScreenPanel({
-  width,
-  height,
-  draw,
-  animated = false,
-  bezel = 0.03,
-  depth = 0.04,
-  frameMaterial = mat.glassDark,
-}: {
-  width: number;
-  height: number;
-  draw: ScreenDraw;
-  animated?: boolean;
-  bezel?: number;
-  depth?: number;
-  frameMaterial?: THREE.Material;
-}) {
-  const texture = useScreenTexture(draw, animated);
-  return (
-    <group>
-      <RoundedBox args={[width, height, depth]} radius={Math.min(0.03, depth / 2)} smoothness={3} material={frameMaterial} />
-      <mesh position={[0, 0, depth / 2 + 0.001]}>
-        <planeGeometry args={[width - bezel * 2, height - bezel * 2]} />
-        <meshBasicMaterial map={texture} toneMapped={false} />
-      </mesh>
-    </group>
-  );
-}
-
-/** Shared screen chrome: dark gradient background + header bar. */
-export function screenBase(ctx: CanvasRenderingContext2D, w: number, h: number, title: string, accent = "#5ace90") {
-  const g = ctx.createLinearGradient(0, 0, 0, h);
-  g.addColorStop(0, "#13304a");
-  g.addColorStop(1, "#0b1923");
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, w, h);
-  ctx.fillStyle = "rgba(255,255,255,0.06)";
-  ctx.fillRect(0, 0, w, 44);
-  ctx.fillStyle = accent;
-  ctx.beginPath();
-  ctx.arc(24, 22, 7, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = "#eef6f2";
-  ctx.font = "600 20px system-ui, sans-serif";
-  ctx.textBaseline = "middle";
-  ctx.fillText(title, 42, 23);
 }
 
 /* ------------------------------------------------------------------ */

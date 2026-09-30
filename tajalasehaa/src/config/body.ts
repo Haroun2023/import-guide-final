@@ -31,7 +31,7 @@ export const bodyAreas: BodyArea[] = [
     conditions: ["آلام وتيبّس الرقبة", "الانزلاق الغضروفي العنقي", "الصداع التوتري", "تنميل الذراعين"],
     insight: "ساعات الجوال والمكتب تضاعف الحمل على الرقبة — لذلك نعالج الوضعية المسبّبة لا الألم وحده.",
     program: "spine",
-    devices: ["combo", "ems"],
+    devices: ["stimawell", "combo"],
   },
   {
     id: "shoulder",
@@ -49,7 +49,7 @@ export const bodyAreas: BodyArea[] = [
     conditions: ["تشنّج عضلات الظهر", "آلام القوام والانحناء", "ألم بين الكتفين"],
     insight: "الجلوس الطويل وضعف عضلات الظهر العلوي يسببان ألمًا بين الكتفين يستجيب جيدًا للتمارين الموجّهة.",
     program: "spine",
-    devices: ["combo", "ems"],
+    devices: ["stimawell", "combo"],
   },
   {
     id: "lowerBack",
@@ -58,7 +58,7 @@ export const bodyAreas: BodyArea[] = [
     conditions: ["الانزلاق الغضروفي القطني", "عرق النسا", "آلام أسفل الظهر المزمنة", "الشد العضلي"],
     insight: "أغلب حالات آلام أسفل الظهر تتحسن بالعلاج التحفّظي المنظّم — والتقييم الدقيق هو أول خطوة.",
     program: "spine",
-    devices: ["combo", "antigravity"],
+    devices: ["stimawell", "combo", "antigravity"],
   },
   {
     id: "elbow",
@@ -67,7 +67,7 @@ export const bodyAreas: BodyArea[] = [
     conditions: ["مرفق التنس", "مرفق لاعب الجولف", "التهاب الأوتار"],
     insight: "ألم المرفق عند الإمساك أو رفع الأشياء كثيرًا ما يكون اعتلالًا في الأوتار يستجيب للتأهيل الموجّه.",
     program: "sports",
-    devices: ["shockwave", "combo"],
+    devices: ["shockwave", "ito"],
   },
   {
     id: "wrist",
@@ -76,7 +76,7 @@ export const bodyAreas: BodyArea[] = [
     conditions: ["متلازمة النفق الرسغي", "التهاب أوتار الإبهام", "تيبّس ما بعد الكسور"],
     insight: "التنميل الليلي في الأصابع قد يكون علامة ضغط على العصب — والتدخل المبكر يصنع الفرق.",
     program: "postop",
-    devices: ["combo"],
+    devices: ["ito", "combo"],
   },
   {
     id: "hip",
@@ -94,7 +94,7 @@ export const bodyAreas: BodyArea[] = [
     conditions: ["خشونة الركبة", "إصابة الرباط الصليبي", "الغضروف الهلالي", "آلام صابونة الركبة"],
     insight: "سواء كانت خشونة أو إصابة رباط، نقوّي العضلات الداعمة ونخفف الحمل عن المفصل تدريجيًا.",
     program: "joints",
-    devices: ["antigravity", "shockwave", "ems"],
+    devices: ["antigravity", "shockwave", "ito"],
   },
   {
     id: "ankle",
