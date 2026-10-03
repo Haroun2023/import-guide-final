@@ -53,6 +53,12 @@ export function openState(specs: HoursSpec[] = site.openingHoursSpec, date = new
   return null;
 }
 
+/** «صباح الخير» from 4 am until noon in Madinah, «مساء الخير» the rest of the day. */
+export function greeting(date = new Date()) {
+  const { minutes } = madinahNow(date);
+  return minutes >= 4 * 60 && minutes < 12 * 60 ? "صباح الخير" : "مساء الخير";
+}
+
 /** Live status, refreshed every minute. Null on the server and before hydration (a prerendered page has no clock). */
 export function useOpenState() {
   const [state, setState] = useState<OpenState | null>(null);

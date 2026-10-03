@@ -1,4 +1,6 @@
 import "@fontsource-variable/readex-pro/wght.css";
+// Handwritten asides (Note.tsx); the browser fetches it only where a note shows
+import "@fontsource/aref-ruqaa/arabic-700.css";
 import "./index.css";
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";

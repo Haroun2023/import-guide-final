@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { copy } from "@/config/copy";
 import { site } from "@/config/site";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
-import { Icon3D } from "@/components/ui/Icon3D";
+import { Note } from "@/components/ui/Note";
 
 /** A large paragraph whose words light up one by one as it scrolls through the view. */
 export function Manifesto() {
@@ -38,10 +38,10 @@ export function Manifesto() {
             </span>
           ))}
         </p>
-        <p className="mt-8 inline-flex items-center gap-2.5 text-muted">
-          <Icon3D name="crown" variant="glyph" size={30} />
-          فريق {site.name}
-        </p>
+        <Note arrow="flourish" className="relative mx-auto mt-10 w-fit pb-5 text-center" arrowClassName="bottom-0 left-1/2 w-60 -translate-x-1/2 text-brand-500">
+          <span className="block text-[1.5rem] text-muted">بكل ودّ،</span>
+          <span className="block text-[2.6rem] leading-snug text-brand-700">فريق {site.name}</span>
+        </Note>
       </div>
     </section>
   );

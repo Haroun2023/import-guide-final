@@ -5,7 +5,7 @@ import { site } from "@/config/site";
 import { useBooking, type BookingPrefill } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { WhatsAppIcon } from "@/components/ui/Icons";
-import { RichText, Swoosh } from "@/components/ui/Kinetic";
+import { HeroMark, RichText } from "@/components/ui/Kinetic";
 
 export type Crumb = { href: string; label: string };
 
@@ -77,15 +77,7 @@ export function PageHero({
           {eyebrow ? <p className="eyebrow eyebrow-light mt-7 animate-rise">{eyebrow}</p> : null}
           <h1 id="page-title" className="h-section mt-3 animate-rise text-white [animation-delay:80ms]">
             {typeof title === "string" ? (
-              <RichText
-                text={title}
-                hl={(part, key) => (
-                  <span key={key} className={`relative inline-block ${accent === "coral" ? "text-coral-400" : "text-gradient-leaf"}`}>
-                    {part}
-                    <Swoosh coral={accent === "coral"} />
-                  </span>
-                )}
-              />
+              <RichText text={title} hl={(part, key) => <HeroMark key={key} text={part} coral={accent === "coral"} />} />
             ) : (
               title
             )}

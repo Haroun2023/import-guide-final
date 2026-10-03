@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { moments, type Moment } from "@/config/content";
 import { copy } from "@/config/copy";
 import { Icon3D } from "@/components/ui/Icon3D";
-import { Kinetic } from "@/components/ui/Kinetic";
+import { Kinetic, penClass } from "@/components/ui/Kinetic";
 import { Reveal } from "@/components/ui/Reveal";
 import { RotatingWords } from "@/components/ui/RotatingWords";
 
@@ -30,7 +30,7 @@ export function Moments() {
             <Kinetic text={copy.moments.title} />
             <br />
             <span className="kw" style={{ "--i": words, "--hl-i": words } as CSSProperties}>
-              <RotatingWords words={copy.moments.phrases} itemClassName="hl" />
+              <RotatingWords words={copy.moments.phrases} itemClassName={(w) => penClass("hl", w)} />
             </span>
           </h2>
           <p className="lead-text mt-4">{copy.moments.lead}</p>

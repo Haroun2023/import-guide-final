@@ -4,30 +4,51 @@ import { centerPhotos } from "@/config/content";
 import { copy, fill } from "@/config/copy";
 import { site } from "@/config/site";
 import { trackEngagement } from "@/lib/tracking";
+import { Note } from "@/components/ui/Note";
 import { OpenStatus } from "@/components/ui/OpenStatus";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Home: one real photo of the center, the address and the way there. */
+/** The prints on the wall: which photo, its handwritten caption and how it hangs. */
+const SNAPS = [
+  { id: "storefront", caption: "ابحث عن هذه اللافتة", hang: "rotate-[2.5deg]" },
+  { id: "reception", caption: "هنا نستقبلك", hang: "-rotate-[3deg] sm:mt-6 lg:mt-8" },
+  { id: "lounge", caption: "ركن هادئ حتى موعدك", hang: "-rotate-[1deg] col-span-2 mx-auto w-[58%] sm:col-span-1 sm:mt-2 sm:w-auto lg:col-span-2 lg:-mt-4 lg:w-[56%]" },
+];
+
+/** Home: real photos of the center pinned like prints, the address and the way there. */
 export function VisitTeaser() {
   const branch = site.branches[0];
-  const photo = centerPhotos.find((p) => p.id === "hall") ?? centerPhotos[0];
-  if (!branch || !photo) return null;
+  const snaps = SNAPS.flatMap((s) => {
+    const photo = centerPhotos.find((p) => p.id === s.id);
+    return photo ? [{ ...s, photo }] : [];
+  });
+  if (!branch || !snaps.length) return null;
   return (
     <section className="py-20 md:py-24" aria-labelledby="visit-teaser-title">
       <div className="container-x">
         <Reveal className="card grid overflow-hidden p-0 lg:grid-cols-[1.2fr_1fr]">
-          <div className="relative min-h-64 bg-mist-200">
-            <img
-              src={`/photos/${photo.id}-960.webp`}
-              srcSet={photo.widths.map((w) => `/photos/${photo.id}-${w}.webp ${w}w`).join(", ")}
-              sizes="(min-width: 1024px) 55vw, 100vw"
-              width={4}
-              height={3}
-              alt={photo.alt}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 size-full object-cover"
-            />
+          <div className="bg-[linear-gradient(135deg,var(--color-mist-100),var(--color-brand-50))] px-5 pb-8 pt-5 sm:px-8 lg:py-8">
+            <Note arrow="curve" className="relative z-10 mb-4 me-12 ms-auto w-fit" arrowClassName="-scale-y-100 top-4 right-[-3.1rem]">
+              صور حقيقية من مركزنا
+            </Note>
+            <div className="grid grid-cols-2 items-start gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-2">
+              {snaps.map(({ id, caption, hang, photo }) => (
+                <figure key={id} className={`polaroid hover:rotate-0 hover:-translate-y-1 ${hang}`}>
+                  <img
+                    src={`/photos/${id}-480.webp`}
+                    srcSet={photo.widths.map((w) => `/photos/${id}-${w}.webp ${w}w`).join(", ")}
+                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 30vw, 46vw"
+                    width={4}
+                    height={3}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[4/3] w-full rounded-[2px] object-cover"
+                  />
+                  <figcaption>{caption}</figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
           <div className="p-7 sm:p-10">
             <p className="eyebrow">{copy.visit.eyebrow}</p>

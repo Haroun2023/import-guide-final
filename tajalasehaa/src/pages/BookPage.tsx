@@ -9,6 +9,7 @@ import { Commitments } from "@/components/sections/Commitments";
 import { FAQ } from "@/components/sections/FAQ";
 import { InsuranceCheck } from "@/components/sections/InsuranceCheck";
 import { Icon3D } from "@/components/ui/Icon3D";
+import { HeroMark } from "@/components/ui/Kinetic";
 import { OpenStatus } from "@/components/ui/OpenStatus";
 
 const NEXT = [
@@ -37,7 +38,7 @@ export default function BookPage() {
             <h1 id="page-title" className="h-section mt-3">
               خطوتك الأولى
               <br />
-              <span className="text-gradient-leaf">تأخذ أقل من دقيقة</span>
+              <HeroMark text="تأخذ أقل من دقيقة" />
             </h1>
             <p className="lead-text mt-4 !text-white/75">
               {site.offer.active ? `${site.offer.label}. ` : ""}اترك اسمك ورقمك وسبب الزيارة، ونتصل بك لنرتّب الباقي معك.

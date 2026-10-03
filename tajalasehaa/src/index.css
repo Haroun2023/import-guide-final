@@ -237,15 +237,14 @@ html.cms-bar #root > header { top: 2.25rem; }
 .kw {
   display: inline-block;
   transition:
-    opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
-    filter 0.6s ease;
-  transition-delay: calc(var(--reveal-delay, 0s) + var(--i, 0) * 60ms);
+    opacity 0.7s ease,
+    transform 0.9s cubic-bezier(0.34, 1.3, 0.64, 1);
+  /* --j: a small per-word offset (Kinetic.tsx) so the words don't land like a metronome */
+  transition-delay: calc(var(--reveal-delay, 0s) + var(--i, 0) * 55ms + var(--j, 0ms));
 }
 .js [data-reveal]:not([data-in]) .kw {
   opacity: 0;
-  transform: translateY(0.5em) rotate(1.5deg);
-  filter: blur(8px);
+  transform: translateY(0.4em);
 }
 /* The heading block itself stays put; its words, eyebrow and lead move instead */
 .js [data-reveal].kinetic:not([data-in]) {
@@ -269,28 +268,76 @@ html.cms-bar #root > header { top: 2.25rem; }
 }
 .js .kinetic:not([data-in]) .eyebrow::before { transform: scaleX(0); }
 
-/* Marker highlight on light surfaces: a brush stroke drawn from the right */
-.hl {
-  --hl-stroke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'%3E%3Cpath d='M5 21C70 12 160 8 296 14l-4 18C198 37 96 39 3 34z' fill='%238fe3b4' fill-opacity='.62'/%3E%3C/svg%3E");
+/* Handwritten notes (Note.tsx) write themselves in from the right, the way
+   Arabic is written, then draw their arrow */
+.js .note[data-reveal]:not([data-in]) {
+  opacity: 1;
+  transform: none;
+}
+.note-text {
+  display: inline-block;
+  clip-path: inset(-0.6em -0.4em -0.7em -0.4em);
+  transition: clip-path 1.3s cubic-bezier(0.6, 0.05, 0.35, 1);
+  transition-delay: calc(var(--reveal-delay, 0s) + 0.1s);
+}
+.js .note:not([data-in]) .note-text { clip-path: inset(-0.6em -0.4em -0.7em calc(100% + 0.4em)); }
+.note-arrow path {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.55s cubic-bezier(0.5, 0, 0.4, 1);
+  transition-delay: calc(var(--reveal-delay, 0s) + 1.15s);
+}
+.note-arrow .note-arrow-head {
+  transition-duration: 0.22s;
+  transition-delay: calc(var(--reveal-delay, 0s) + 1.65s);
+}
+.js .note:not([data-in]) .note-arrow path { stroke-dashoffset: 1.05; }
+
+/* ------------------------------------------------------------------
+   Pen underlines (*starred* words): a hand-drawn stroke under the key
+   words, drawn from the right like a pen. In Readex Pro most letters end
+   within 0.27em below the baseline, so the stroke lies 0.33-0.42em below
+   it. A final or lone ج ح خ ع غ م ي hangs to 0.5em: words with one get
+   .hl-low (penClass in Kinetic.tsx), which drops the stroke to
+   0.57-0.66em. The padding only extends the painted area; the empty
+   ::before/::after boxes hang below the baseline and give just the lines
+   with a stroke the room it needs, clear of the next line's tall letters.
+   A background image wraps with the text (one stroke per line) and every
+   browser draws it the same way.
+------------------------------------------------------------------- */
+.hl,
+.hl-dark,
+.hl-hero {
+  --ul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 404 24' preserveAspectRatio='none'%3E%3Cpath d='M396 8.6C300 9.4 160 10.2 14 10.6C9 10.7 5 9.6 3 8.2C2.2 9.8 5 13 9 14.2C150 16.6 300 16.4 396 15.6C399.4 15.3 400.6 12.9 400.2 11.6C399.7 9.8 398.4 8.6 396 8.6Z' fill='%2334b273' fill-opacity='0.92'/%3E%3C/svg%3E");
+  --ul-h: 0.24em;
+  --ul-drop: 0.24em;
   color: inherit;
-  background: var(--hl-stroke) no-repeat right 0 bottom 0.06em / 100% 0.58em;
+  background: var(--ul) no-repeat right 0 bottom 0 / 100% var(--ul-h);
+  padding-bottom: var(--ul-drop);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  padding-inline: 0.06em;
-  transition: background-size 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
-  transition-delay: calc(var(--reveal-delay, 0s) + var(--hl-i, 0) * 60ms + 0.35s);
+  transition: background-size 0.85s cubic-bezier(0.32, 0.72, 0.24, 1);
+  transition-delay: calc(var(--reveal-delay, 0s) + var(--hl-i, 0) * 60ms + 0.3s);
+}
+.hl-low { --ul-drop: 0.48em; }
+.hl::before, .hl::after,
+.hl-dark::before, .hl-dark::after,
+.hl-hero::before, .hl-hero::after {
+  content: "";
+  line-height: 0;
+  /* hangs 0.24em + --ul-drop below the baseline, so the line ends just under the stroke */
+  vertical-align: calc(-0.615em - var(--ul-drop));
 }
 .hl-coral {
-  --hl-stroke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'%3E%3Cpath d='M5 21C70 12 160 8 296 14l-4 18C198 37 96 39 3 34z' fill='%23ffb3a8' fill-opacity='.7'/%3E%3C/svg%3E");
+  --ul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 404 24' preserveAspectRatio='none'%3E%3Cpath d='M396 8.6C300 9.4 160 10.2 14 10.6C9 10.7 5 9.6 3 8.2C2.2 9.8 5 13 9 14.2C150 16.6 300 16.4 396 15.6C399.4 15.3 400.6 12.9 400.2 11.6C399.7 9.8 398.4 8.6 396 8.6Z' fill='%23f88578' fill-opacity='0.95'/%3E%3C/svg%3E");
 }
-/* On dark surfaces: leaf gradient words over a glowing swoosh */
-.hl-dark {
-  color: inherit;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14C80 5 190 3 297 9' fill='none' stroke='%235ace90' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 0 bottom -0.05em / 100% 0.32em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  transition: background-size 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
-  transition-delay: calc(var(--reveal-delay, 0s) + var(--hl-i, 0) * 60ms + 0.35s);
+/* On dark surfaces: a glowing leaf stroke under leaf-gradient words */
+.hl-dark,
+.hl-hero {
+  --ul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 404 24' preserveAspectRatio='none'%3E%3Cpath d='M396 8.6C300 9.4 160 10.2 14 10.6C9 10.7 5 9.6 3 8.2C2.2 9.8 5 13 9 14.2C150 16.6 300 16.4 396 15.6C399.4 15.3 400.6 12.9 400.2 11.6C399.7 9.8 398.4 8.6 396 8.6Z' fill='%235ace90' fill-opacity='.22' stroke='%235ace90' stroke-opacity='.22' stroke-width='7' stroke-linejoin='round'/%3E%3Cpath d='M396 8.6C300 9.4 160 10.2 14 10.6C9 10.7 5 9.6 3 8.2C2.2 9.8 5 13 9 14.2C150 16.6 300 16.4 396 15.6C399.4 15.3 400.6 12.9 400.2 11.6C399.7 9.8 398.4 8.6 396 8.6Z' fill='%235ace90' fill-opacity='1'/%3E%3C/svg%3E");
+}
+.hl-hero.hl-coral {
+  --ul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 404 24' preserveAspectRatio='none'%3E%3Cpath d='M396 8.6C300 9.4 160 10.2 14 10.6C9 10.7 5 9.6 3 8.2C2.2 9.8 5 13 9 14.2C150 16.6 300 16.4 396 15.6C399.4 15.3 400.6 12.9 400.2 11.6C399.7 9.8 398.4 8.6 396 8.6Z' fill='%23f88578' fill-opacity='.22' stroke='%23f88578' stroke-opacity='.22' stroke-width='7' stroke-linejoin='round'/%3E%3Cpath d='M396 8.6C300 9.4 160 10.2 14 10.6C9 10.7 5 9.6 3 8.2C2.2 9.8 5 13 9 14.2C150 16.6 300 16.4 396 15.6C399.4 15.3 400.6 12.9 400.2 11.6C399.7 9.8 398.4 8.6 396 8.6Z' fill='%23f88578' fill-opacity='1'/%3E%3C/svg%3E");
 }
 .hl-dark .kw {
   background: linear-gradient(135deg, #fff 0%, var(--color-leaf-200) 35%, var(--color-leaf-300) 70%, var(--color-leaf-400));
@@ -298,37 +345,24 @@ html.cms-bar #root > header { top: 2.25rem; }
   background-clip: text;
   color: transparent;
 }
-.js [data-reveal]:not([data-in]) .hl { background-size: 0% 0.58em; }
-.js [data-reveal]:not([data-in]) .hl-dark { background-size: 0% 0.32em; }
-
-/* Hand-drawn line under the hero's last words, drawn from the right after load */
-.swoosh {
-  position: absolute;
-  inset-inline: -3%;
-  bottom: -0.16em;
-  width: 106%;
-  height: 0.3em;
-  overflow: visible;
-  pointer-events: none;
+.js [data-reveal]:not([data-in]) .hl,
+.js [data-reveal]:not([data-in]) .hl-dark {
+  background-size: 0% var(--ul-h);
 }
-.swoosh path {
-  fill: none;
-  stroke: var(--color-leaf-400);
-  stroke-width: 4;
-  vector-effect: non-scaling-stroke;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  filter: drop-shadow(0 0 6px rgb(90 206 144 / 0.6));
-  animation: swoosh-draw 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.9s forwards;
+/* Page titles draw their line once the page has painted */
+.hl-hero {
+  transition: none;
+  animation: pen-draw 1.1s cubic-bezier(0.32, 0.72, 0.24, 1) 0.8s both;
 }
-.swoosh-coral path {
-  stroke: var(--color-coral-400);
-  filter: drop-shadow(0 0 6px rgb(248 133 120 / 0.55));
+@keyframes pen-draw {
+  from { background-size: 0% var(--ul-h); }
 }
-@keyframes swoosh-draw {
-  to { stroke-dashoffset: 0; }
+/* Rotating phrases: only the phrase on show is underlined, redrawn each time */
+.rotator > :not([data-state="in"]) .hl {
+  background-size: 0% var(--ul-h);
+  transition: none;
 }
+.rotator > [data-state="in"] .hl { transition-delay: 0.3s; }
 
 /* A phrase that changes in place (RotatingWords.tsx) */
 .rotator {
@@ -337,10 +371,10 @@ html.cms-bar #root > header { top: 2.25rem; }
 }
 .rotator > span {
   grid-area: 1 / 1;
-  transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.55s ease;
+  transition: opacity 0.5s ease, transform 0.75s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.rotator > [data-state="wait"] { opacity: 0; transform: translateY(0.45em); filter: blur(6px); }
-.rotator > [data-state="out"] { opacity: 0; transform: translateY(-0.45em); filter: blur(6px); }
+.rotator > [data-state="wait"] { opacity: 0; transform: translateY(0.45em); }
+.rotator > [data-state="out"] { opacity: 0; transform: translateY(-0.35em); }
 
 /* Words that light up as the paragraph scrolls through the view (Manifesto.tsx) */
 .lit-word {
@@ -430,24 +464,87 @@ html.cms-bar #root > header { top: 2.25rem; }
     letter-spacing: 0.02em;
     color: var(--color-brand-700);
   }
+  /* A small hand-drawn squiggle before every section label */
   .eyebrow::before {
     content: "";
-    width: 1.75rem;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-brand-500));
+    flex: none;
+    width: 1.9rem;
+    height: 0.6rem;
+    background: var(--color-brand-500);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 10'%3E%3Cpath d='M1.5 6.2C5 2.8 8.4 2.6 11.6 5.6S18.4 8.6 21.6 5.4 28 2.4 30.6 5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 10'%3E%3Cpath d='M1.5 6.2C5 2.8 8.4 2.6 11.6 5.6S18.4 8.6 21.6 5.4 28 2.4 30.6 5' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
   }
   .eyebrow-light { color: var(--color-leaf-300); }
-  .eyebrow-light::before { background: linear-gradient(90deg, transparent, var(--color-leaf-400)); }
+  .eyebrow-light::before { background: var(--color-leaf-400); }
 
+  /* A note in the team's handwriting (Note.tsx), slightly askew like a real one */
+  .note {
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 1.7rem; /* Ruqaa's letters sit small on their em */
+    line-height: 1.4;
+    color: var(--color-navy-600);
+    rotate: -2.5deg;
+    text-wrap: balance;
+  }
+  .note-light { color: var(--color-leaf-200); }
+  .note-coral { color: var(--color-coral-600); }
+  .note-arrow {
+    position: absolute;
+    width: 3.25rem;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .note-arrow path {
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* A print pinned to the wall: white border, a strip of tape on top and a
+     handwritten caption (VisitTeaser.tsx) */
+  .polaroid {
+    position: relative;
+    background: #fff;
+    padding: 0.5rem 0.5rem 0;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgb(16 40 58 / 0.12), 0 16px 32px -14px rgb(16 40 58 / 0.4);
+    transition: rotate 0.5s cubic-bezier(0.34, 1.3, 0.64, 1), translate 0.5s cubic-bezier(0.34, 1.3, 0.64, 1);
+  }
+  .polaroid::before {
+    content: "";
+    position: absolute;
+    top: -0.65rem;
+    left: 50%;
+    width: 4.25rem;
+    height: 1.35rem;
+    translate: -50% 0;
+    rotate: -4deg;
+    background: rgb(240 230 204 / 0.8);
+    box-shadow: 0 1px 2px rgb(16 40 58 / 0.1);
+  }
+  .polaroid figcaption {
+    padding: 0.3rem 0.25rem 0.5rem;
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+    line-height: 1.4;
+    text-align: center;
+    color: var(--color-navy-600);
+  }
+
+  /* Arabic needs more leading than Latin: Readex Pro's tall letters rise
+     to 1em and a final ي or م hangs 0.5em, so tighter lines collide */
   .h-display {
     font-size: clamp(2.15rem, 1.2rem + 4.4vw, 4.35rem);
     font-weight: 700;
-    line-height: 1.18;
+    line-height: 1.3;
   }
   .h-section {
     font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.9rem);
     font-weight: 650;
-    line-height: 1.25;
+    line-height: 1.35;
   }
   .lead-text {
     font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.2rem);

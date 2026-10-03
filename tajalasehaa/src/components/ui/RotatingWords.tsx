@@ -15,8 +15,8 @@ export function RotatingWords({
   words: string[];
   interval?: number;
   className?: string;
-  /** on an inline span around each phrase (e.g. the marker highlight) */
-  itemClassName?: string;
+  /** on an inline span around each phrase (e.g. the pen underline), or a function of the phrase */
+  itemClassName?: string | ((phrase: string) => string);
 }) {
   const [i, setI] = useState(0);
   const reduce = usePrefersReducedMotion();
@@ -35,7 +35,7 @@ export function RotatingWords({
       <span ref={ref} className={`rotator ${className}`} aria-hidden>
         {words.map((w, k) => (
           <span key={w} data-state={k === i ? "in" : k === prev ? "out" : "wait"}>
-            <span className={itemClassName}>{w}</span>
+            <span className={typeof itemClassName === "function" ? itemClassName(w) : itemClassName}>{w}</span>
           </span>
         ))}
       </span>

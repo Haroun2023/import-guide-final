@@ -10,6 +10,7 @@ import { whatsappLink } from "@/config/site";
 import { trackContact, trackEngagement } from "@/lib/tracking";
 import { useBooking } from "@/components/booking/BookingContext";
 import { WhatsAppIcon } from "@/components/ui/Icons";
+import { Note } from "@/components/ui/Note";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { LazyCanvas } from "@/components/three/LazyCanvas";
 import { HotspotOverlay, type HotspotDomRef } from "@/components/three/HotspotOverlay";
@@ -89,9 +90,10 @@ export function PainMap({ initialArea = null, heading = "full" }: { initialArea?
                 <RotateCcw size={18} aria-hidden />
               </button>
             </div>
-            <p className="pointer-events-none absolute start-4 top-4 rounded-full bg-white/80 px-3 py-1 text-xs text-muted backdrop-blur">
-              اسحب للتدوير · اضغط على النقاط
-            </p>
+            <Note tone="coral" arrow="curve" delay={0.5} className="pointer-events-none absolute start-5 top-4 sm:start-8 sm:top-6" arrowClassName="rotate-180 top-9 left-[-2.6rem]">
+              اضغط حيث يؤلمك
+              <span className="block font-sans text-xs font-normal text-muted">أو اسحب المجسّم لتديره</span>
+            </Note>
           </Reveal>
 
           {/* Panel */}

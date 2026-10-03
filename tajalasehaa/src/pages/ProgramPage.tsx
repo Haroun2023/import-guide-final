@@ -172,11 +172,7 @@ export default function ProgramPage({ id }: { id: string }) {
 
       <BookingSection
         prefill={{ ...booking, placement: `program:${p.id}:bottom` }}
-        title={
-          <>
-            احجز تقييمك <span className="text-gradient-leaf">لبرنامج {p.title}</span>
-          </>
-        }
+        title={`احجز تقييمك *لبرنامج ${p.title}*`}
       />
     </SiteLayout>
   );

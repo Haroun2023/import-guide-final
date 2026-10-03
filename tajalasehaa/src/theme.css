@@ -5,6 +5,8 @@
 ------------------------------------------------------------------- */
 @theme {
   --font-sans: "Readex Pro Variable", "Readex Pro", ui-sans-serif, system-ui, "Segoe UI", Tahoma, sans-serif;
+  /* Ruqaa, the everyday Arabic handwriting: for notes written by the team */
+  --font-hand: "Aref Ruqaa", "Readex Pro Variable", "Readex Pro", serif;
 
   --color-ink: #0f2231;
   --color-muted: #51646f;

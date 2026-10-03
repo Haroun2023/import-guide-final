@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { copy } from "@/config/copy";
 import { site } from "@/config/site";
 import { Icon3D } from "@/components/ui/Icon3D";
+import { Note } from "@/components/ui/Note";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 
 const PATHS = [
@@ -21,7 +22,13 @@ export function QuickPaths() {
     <section className="py-20 md:py-24" aria-labelledby="paths-title">
       <div className="container-x">
         <SectionHeading id="paths-title" eyebrow={copy.quickPaths.eyebrow} title={copy.quickPaths.title} lead={copy.quickPaths.lead} />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Over the gap beside the first card, its arrow curling down into it */}
+        <div className="mt-8 flex justify-end sm:justify-start sm:ps-[calc(50%+2.5rem)] lg:ps-[calc(33.333%+2.75rem)]">
+          <Note arrow="curve" className="relative z-10 me-12 sm:me-0" arrowClassName="-scale-y-100 top-3 right-[-3.1rem]">
+            محتار؟ ابدأ من هنا
+          </Note>
+        </div>
+        <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {paths.map((p, i) => (
             <Reveal as="li" key={p.href} delay={(i % 3) * 0.06} className="glow-card group relative flex items-start gap-4 p-5">
               <Icon3D name={p.icon} size={64} className="shrink-0 drop-shadow-[0_10px_12px_rgb(16_40_58/0.16)] transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:rotate-[-6deg]" />

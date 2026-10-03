@@ -14,6 +14,7 @@ import { Journey } from "@/components/sections/Journey";
 import { PainMap } from "@/components/sections/PainMap";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { Visit } from "@/components/sections/Visit";
+import { HeroMark } from "@/components/ui/Kinetic";
 import { BrandMark } from "@/components/ui/Logo";
 import NotFound from "./NotFound";
 
@@ -43,10 +44,10 @@ export default function Landing({ slug }: { slug: string }) {
               <p className="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1.5 text-sm font-semibold text-leaf-300 ring-1 ring-white/15">
                 <BrandMark size={16} tone="light" /> {c.eyebrow}
               </p>
-              <h1 id="lp-title" className="mt-5 text-[clamp(2rem,1.3rem+3.4vw,3.6rem)] font-bold leading-[1.2]">
+              <h1 id="lp-title" className="mt-5 text-[clamp(2rem,1.3rem+3.4vw,3.6rem)] font-bold leading-[1.3]">
                 {c.title}
                 <br />
-                <span className="text-gradient-leaf">{c.highlight}</span>
+                <HeroMark text={c.highlight} />
               </h1>
               <p className="mt-5 max-w-xl text-[1.05rem] leading-9 text-white/75">{c.sub}</p>
 
@@ -107,11 +108,7 @@ export default function Landing({ slug }: { slug: string }) {
         <FAQ limit={6} />
         <BookingSection
           prefill={{ complaint: c.complaint, placement: `${placement}:bottom` }}
-          title={
-            <>
-              {c.title} <span className="text-gradient-leaf">{c.highlight}</span>
-            </>
-          }
+          title={`${c.title} *${c.highlight}*`}
         />
       </main>
       <Footer />

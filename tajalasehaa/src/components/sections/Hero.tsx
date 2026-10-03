@@ -1,15 +1,43 @@
 import { ArrowLeft, Check, ChevronDown } from "lucide-react";
 import { lazy } from "react";
+import { minutesAr } from "@/admin/count";
 import { copy, fill } from "@/config/copy";
 import { site } from "@/config/site";
 import { useBooking } from "@/components/booking/BookingContext";
 import { WhatsAppLink } from "@/components/layout/ContactLinks";
 import { WhatsAppIcon } from "@/components/ui/Icons";
-import { RichText, Swoosh } from "@/components/ui/Kinetic";
+import { HeroMark, RichText } from "@/components/ui/Kinetic";
+import { Note } from "@/components/ui/Note";
+import { greeting, useOpenState } from "@/components/ui/OpenStatus";
 import { LazyCanvas } from "@/components/three/LazyCanvas";
 import { SpinePoster } from "@/components/three/Posters";
 
 const SpineScene = lazy(() => import("@/three/SpineScene"));
+
+/** 15 → «ربع ساعة»: the way you would say it. */
+const spoken = (m: number) => (m === 15 ? "ربع ساعة" : m === 30 ? "نصف ساعة" : m === 60 ? "ساعة" : minutesAr(m));
+
+/**
+ * A note from the team under the buttons: good morning or evening in Madinah
+ * time, and how soon we answer (or that we answer once we open). The
+ * prerendered page has no clock, so it says hello until the page knows the time.
+ */
+function Greeting() {
+  const state = useOpenState();
+  const hello = state ? greeting() : "حيّاك الله";
+  const reply = state && !state.open ? "اترك رسالتك ونرد عليك أول ما نفتح" : `نرد عليك خلال ${spoken(site.responseTimeMinutes)}`;
+  return (
+    <Note
+      tone="light"
+      arrow="loop"
+      delay={1.2}
+      className="relative max-w-[15rem] self-start md:me-6 md:mt-1"
+      arrowClassName="-top-10 left-[-1.6rem] md:left-auto md:right-[-3.4rem]"
+    >
+      {hello}، {reply}
+    </Note>
+  );
+}
 
 export function Hero() {
   const { openBooking } = useBooking();
@@ -46,15 +74,7 @@ export function Hero() {
         <div className="max-w-[40rem]">
           <p className="animate-rise text-[0.95rem] font-medium text-leaf-300/90">{copy.hero.eyebrow}</p>
           <h1 id="hero-title" className="h-display mt-4 animate-rise [animation-delay:120ms]">
-            <RichText
-              text={copy.hero.title}
-              hl={(part, key) => (
-                <span key={key} className="text-gradient-leaf relative inline-block">
-                  {part}
-                  <Swoosh />
-                </span>
-              )}
-            />
+            <RichText text={copy.hero.title} hl={(part, key) => <HeroMark key={key} text={part} />} />
           </h1>
           {/* Phones get a shorter line that leaves the left strip to the 3D spine. */}
           <p className="mt-5 animate-rise pe-[22%] text-[1.05rem] leading-8 text-white/80 [animation-delay:240ms] md:hidden">{fill(copy.hero.leadShort, vars)}</p>
@@ -69,9 +89,12 @@ export function Hero() {
               <WhatsAppIcon size={20} /> اسألنا على واتساب
             </WhatsAppLink>
           </div>
-          {site.offer.active ? (
-            <p className="mt-3 animate-rise pe-[22%] text-sm text-white/60 [animation-delay:420ms] md:pe-0">{site.offer.note} · لفترة محدودة</p>
-          ) : null}
+          <div className="mt-3 flex flex-col gap-y-3 md:flex-row-reverse md:items-start md:justify-between md:gap-x-4">
+            <Greeting />
+            {site.offer.active ? (
+              <p className="animate-rise pe-[22%] text-sm text-white/60 [animation-delay:420ms] md:pe-0">{site.offer.note} · لفترة محدودة</p>
+            ) : null}
+          </div>
 
           <ul className="mt-8 grid animate-rise gap-x-6 gap-y-2.5 pe-[22%] text-[0.92rem] text-white/75 [animation-delay:480ms] sm:grid-cols-2 md:mt-9 md:pe-0">
             {trust.map((t) => (
