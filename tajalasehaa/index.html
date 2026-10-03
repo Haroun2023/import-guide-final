@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>تاج الأصحاء | علاج طبيعي وتأهيل طبي في المدينة المنورة</title>
+    <meta name="description" content="تقييم شامل وخطة تأهيل شخصية بأجهزة عالمية في المدينة المنورة. احجز تقييمك الآن." />
+    <meta name="theme-color" content="#10283a" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://tajalasehaa.sa/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="تاج الأصحاء" />
+    <meta property="og:title" content="تاج الأصحاء | علاج طبيعي وتأهيل طبي في المدينة المنورة" />
+    <meta property="og:description" content="الصحة تاج… نستعيده معًا. تقييم شامل وخطة تأهيل شخصية بأجهزة عالمية." />
+    <meta property="og:url" content="https://tajalasehaa.sa/" />
+    <meta property="og:image" content="https://tajalasehaa.sa/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!--head-extra-->
+    <script>
+      /* A browser that opened the demo CMS (/admin) shows its edits: keep the
+         prerendered page hidden until they are applied (see src/main.tsx). */
+      try {
+        if (localStorage.getItem("taj_cms_v1") || location.pathname.indexOf("/admin") === 0) {
+          document.documentElement.classList.add("cms-pending");
+          setTimeout(function () { document.documentElement.classList.remove("cms-pending"); }, 4000);
+        }
+      } catch (e) {}
+    </script>
+    <script>
+      /* Scroll reveals without waiting for the app bundle: elements marked
+         [data-reveal] fade in once they enter the viewport. */
+      (function () {
+        var d = document.documentElement;
+        if (!("IntersectionObserver" in window) || !("MutationObserver" in window)) return;
+        d.classList.add("js");
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.setAttribute("data-in", ""); io.unobserve(e.target); }
+          });
+        }, { rootMargin: "0px 0px -8% 0px" });
+        function watch(n) {
+          if (n.nodeType !== 1) return;
+          if (n.matches("[data-reveal]:not([data-in])")) io.observe(n);
+          n.querySelectorAll("[data-reveal]:not([data-in])").forEach(function (el) { io.observe(el); });
+        }
+        new MutationObserver(function (ms) {
+          ms.forEach(function (m) { m.addedNodes.forEach(watch); });
+        }).observe(d, { childList: true, subtree: true });
+        // Anything the visitor jumped past (anchor links, restored scroll) is shown at once.
+        var queued = false;
+        addEventListener("scroll", function () {
+          if (queued) return;
+          queued = true;
+          setTimeout(function () {
+            queued = false;
+            document.querySelectorAll("[data-reveal]:not([data-in])").forEach(function (el) {
+              if (el.getBoundingClientRect().bottom < 0) { el.setAttribute("data-in", ""); io.unobserve(el); }
+            });
+          }, 150);
+        }, { passive: true });
+      })();
+      /* Render every section before any in-page jump (and once idle) so
+         anchors land exactly; see content-visibility in index.css. */
+      (function () {
+        var d = document.documentElement;
+        function full() { d.classList.add("cv-off"); }
+        if (location.hash) full();
+        addEventListener("click", function (e) {
+          if (e.target instanceof Element && e.target.closest("a[href*='#']")) full();
+        }, true);
+        addEventListener("load", function () {
+          if (window.requestIdleCallback) requestIdleCallback(full, { timeout: 2500 });
+          else setTimeout(full, 1200);
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+import { lazy, Suspense, type ReactNode } from "react";
+import { cmsRuntime } from "@/cms/flag";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { MobileCTABar } from "./MobileCTABar";
+import { WhatsAppFab } from "./WhatsAppFab";
+
+/** Admin bar, offer popup and cookie banner from the demo CMS (never loaded without it). */
+const CmsExtras = lazy(() => import("@/cms/SiteExtras"));
+
+/** Header + page + footer, with the sticky phone CTA and the WhatsApp button. */
+export function SiteLayout({
+  children,
+  overDark = true,
+  placement = "sticky-bar",
+  complaint,
+}: {
+  children: ReactNode;
+  /** the page starts with a dark hero (transparent header until scrolled) */
+  overDark?: boolean;
+  placement?: string;
+  complaint?: string;
+}) {
+  return (
+    <>
+      <Header overDark={overDark} />
+      <main id="main">{children}</main>
+      <Footer />
+      <MobileCTABar placement={placement} complaint={complaint} />
+      <WhatsAppFab />
+      {cmsRuntime.active ? (
+        <Suspense fallback={null}>
+          <CmsExtras />
+        </Suspense>
+      ) : null}
+    </>
+  );
+}

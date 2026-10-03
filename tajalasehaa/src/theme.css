@@ -1,0 +1,122 @@
+/* ------------------------------------------------------------------
+   Design tokens — taken from the official logo: navy #24475D (navy-700)
+   and leaf green #0C8456 (brand-600), with the logo's navy→green gradient.
+   Change the brand here; every component reads these tokens.
+------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Readex Pro Variable", "Readex Pro", ui-sans-serif, system-ui, "Segoe UI", Tahoma, sans-serif;
+  /* Ruqaa, the everyday Arabic handwriting: for notes written by the team */
+  --font-hand: "Aref Ruqaa", "Readex Pro Variable", "Readex Pro", serif;
+
+  --color-ink: #0f2231;
+  --color-muted: #51646f;
+  --color-deep: #0b1923;
+
+  /* Logo green */
+  --color-brand-50: #f0faf5;
+  --color-brand-100: #d9f2e6;
+  --color-brand-200: #b4e4ce;
+  --color-brand-300: #7bcca9;
+  --color-brand-400: #37ae7d;
+  --color-brand-500: #189563;
+  --color-brand-600: #0c8456;
+  --color-brand-700: #0a6644;
+  --color-brand-800: #0a4d35;
+  --color-brand-900: #093a29;
+  --color-brand-950: #04251b;
+
+  /* Logo navy */
+  --color-navy-50: #f4f8fa;
+  --color-navy-100: #e6eff4;
+  --color-navy-200: #ccdce6;
+  --color-navy-300: #a2bdcd;
+  --color-navy-400: #6a94af;
+  --color-navy-500: #44718d;
+  --color-navy-600: #315972;
+  --color-navy-700: #24475d;
+  --color-navy-800: #1a3647;
+  --color-navy-900: #132735;
+  --color-navy-950: #0b1923;
+
+  /* Fresh-leaf accent (the logo's light tone) — highlights on dark surfaces */
+  --color-leaf-100: #e3f8eb;
+  --color-leaf-200: #bfeed3;
+  --color-leaf-300: #8fe3b4;
+  --color-leaf-400: #5ace90;
+  --color-leaf-500: #34b273;
+  --color-leaf-600: #218c5a;
+  --color-leaf-700: #176e48;
+
+  /* Cool clinical neutrals */
+  --color-mist-50: #f7fafa;
+  --color-mist-100: #eef3f3;
+  --color-mist-200: #dee7e7;
+  --color-mist-300: #c8d3d5;
+  --color-mist-400: #a4b3b7;
+
+  /* Pain / attention (pain map only) */
+  --color-coral-300: #ffb3a8;
+  --color-coral-400: #f88578;
+  --color-coral-500: #ee5d52;
+  --color-coral-600: #d24439;
+
+  --shadow-soft: 0 1px 2px rgb(11 25 35 / 0.04), 0 8px 24px -8px rgb(11 25 35 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(11 25 35 / 0.05), 0 24px 48px -16px rgb(11 25 35 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(90 206 144 / 0.25), 0 12px 40px -8px rgb(52 178 115 / 0.45);
+
+  --radius-card: 1.5rem;
+
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pulse-ring: pulse-ring 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-shine: shine 3.2s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+    to { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.6); opacity: 0.9; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+  }
+  @keyframes shine {
+    0%, 60% { transform: translateX(120%) skewX(-18deg); }
+    100% { transform: translateX(-220%) skewX(-18deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes step-fwd {
+    from { opacity: 0; transform: translateX(-28px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes step-back {
+    from { opacity: 0; transform: translateX(28px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes sheet-in {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes dstage-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes dstage-scan {
+    0% { background-position: 0 100%; }
+    60%, 100% { background-position: 0 -100%; }
+  }
+  @keyframes dstage-bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -8px; }
+  }
+}
